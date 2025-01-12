@@ -1,5 +1,4 @@
-import { Text, View } from '@/components/Themed';
-import { Stack } from 'expo-router';
+import { View } from 'react-native';
 import CardListItem from '@/components/CardListItem';
 
 export default function TabOneScreen() {
