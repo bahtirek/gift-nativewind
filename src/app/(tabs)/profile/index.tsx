@@ -1,4 +1,5 @@
-import { Href, Link, usePathname } from 'expo-router';
+import ListItem from '@/components/common/ListItem';
+import { Href, Link, RelativePathString, router, usePathname } from 'expo-router';
 import { FlatList, View, StyleSheet } from 'react-native';
 
 const Profile = () => {
@@ -15,19 +16,16 @@ const Profile = () => {
         data={profileMenuItems}
         keyExtractor={(item) => item.label}
         renderItem={({item}) => (
-          <Link href={`${pathname}/${item.path}` as Href} style={styles.item}>{item.label}</Link>
+          <ListItem label={item.label} handlePress={() => {router.push(`${pathname}/${item.path}` as RelativePathString)}}/>
         )}
-        className='p-2'
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
+  link: {
+    
   },
 });
 
