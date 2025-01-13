@@ -3,17 +3,16 @@ import React, { useState } from 'react'
 import { CategoryItemType } from 'src/types'
 
 type CategoryItemPropType = {
-  activeItem: string,
   item: CategoryItemType,
 }
 
 const CategoryItem = ({item}: CategoryItemPropType) => {
-const [category, setCategory] = useState(''); 
+  const [category, setCategory] = useState(''); 
 
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      onPress={() => setCategory(item.$id)}
+      onPress={() => setCategory(item.id)}
       className='relative justify-center items-center'
     >
       <View className=' p-3 m-1 rounded-[20px]'>

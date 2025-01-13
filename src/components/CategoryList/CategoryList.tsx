@@ -1,21 +1,15 @@
 import { FlatList } from 'react-native'
-import React, { useState } from 'react'
-import { CategoryItemType } from 'src/types'
+import React from 'react'
 import CategoryItem from './CategoryItem'
+import categories from '@assets/data/categories';
 
-type VideoCardPropType = {
-  categories: CategoryItemType[]
-}
-
-const CategoryList = ({categories}: VideoCardPropType) => {
-  const [activeItem, setActiveItem] = useState<string>(categories[0]?.$id);
-
+const CategoryList = () => {
   return (
     <FlatList 
       data={categories}
-      keyExtractor={(item) => item.$id}
+      keyExtractor={(item) => item.label}
       renderItem={({item}) => (
-        <CategoryItem activeItem={activeItem} item={item} />
+        <CategoryItem item={item} />
       )}
       horizontal
       className='pb-2'

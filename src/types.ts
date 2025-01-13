@@ -24,18 +24,15 @@ export type FormFieldType = {
 
 export type CategoryItemType = {
   label?: string,
-  thumbnail?: string,
-  promt?: string,
   icon: string,
-  $id: string,
-  creator: CreatorType
+  id: string,
 };
 
 export type GiftCardType = {
   label?: string,
   thumbnail?: string,
   description?: string,
-  $id: string,
+  id: string,
 };
 
 export type CreatorType = {
