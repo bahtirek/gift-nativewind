@@ -9,6 +9,10 @@ const Profile = () => {
   ]
   const pathname = usePathname();
 
+  const goToScreen = (path: RelativePathString) => {
+    router.push(`${pathname}/${path}` as RelativePathString)
+  }
+
   return (
     <View className=''>
       {/* list loop will iterate the cardlistitem component */}
@@ -16,7 +20,7 @@ const Profile = () => {
         data={profileMenuItems}
         keyExtractor={(item) => item.label}
         renderItem={({item}) => (
-          <ListItem label={item.label} handlePress={() => {router.push(`${pathname}/${item.path}` as RelativePathString)}}/>
+          <ListItem label={item.label} handlePress={() => {goToScreen(item.path as RelativePathString)}}/>
         )}
       />
     </View>
