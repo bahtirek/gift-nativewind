@@ -22,7 +22,7 @@ export type FormFieldType = {
   otherStyles?: string,
 } & React.ComponentPropsWithoutRef<typeof TextInput>;
 
-export type VideoCardType = {
+export type CategoryItemType = {
   label?: string,
   thumbnail?: string,
   promt?: string,
