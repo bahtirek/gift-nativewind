@@ -29,10 +29,11 @@ export type CategoryItemType = {
 };
 
 export type GiftCardType = {
+  id: string,
   label?: string,
   thumbnail?: string,
   description?: string,
-  id: string,
+  address?: string
 };
 
 export type CreatorType = {
