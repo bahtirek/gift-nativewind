@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, ImageBackground } from 'react-native'
+import { View, Text, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { CategoryItemType } from 'src/types'
 
@@ -14,8 +14,9 @@ const CategoryItem = ({item}: CategoryItemPropType) => {
       activeOpacity={0.7}
       onPress={() => setCategory(item.id)}
       className='relative justify-center items-center'
+      
     >
-      <View className=' p-3 m-1 rounded-[20px]'>
+      <View className=' p-3 m-1 rounded-[20px] rounded-xl border border-gray-300'>
         <ImageBackground 
           source={{uri: item.icon}}
           className='w-10 h-10 overflow-hidden'
@@ -26,5 +27,20 @@ const CategoryItem = ({item}: CategoryItemPropType) => {
     </TouchableOpacity>
   )
 }
+const styles = StyleSheet.create({
+  bgLightOrange: {
+    backgroundColor: '#f9660014'
+  },
+  shadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+        width: 0,
+        height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
 
+    elevation: 6,
+}
+});
 export default CategoryItem
