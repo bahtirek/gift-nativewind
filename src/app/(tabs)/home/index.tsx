@@ -15,13 +15,14 @@ export default function TabOneScreen() {
   return (
     <SafeAreaView className='h-full bg-white'>
       <FlatList 
+        className='px-4'
         data={trendingCards}
         keyExtractor={(item) => item.id}
         renderItem={({item}) => (
-          <GiftCard giftCard={item} />
+          <GiftCard giftCard={item} className="mb-5" />
         )}
         ListHeaderComponent={() => (
-          <View className='mt-6 px-4 space-y-6'>
+          <View className='mt-6 space-y-6'>
             <View className='justify-between items-center flex-row mb-6'>
               <View className=''>
                 {/* <Text className='text-xs font-pregular text-gray-600'>Unwrap Joy, Anytime, Anywhere!</Text> */}
