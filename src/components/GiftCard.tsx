@@ -15,18 +15,18 @@ const GiftCard = ({giftCard, showDescription, className}: GiftCardPropType, ) =>
     <View className={`flex flex-col items-center ${className}`}>
       <TouchableOpacity
         activeOpacity={0.7}
-        className='p-3 relative w-full rounded-xl border border-gray-300'
+        className='p-3 relative w-full rounded-xl border border-secondary-200'
       >
         <View className=''>
           <Image 
             source={{uri: thumbnail}}
-            className='w-full h-40 rounded-[8px]'
+            className='w-full h-40 rounded-[8px] opacity-90'
             resizeMode='cover'
           />
           <View className=' flex-1 pt-2 pb-1 gap-y-1'>
-            <Text className='text-sm text-orange-500 font-psemibold'>{label}</Text>
-            <Text className='text-xs text-gray-800 font-pregular' numberOfLines={1}>{address}</Text>
-            {showDescription && <Text className='text-xs text-gray-500 font-pregular' numberOfLines={2}>{description}</Text>}
+            <Text className='text-xl text-primary font-regular'>{label}</Text>
+            <Text className='text-sm text-secondary-700 font-pregular' numberOfLines={1}>{address}</Text>
+            {showDescription && <Text className='text-xs text-secondary-700 font-regular' numberOfLines={2}>{description}</Text>}
           </View>
 
         </View>
