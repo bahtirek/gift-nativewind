@@ -1,30 +1,47 @@
 import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
+import { Tabs } from 'expo-router';
+import { Image, View, ColorValue } from 'react-native';
 
-import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useClientOnlyValue } from '@/hooks/useClientOnlyValue';
+import icons from '@/constants/icons';
 
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={20} style={{ marginBottom: -3 }} {...props} />;
+const TabIcon = ({icon, color, name, focused}: {icon: object, color: ColorValue, name: string, focused: boolean}) => {
+  return (
+    <View className='items-center justify-center gap-2'>
+      <Image 
+      source={icon} 
+      resizeMode='contain' 
+      tintColor={color}
+      className='"!w-6 !h-6'
+    />
+    {/* <Text 
+      className={`${focused ? 'font-psemibold' : 'font-pregular'} text-xs`}
+      style={{color: color}}
+    >
+      {name}
+    </Text> */}
+    </View>
+  )
 }
-
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: '#FF7C47',
+        tabBarInactiveTintColor: '#b8b8b8',
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
+        tabBarStyle: {
+          height: 60,
+          backgroundColor: '#FFFFFF',
+          borderTopWidth: 1,
+          borderTopColor: '#FF7C47'
+        }
       }}>
       <Tabs.Screen name="index" options={{href: null}}/>
       <Tabs.Screen
@@ -32,20 +49,13 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
+          tabBarIcon: ({color, focused}) => (
+            <TabIcon 
+              icon={icons.home}
+              color={color}
+              name='Home'
+              focused={focused}
+            />
           ),
         }}
       />
@@ -53,14 +63,28 @@ export default function TabLayout() {
         name="favorites"
         options={{
           title: 'Favorites',
-          tabBarIcon: ({ color }) => <TabBarIcon name="star" color={color} />,
+          tabBarIcon: ({color, focused}) => (
+            <TabIcon 
+              icon={icons.bookmark}
+              color={color}
+              name='Bookmark'
+              focused={focused}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="basket"
         options={{
           title: 'Basket',
-          tabBarIcon: ({ color }) => <TabBarIcon name="shopping-basket" color={color} />,
+          tabBarIcon: ({color, focused}) => (
+            <TabIcon 
+              icon={icons.basket}
+              color={color}
+              name='Basket'
+              focused={focused}
+            />
+          )
         }}
       />
       <Tabs.Screen
@@ -68,7 +92,14 @@ export default function TabLayout() {
         options={{
           title: 'Profile',
           headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
+          tabBarIcon: ({color, focused}) => (
+            <TabIcon 
+              icon={icons.profile}
+              color={color}
+              name='Profile'
+              focused={focused}
+            />
+          ),
         }}
       />
     </Tabs>
