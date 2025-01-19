@@ -16,14 +16,14 @@ const CategoryItem = ({item}: CategoryItemPropType) => {
       className='relative justify-center items-center'
       
     >
-      <View className=' p-3 m-1 rounded-xl border border-primary'>
+      <View className=' p-3 m-1 rounded-xl border border-secondary-200'>
         <ImageBackground 
           source={{uri: item.icon}}
           className='w-10 h-10 overflow-hidden'
           resizeMode='cover'
         />
       </View>
-      <Text className='text-xs font-pregular text-secondary-600'>{item.label}</Text>
+      <Text className='text-xs font-pregular text-primary'>{item.label}</Text>
     </TouchableOpacity>
   )
 }

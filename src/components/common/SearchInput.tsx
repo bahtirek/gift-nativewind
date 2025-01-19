@@ -10,10 +10,10 @@ const SearchInput = () => {
   return (
     <View className="flex flex-row items-center space-x-4 mb-6 w-full relative">
       <TextInput
-        className="text-base mt-0.5 text-gray flex-1 font-pregular h-14 pl-4 pr-12 rounded-2xl border border-primary focus:border-primary"
+        className="text-base mt-0.5 text-gray flex-1 font-pregular h-14 pl-4 pr-12 rounded-2xl border border-secondary-200 focus:border-primary"
         value={query}
         placeholder={'Search for perfect gift place'}
-        placeholderTextColor="#6A6A6A"
+        placeholderTextColor="#FFA07A"
         onChangeText={(e) => setQuery(e)}
       />
 
