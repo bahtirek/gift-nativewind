@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
+        primary2: {
           DEFAULT: "#FF692E",
           100: "#FFFBFA",
           200: "#FFD7C7",
@@ -17,6 +17,18 @@ module.exports = {
           700: "#FF692E",
           800: "#FF5714",
           900: "#FF4900",
+        },
+        primary: {
+          DEFAULT: "#FF4416",
+          100: "#FFE8E2",
+          200: "#FFD3C9",
+          300: "#FFBFAF",
+          400: "#FFAA95",
+          500: "#FF967C",
+          600: "#FF8162",
+          700: "#FF6D49",
+          800: "#FF5830",
+          900: "#FF4416",
         },
         secondary: {
           DEFAULT: "B8B8B8",

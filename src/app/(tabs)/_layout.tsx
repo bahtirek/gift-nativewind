@@ -31,7 +31,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
-        tabBarActiveTintColor: '#FF692E',
+        tabBarActiveTintColor: '#FF4416',
         tabBarInactiveTintColor: '#b8b8b8',
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
@@ -40,7 +40,7 @@ export default function TabLayout() {
           height: 40,
           backgroundColor: '#FFFFFF',
           borderTopWidth: 1,
-          borderTopColor: '#FF692E'
+          borderTopColor: '#FF8162'
         }
       }}>
       <Tabs.Screen name="index" options={{href: null}}/>
@@ -48,6 +48,7 @@ export default function TabLayout() {
         name="home"
         options={{
           title: 'Home',
+          headerTintColor: '#FF4416',
           headerShown: false,
           tabBarIcon: ({color, focused}) => (
             <TabIcon 
@@ -63,6 +64,7 @@ export default function TabLayout() {
         name="favorites"
         options={{
           title: 'Favorites',
+          headerTintColor: '#FF4416',
           tabBarIcon: ({color, focused}) => (
             <TabIcon 
               icon={icons.bookmark}
@@ -77,7 +79,7 @@ export default function TabLayout() {
         name="search"
         options={{
           title: 'Search',
-          headerShown: false,
+          headerTintColor: '#FF4416',
           tabBarIcon: ({color, focused}) => (
             <TabIcon 
               icon={icons.search}
@@ -92,6 +94,7 @@ export default function TabLayout() {
         name="basket"
         options={{
           title: 'Basket',
+          headerTintColor: '#FF4416',
           tabBarIcon: ({color, focused}) => (
             <TabIcon 
               icon={icons.basket}
@@ -106,7 +109,7 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: 'Profile',
-          headerShown: false,
+          headerTintColor: '#FF4416',
           tabBarIcon: ({color, focused}) => (
             <TabIcon 
               icon={icons.profile}
