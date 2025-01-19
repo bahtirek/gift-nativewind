@@ -80,6 +80,7 @@ export default function TabLayout() {
         options={{
           title: 'Gift Cards',
           headerTintColor: '#FF4416',
+          headerShown: false,
           tabBarIcon: ({color, focused}) => (
             <TabIcon 
               icon={icons.allcards}

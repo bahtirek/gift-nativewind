@@ -1,30 +1,57 @@
 import ListItem from '@/components/common/ListItem';
 import { Href, Link, RelativePathString, router, usePathname } from 'expo-router';
-import { FlatList, View, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet, Text } from 'react-native';
+import searchQuerySignal from "@signals/search.signal";
+import { SafeAreaView } from 'react-native-safe-area-context';
+import giftCards from '@assets/data/giftcards';
+import GiftCard from '@/components/GiftCard';
+import SearchInput from '@/components/common/SearchInput';
 
 const Profile = () => {
-  const profileMenuItems = [
-    {id: 1, label: "Account", path: 'account'},
-    {id: 2, label: "Orders", path: 'orders'},
-  ]
-  const pathname = usePathname();
+  const allCards = giftCards;
 
-  const goToScreen = (path: RelativePathString) => {
-    router.push(`${pathname}/${path}` as RelativePathString)
+  const getCards = () => {
+
   }
 
   return (
-    <View className=''>
-      {/* list loop will iterate the cardlistitem component */}
-      
-    </View>
+    <SafeAreaView className='h-full bg-white'>
+      <FlatList 
+        className='px-5'
+        data={allCards}
+        keyExtractor={(item) => item.id}
+        renderItem={({item}) => (
+          <GiftCard giftCard={item} className="mb-5" />
+        )}
+        ListHeaderComponent={() => (
+          <View className='py-3 px-5 bg-white -mx-5 mb-3'
+          style={styles.shadow}
+          >
+            <SearchInput handleSearchQuery={getCards}/>
+          </View>
+        )}
+        keyboardDismissMode='on-drag'
+        stickyHeaderIndices={[0]}
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  link: {
-    
+  bgLightOrange: {
+    backgroundColor: '#f9660014'
   },
+  shadow: {
+    shadowColor: "#FF4416",
+    shadowOffset: {
+        width: 0,
+        height: 1,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+
+    elevation: 6,
+  }
 });
 
 export default Profile;
