@@ -4,6 +4,8 @@ import search from "./../../assets/icons/search.png";
 import basket from "./../../assets/icons/basket.png";
 import giftCard from "./../../assets/icons/gift-card.png";
 import profile from "./../../assets/icons/profile.png";
+import controlsa from "./../../assets/icons/controlsa.png";
+import search_orange from "./../../assets/icons/search_orange.png";
 
 export default {
   bookmark,
@@ -11,5 +13,7 @@ export default {
   search,
   basket,
   giftCard, 
-  profile
+  profile,
+  controlsa,
+  search_orange
 };

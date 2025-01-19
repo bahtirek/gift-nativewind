@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, Image, TextInputProps, Alert } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Alert } from 'react-native'
 import React, { useState } from 'react'
 import icons from '@constants/icons';
 import { Href, router, usePathname } from 'expo-router';
@@ -28,8 +28,8 @@ const SearchInput = () => {
         className='absolute right-4'
       >
         <Image 
-          source={icons.search}
-          className='!w-5 !h-5'
+          source={icons.search_orange}
+          className='!w-6 !h-6'
           resizeMode='contain'
         />
       </TouchableOpacity>
