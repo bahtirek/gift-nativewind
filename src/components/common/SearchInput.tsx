@@ -1,11 +1,10 @@
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Alert } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Alert, GestureResponderEvent } from 'react-native'
 import React, { useState } from 'react'
 import icons from '@constants/icons';
-import { Href, router, usePathname } from 'expo-router';
+import searchQuerySignal from "@signals/search.signal";
 
-const SearchInput = () => {
-  const [query, setQuery] = useState('')
-  const pathname = usePathname();
+const SearchInput = ( { handleSearchQuery }: any) => {
+  const [query, setQuery] = useState('');
   
   return (
     <View className="flex flex-row items-center space-x-4 mb-6 w-full relative">
@@ -22,8 +21,8 @@ const SearchInput = () => {
           if(!query) {
             return Alert.alert('Missing query', "Please input something to search results across database")
           }
-          if(pathname.startsWith('/search')) router.setParams({query})
-            else router.push(`/search/${query}` as Href)
+          searchQuerySignal.value = query;
+          handleSearchQuery()
         }}
         className='absolute right-4'
       >

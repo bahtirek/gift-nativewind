@@ -76,15 +76,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="search"
+        name="allcards"
         options={{
-          title: 'Search',
+          title: 'Gift Cards',
           headerTintColor: '#FF4416',
           tabBarIcon: ({color, focused}) => (
             <TabIcon 
-              icon={icons.search}
+              icon={icons.allcards}
               color={color}
-              name='Search'
+              name='Gift Cards'
               focused={focused}
             />
           ),

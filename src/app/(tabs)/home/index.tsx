@@ -8,9 +8,13 @@ import giftCards from '@assets/data/giftcards';
 import GiftCard from '@/components/GiftCard';
 import icons from '@constants/icons';
 import SearchInput from '@/components/common/SearchInput';
+import { Href, router } from 'expo-router';
 
 export default function TabOneScreen() {
   const trendingCards = giftCards;
+  const goToSearchScreen = () => {
+    router.push('/allcards' as Href);
+  }
   return (
     <SafeAreaView className='h-full bg-white'>
       <FlatList 
@@ -37,8 +41,7 @@ export default function TabOneScreen() {
               </View>
             </View>
 
-            <SearchInput />
-
+            <SearchInput handleSearchQuery={goToSearchScreen}/>
 
             <View className='w-full flex-1'>
               <CategoryList />

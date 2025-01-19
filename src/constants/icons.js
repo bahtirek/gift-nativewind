@@ -6,6 +6,7 @@ import giftCard from "./../../assets/icons/gift-card.png";
 import profile from "./../../assets/icons/profile.png";
 import controlsa from "./../../assets/icons/controlsa.png";
 import search_orange from "./../../assets/icons/search_orange.png";
+import allcards from "./../../assets/icons/allcards.png";
 
 export default {
   bookmark,
@@ -15,5 +16,6 @@ export default {
   giftCard, 
   profile,
   controlsa,
-  search_orange
+  search_orange,
+  allcards
 };
