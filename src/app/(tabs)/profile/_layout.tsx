@@ -1,7 +1,7 @@
 import React from 'react'
 import { Stack } from 'expo-router'
 
-const HomeStack = () => {
+const ProfileStack = () => {
   return (
     <Stack>
       <Stack.Screen name="index" options={{title: 'Profile'}} />
@@ -9,4 +9,4 @@ const HomeStack = () => {
   )
 }
 
-export default HomeStack
+export default ProfileStack
