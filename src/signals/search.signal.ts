@@ -1,9 +1,23 @@
-import { signal, effect } from "@preact/signals-react";
+import { signal, effect, computed } from "@preact/signals-react";
+import categories from "@assets/data/categories";
 
 const searchQuerySignal = signal("");
 
-effect(() => {
-  console.log("effect", searchQuerySignal.value)
-})
+const categorySignal = signal(categories);
 
-export default searchQuerySignal;
+const setCategory = (id: string, value: boolean) => {
+  categorySignal.value = categorySignal.value.map(category => {
+    if(category.id == id) {
+      return { ...category, checked: value}
+    }
+
+    return category;
+  })
+}
+
+export {
+  searchQuerySignal,
+  categorySignal,
+  setCategory
+} 
+  

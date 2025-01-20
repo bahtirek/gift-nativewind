@@ -1,14 +1,14 @@
-import { View, Text } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import React, { useState } from 'react'
 
 import Checkbox from 'expo-checkbox';
 
-const CategoryCheckbox = ( { item, handelCheckBoxSelect }: any) => {
-  const [isChecked, setChecked] = useState(false);
+const CategoryCheckbox = ( { item, handelCheckBoxSelect}: any) => {
+  const [isChecked, setChecked] = useState(item.checked);
 
   const setValue = (value: boolean) => {
-    setChecked(value);
-    handelCheckBoxSelect(value)
+    handelCheckBoxSelect(value);
+    setChecked(!isChecked);   
   }
   
   return (
@@ -19,7 +19,9 @@ const CategoryCheckbox = ( { item, handelCheckBoxSelect }: any) => {
         color='#FF4416'
         className='mr-5'
       />
-      <Text className='text-secondary-700 text-lg'>{item.label}</Text>
+      <Pressable onPress={() => { setValue(!isChecked) }}>
+        <Text className='text-secondary-700 text-lg'>{item.label}</Text>
+      </Pressable>
     </View>
   )
 }

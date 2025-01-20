@@ -23,7 +23,7 @@ const GiftCard = ({giftCard, showDescription, className}: GiftCardPropType, ) =>
             className='w-full h-40 rounded-[8px] opacity-90'
             resizeMode='cover'
           />
-          <View className=' flex-1 pt-2 pb-1 gap-y-1'>
+          <View className=' flex-1 pb-1 gap-y-1'>
             <Text className='text-xl text-primary font-regular'>{label}</Text>
             <Text className='text-sm text-secondary-700 font-pregular' numberOfLines={1}>{address}</Text>
             {showDescription && <Text className='text-xs text-secondary-700 font-regular' numberOfLines={2}>{description}</Text>}

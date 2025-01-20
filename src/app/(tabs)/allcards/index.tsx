@@ -1,11 +1,8 @@
-import ListItem from '@/components/common/ListItem';
-import { Href, Link, RelativePathString, router, usePathname } from 'expo-router';
-import { FlatList, View, StyleSheet, Text } from 'react-native';
-import searchQuerySignal from "@signals/search.signal";
+import { FlatList, View, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import giftCards from '@assets/data/giftcards';
 import GiftCard from '@/components/GiftCard';
-import SearchInput from '@/components/common/SearchInput';
+import CardsScreenHeader from '@/components/cards/CardsScreenHeader';
 
 const Profile = () => {
   const allCards = giftCards;
@@ -24,10 +21,8 @@ const Profile = () => {
           <GiftCard giftCard={item} className="mb-5" />
         )}
         ListHeaderComponent={() => (
-          <View className='py-3 px-5 bg-white -mx-5 mb-3'
-          style={styles.shadow}
-          >
-            <SearchInput handleSearchQuery={getCards}/>
+          <View className='py-3 px-5 bg-white -mx-5 mb-3' style={styles.shadow}>
+            <CardsScreenHeader />
           </View>
         )}
         keyboardDismissMode='on-drag'
