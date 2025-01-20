@@ -3,12 +3,12 @@ import React, { useState } from 'react'
 
 import Checkbox from 'expo-checkbox';
 
-const CategoryCheckbox = ( { item, handelCheckBoxSelect }: any) => {
-  const [isChecked, setChecked] = useState(false);
+const CategoryCheckbox = ( { item, handelCheckBoxSelect}: any) => {
+  const [isChecked, setChecked] = useState(item.checked);
 
   const setValue = (value: boolean) => {
-    setChecked(value);
-    handelCheckBoxSelect(value)
+    handelCheckBoxSelect(value);
+    setChecked(!isChecked);   
   }
   
   return (

@@ -1,0 +1,23 @@
+import React from 'react';
+import { FlatList } from 'react-native';
+import { categorySignal, setCategory } from "@signals/search.signal";
+import CategoryCheckbox from '../CategoryList/CategoryCheckBox';
+
+const CategoryFilter = () => {
+  const handelCheckBoxSelect = (id: string, value: boolean) => {
+    setCategory(id, value)
+  }
+
+  return (
+    <FlatList
+      className='px-8 pb-5 w-full'
+      data={categorySignal.value}
+      keyExtractor={(item) => item.id}
+      renderItem={({item}) => (
+        <CategoryCheckbox item={item} handelCheckBoxSelect={(value: boolean) => {handelCheckBoxSelect(item.id, value)}}/>
+      )}
+    />
+  )
+}
+
+export default CategoryFilter;
