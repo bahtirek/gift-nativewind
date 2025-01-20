@@ -1,8 +1,6 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { Image, View, ColorValue } from 'react-native';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { Image, View, ColorValue, Platform } from 'react-native';
 import { useClientOnlyValue } from '@/hooks/useClientOnlyValue';
 import icons from '@/constants/icons';
 
@@ -15,17 +13,15 @@ const TabIcon = ({icon, color, name, focused}: {icon: object, color: ColorValue,
       tintColor={color}
       className='"!w-6 !h-6'
     />
-    {/* <Text 
-      className={`${focused ? 'font-psemibold' : 'font-pregular'} text-xs`}
-      style={{color: color}}
-    >
-      {name}
-    </Text> */}
     </View>
   )
 }
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  let tabHeight = 70;
+  if (Platform.OS === 'android') {
+    tabHeight = 40;
+    // Code specific to Android
+  }
 
   return (
     <Tabs
@@ -37,7 +33,7 @@ export default function TabLayout() {
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
         tabBarStyle: {
-          height: 40,
+          height: tabHeight,
           backgroundColor: '#FFFFFF',
           borderTopWidth: 1,
           borderTopColor: '#FF8162'
