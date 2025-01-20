@@ -10,7 +10,7 @@ const CategoryFilter = () => {
 
   return (
     <FlatList
-      className='px-8 pb-5 w-full'
+      className='w-full'
       data={categorySignal.value}
       keyExtractor={(item) => item.id}
       renderItem={({item}) => (

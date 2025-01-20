@@ -8,6 +8,7 @@ import controls from "./../../assets/icons/controls.png";
 import controlsa from "./../../assets/icons/controlsa.png";
 import search_orange from "./../../assets/icons/search_orange.png";
 import allcards from "./../../assets/icons/allcards.png";
+import cancel from "./../../assets/icons/cancel.png";
 
 export default {
   bookmark,
@@ -19,5 +20,6 @@ export default {
   controls,
   controlsa,
   search_orange,
-  allcards
+  allcards,
+  cancel
 };

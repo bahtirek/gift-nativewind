@@ -40,3 +40,8 @@ export type CreatorType = {
   username: string,
   avatar: string
 }
+
+export type Location = {
+  id: string,
+  name: string
+}
