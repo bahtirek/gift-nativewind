@@ -1,12 +1,8 @@
 import { View, Text, Modal, TouchableOpacity, Image, StyleSheet, Alert, FlatList, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import icons from '@constants/icons';
-import { categorySignal } from "@signals/search.signal";
-import Checkbox from 'expo-checkbox';
-import CategoryCheckbox from '../CategoryList/CategoryCheckBox';
 import SearchInput from '../common/SearchInput';
-import { computed } from "@preact/signals-react";
-import CategoryFilter from '../CategoryList/CategoryFilter';
+import CategoryFilterList from '../CategoryList/CategoryFilterList';
 
 const CardsScreenHeader = ( { handleSearchQuery }: any) => {
   const [showSettings, setShowSettings] = useState(false);
@@ -40,7 +36,7 @@ const CardsScreenHeader = ( { handleSearchQuery }: any) => {
             className="flex flex-row items-center bg-white"
             style={styles.shadow}
             >
-            <CategoryFilter />
+            <CategoryFilterList />
           </View>
         </View>
       }
@@ -61,4 +57,5 @@ const styles = StyleSheet.create({
     elevation: 6,
   }
 });
+
 export default CardsScreenHeader
