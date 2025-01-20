@@ -10,23 +10,13 @@ import CategoryFilter from '../CategoryList/CategoryFilter';
 
 const CardsScreenHeader = ( { handleSearchQuery }: any) => {
   const [showSettings, setShowSettings] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
 
   const toggleSettings = () => {
     setShowSettings(!showSettings);
-    //setModalVisible(!modalVisible);
   }
-
-  const handelCheckBoxSelect = () => {
-    console.log("checked");
-  }
-
-  const filters = computed(() => {
-    return categorySignal.value.filter(category => category.checked)
-  })
   
   return (
-    <View className="flex flex-column w-full relative">
+    <View className="flex flex-column w-full relative cards-screen-header">
       <View className="flex  flex-1 flex-row items-center relative">
         <View className="flex  flex-1">
           <SearchInput />
@@ -54,36 +44,6 @@ const CardsScreenHeader = ( { handleSearchQuery }: any) => {
           </View>
         </View>
       }
-      {!showSettings && 
-        <View>
-          <FlatList
-            className='pt-2 flex flex-row flex-wrap'
-            data={filters.value}
-            keyExtractor={(item) => item.id}
-            renderItem={({item}) => (
-              <Text className='mr-4 text-secondary-700'>*{item.label}</Text>
-            )}
-          />
-        </View>
-      }
-      <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-            setModalVisible(!modalVisible);
-          }}>
-          <View className='flex items-center justify-center p-5'>
-            <View className='flex items-center justify-center w-full m-20 bg-white border rounded-2xl border-gray-600'>
-              <Text>Hello World!</Text>
-              <Pressable
-                onPress={() => setModalVisible(!modalVisible)}>
-                <Text >Hide Modal</Text>
-              </Pressable>
-            </View>
-          </View>
-      </Modal>
     </View>
   )
 }
