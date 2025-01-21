@@ -3,13 +3,13 @@ import React, { useState } from 'react'
 import icons from '@constants/icons';
 import SearchInput from '../common/SearchInput';
 import CardsScreenHeaderModal from './CardsScreenHeaderModal';
+import { setInitialLocation } from '@signals/location.signal'
 
 const CardsScreenHeader = () => {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const toggleSettingsModal = () => {
     setShowSettingsModal(!showSettingsModal);  
   }
-  
   return (
     <View className="flex flex-column w-full relative cards-screen-header">
       <View className="flex flex-1 flex-row items-center relative">
