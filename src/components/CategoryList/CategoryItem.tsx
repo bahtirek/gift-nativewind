@@ -1,18 +1,24 @@
 import { View, Text, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { CategoryItemType } from 'src/types'
+import { setCategory, resetCategories } from '@signals/search.signal';
+import { router } from 'expo-router';
 
 type CategoryItemPropType = {
   item: CategoryItemType,
 }
 
 const CategoryItem = ({item}: CategoryItemPropType) => {
-  const [category, setCategory] = useState(''); 
+  const handelCheckBoxSelect = (id: string) => {
+    resetCategories();
+    setCategory(id, true);
+    router.navigate('/allcards');
+  }
 
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      onPress={() => setCategory(item.id)}
+      onPress={() => handelCheckBoxSelect(item.id)}
       className='relative justify-center items-center'
       
     >

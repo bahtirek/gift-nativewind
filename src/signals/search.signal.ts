@@ -15,9 +15,14 @@ const setCategory = (id: string, value: boolean) => {
   })
 }
 
+const resetCategories = () => {
+  categorySignal.value = categorySignal.value.map(category => { return {...category, checked: false}})
+}
+
 export {
   searchQuerySignal,
   categorySignal,
-  setCategory
+  setCategory,
+  resetCategories
 } 
   
