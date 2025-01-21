@@ -1,7 +1,7 @@
 import { FlatList } from 'react-native'
 import React from 'react'
 import CategoryItem from './CategoryItem'
-import { categorySignal, setCategory } from '@signals/search.signal';
+import { categorySignal, setCategory } from '@signals/category.signal';
 
 const CategoryList = () => {
   return (

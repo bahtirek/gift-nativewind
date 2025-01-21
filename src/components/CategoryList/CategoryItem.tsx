@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native'
-import React, { useState } from 'react'
+import React from 'react'
 import { CategoryItemType } from 'src/types'
-import { setCategory, resetCategories } from '@signals/search.signal';
+import { setCategory, resetCategories } from '@signals/category.signal';
 import { router } from 'expo-router';
 
 type CategoryItemPropType = {

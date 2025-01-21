@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import { categorySignal, setCategory } from "@signals/search.signal";
+import { categorySignal, setCategory } from "@signals/category.signal";
 import CategoryCheckbox from './CategoryCheckBox';
 
 const CategoryFilter = () => {
