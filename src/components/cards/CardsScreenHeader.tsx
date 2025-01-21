@@ -7,15 +7,13 @@ import CardsScreenHeaderModal from './CardsScreenHeaderModal';
 const CardsScreenHeader = () => {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const toggleSettingsModal = () => {
-    setShowSettingsModal(!showSettingsModal);
-    console.log(showSettingsModal);
-    
+    setShowSettingsModal(!showSettingsModal);  
   }
   
   return (
     <View className="flex flex-column w-full relative cards-screen-header">
-      <View className="flex  flex-1 flex-row items-center relative">
-        <View className="flex  flex-1">
+      <View className="flex flex-1 flex-row items-center relative">
+        <View className="flex flex-1">
           <SearchInput />
         </View>
         <View className=''>

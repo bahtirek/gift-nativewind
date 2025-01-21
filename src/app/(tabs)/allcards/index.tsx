@@ -3,9 +3,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import giftCards from '@assets/data/giftcards';
 import GiftCard from '@/components/GiftCard';
 import CardsScreenHeader from '@/components/cards/CardsScreenHeader';
+import { giftcardsSignal } from '@signals/giftcards.signal';
 
 const Profile = () => {
-  const allCards = giftCards;
 
   const getCards = () => {
 
@@ -15,13 +15,13 @@ const Profile = () => {
     <SafeAreaView className='h-full bg-white'>
       <FlatList 
         className='px-5'
-        data={allCards}
+        data={giftcardsSignal.value}
         keyExtractor={(item) => item.id}
         renderItem={({item}) => (
           <GiftCard giftCard={item} className="mb-5" />
         )}
         ListHeaderComponent={() => (
-          <View className='py-3 px-5 bg-white -mx-5 mb-3' style={styles.shadow}>
+          <View className='py-3 px-5 bg-white -mx-5 mb-5' style={styles.shadow}>
             <CardsScreenHeader />
           </View>
         )}
