@@ -4,14 +4,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from "expo-status-bar";
 
 import CategoryList from '@/components/CategoryList/CategoryList';
-import giftCards from '@assets/data/giftcards';
+import { trendingGiftcardsSignal } from '@signals/giftcards.signal';
 import GiftCard from '@/components/GiftCard';
 import icons from '@constants/icons';
 import SearchInput from '@/components/common/SearchInput';
 import { Href, router } from 'expo-router';
 
 export default function TabOneScreen() {
-  const trendingCards = giftCards;
   const goToSearchScreen = () => {
     router.push('/allcards' as Href);
   }
@@ -19,7 +18,7 @@ export default function TabOneScreen() {
     <SafeAreaView className='h-full bg-white'>
       <FlatList 
         className='px-5'
-        data={trendingCards}
+        data={trendingGiftcardsSignal.value}
         keyExtractor={(item) => item.id}
         renderItem={({item}) => (
           <GiftCard giftCard={item} className="mb-5" />

@@ -1,7 +1,5 @@
-import { signal, effect, computed } from "@preact/signals-react";
+import { signal } from "@preact/signals-react";
 import categories from "@assets/data/categories";
-
-const searchQuerySignal = signal("");
 
 const categorySignal = signal(categories);
 
@@ -20,7 +18,6 @@ const resetCategories = () => {
 }
 
 export {
-  searchQuerySignal,
   categorySignal,
   setCategory,
   resetCategories
