@@ -1,11 +1,25 @@
 import { signal, effect, computed } from "@preact/signals-react";
 import giftCards from "@assets/data/giftcards";
+import { GiftCardType } from "@/types";
 
-const giftcardsSignal = signal(giftCards);
-const trendingGiftcardsSignal = signal(giftCards);
+const giftCardsSignal = signal<GiftCardType[]>(giftCards);
+const trendingGiftcardsSignal = signal<GiftCardType[]>(giftCards);
+
+const giftCardSignal = signal<GiftCardType>({});
+
+const setGiftCard = (giftCard: GiftCardType) => {
+  giftCardSignal.value = giftCard
+}
+
+const resetGiftCard = () => {
+
+}
 
 export {
-  giftcardsSignal,
+  giftCardsSignal,
   trendingGiftcardsSignal,
+  giftCardSignal,
+  setGiftCard,
+  resetGiftCard
 } 
   

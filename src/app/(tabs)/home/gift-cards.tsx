@@ -1,22 +1,17 @@
 import { FlatList, View, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import giftCards from '@assets/data/giftcards';
 import GiftCard from '@/components/GiftCard';
 import CardsScreenHeader from '@/components/cards/CardsScreenHeader';
-import { giftcardsSignal } from '@signals/giftcards.signal';
+import { giftCardsSignal } from '@signals/giftcards.signal';
 
-const Profile = () => {
-
-  const getCards = () => {
-
-  }
+const GiftCards = () => {
 
   return (
     <SafeAreaView className='h-full bg-white'>
       <FlatList 
         className='px-5'
-        data={giftcardsSignal.value}
-        keyExtractor={(item) => item.id}
+        data={giftCardsSignal.value}
+        keyExtractor={(item) => item.id!}
         renderItem={({item}) => (
           <GiftCard giftCard={item} className="mb-5" />
         )}
@@ -49,4 +44,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Profile;
+export default GiftCards;
