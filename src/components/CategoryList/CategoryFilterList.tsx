@@ -10,7 +10,7 @@ const CategoryFilter = () => {
 
   return (
     <FlatList
-      className='w-full'
+      className='w-full flex-grow-0'
       data={categorySignal.value}
       keyExtractor={(item) => item.id}
       renderItem={({item}) => (

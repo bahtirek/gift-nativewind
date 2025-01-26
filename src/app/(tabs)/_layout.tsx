@@ -1,8 +1,9 @@
 import React from 'react';
-import { Tabs } from 'expo-router';
+import { Tabs, router } from 'expo-router';
 import { Image, View, ColorValue, Platform } from 'react-native';
 import { useClientOnlyValue } from '@/hooks/useClientOnlyValue';
 import icons from '@/constants/icons';
+import SearchButton from '@/components/search/SearchButton';
 
 const TabIcon = ({icon, color, name, focused}: {icon: object, color: ColorValue, name: string, focused: boolean}) => {
   return (
@@ -48,7 +49,7 @@ export default function TabLayout() {
           headerShown: false,
           tabBarIcon: ({color, focused}) => (
             <TabIcon 
-              icon={icons.home}
+              icon={icons.allcards}
               color={color}
               name='Home'
               focused={focused}
@@ -66,22 +67,6 @@ export default function TabLayout() {
               icon={icons.bookmark}
               color={color}
               name='Bookmark'
-              focused={focused}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="allcards"
-        options={{
-          title: 'Gift Cards',
-          headerTintColor: '#FF4416',
-          headerShown: false,
-          tabBarIcon: ({color, focused}) => (
-            <TabIcon 
-              icon={icons.allcards}
-              color={color}
-              name='Gift Cards'
               focused={focused}
             />
           ),

@@ -12,14 +12,14 @@ import { Href, router } from 'expo-router';
 
 export default function TabOneScreen() {
   const goToSearchScreen = () => {
-    router.push('/allcards' as Href);
+    router.push('/home/gift-cards' as Href);
   }
   return (
     <SafeAreaView className='h-full bg-white'>
       <FlatList 
         className='px-5'
         data={trendingGiftcardsSignal.value}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id!}
         renderItem={({item}) => (
           <GiftCard giftCard={item} className="mb-5" />
         )}

@@ -1,19 +1,21 @@
-import { View, Text, Modal, Image, StyleSheet, Pressable, Platform } from 'react-native'
+import { View, Text, Modal, Image, StyleSheet, Pressable, Platform, GestureResponderEvent } from 'react-native'
 import React from 'react'
 import icons from '@constants/icons';
 import CategoryFilterList from '../CategoryList/CategoryFilterList';
-import LocationDropdown from '../LocationDropdown';
+import LocationDropdown from './LocationDropdown';
+import SearchInput from '../common/SearchInput';
+import CustomButton from '../common/CustomButton';
 
-const CardsScreenHeaderModal = ( {showSettingsModal, toggleSettingsModal}: any) => {
+const CardsScreenHeaderModal = ( {showSearchModal, closeModal, handleSearch}: any) => {
   
   return (
     <Modal
       animationType="slide"
-      visible={showSettingsModal}
+      visible={showSearchModal}
       >
       <View className='flex w-full h-full bg-white' style={styles.container}>
         <View className='flex items-end'>
-          <Pressable onPress={toggleSettingsModal} className="p-4">
+          <Pressable onPress={closeModal as (e?: GestureResponderEvent) => void} className="p-4">
             <Image 
               source={icons.cancel}
               className='!w-5 !h-5'
@@ -21,12 +23,18 @@ const CardsScreenHeaderModal = ( {showSettingsModal, toggleSettingsModal}: any) 
             />
           </Pressable>
         </View>
-        <View className="flex bg-white px-8">
+        <View className="flex bg-white px-8 pb-10 flex-1">
+          <View className="mt-6">
+            <SearchInput handleSearchQuery={handleSearch} />
+          </View>
           <Text className='text-primary mt-5 mb-2'>Category</Text>
           <CategoryFilterList />
           <Text className='text-primary mt-7'>Location</Text>
           <View style={styles.dropdown}>
             <LocationDropdown />
+          </View>
+          <View className='mt-auto'>
+            <CustomButton label={'Search'} handlePress={handleSearch}/>
           </View>
         </View>
       </View>

@@ -1,6 +1,8 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react';
 import { GiftCardType } from 'src/types';
+import { router } from 'expo-router';
+import { setGiftCard } from '@/signals/giftcards.signal';
 
 type GiftCardPropType = {
   giftCard: GiftCardType,
@@ -10,11 +12,15 @@ type GiftCardPropType = {
 
 const GiftCard = ({giftCard, showDescription, className}: GiftCardPropType, ) => {
   const {label, thumbnail, description, address} = giftCard;
-
+  const goToCardDetailsScreen = () => {
+    setGiftCard(giftCard)
+    router.push('/home/gift-card-details')
+  }
   return (
     <View className={`flex flex-col items-center ${className}`}>
       <TouchableOpacity
         activeOpacity={0.7}
+        onPress={goToCardDetailsScreen}
         className='p-3 relative w-full rounded-xl border border-secondary-200'
       >
         <View className=''>
