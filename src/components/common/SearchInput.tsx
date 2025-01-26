@@ -1,11 +1,11 @@
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Alert, GestureResponderEvent } from 'react-native'
+import { View, TextInput, TouchableOpacity, Image, Alert } from 'react-native'
 import React, { useState } from 'react'
 import icons from '@constants/icons';
-import {searchQuerySignal} from "@signals/search.signal";
+import {setSearchQuery } from "@signals/search.signal";
 
 const SearchInput = ( { handleSearchQuery }: any) => {
   const [query, setQuery] = useState('');
-  
+
   return (
     <View className="flex flex-row items-center w-full relative">
       <TextInput
@@ -21,8 +21,8 @@ const SearchInput = ( { handleSearchQuery }: any) => {
           if(!query) {
             return Alert.alert('Missing query', "Please input something to search results across database")
           }
-          searchQuerySignal.value = query;
-          handleSearchQuery()
+          setSearchQuery(query);
+          handleSearchQuery();
         }}
         className='absolute right-4'
       >

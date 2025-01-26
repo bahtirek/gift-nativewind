@@ -4,14 +4,9 @@ import icons from '@constants/icons';
 import CategoryFilterList from '../CategoryList/CategoryFilterList';
 import LocationDropdown from './LocationDropdown';
 import SearchInput from '../common/SearchInput';
-import { Href, router } from 'expo-router';
 import CustomButton from '../common/CustomButton';
 
-const CardsScreenHeaderModal = ( {showSearchModal, toggleSearchModal}: any) => {
-  const handleSearch = () => {
-    toggleSearchModal();
-    router.push('/home/gift-cards' as Href);
-  }
+const CardsScreenHeaderModal = ( {showSearchModal, closeModal, handleSearch}: any) => {
   
   return (
     <Modal
@@ -20,7 +15,7 @@ const CardsScreenHeaderModal = ( {showSearchModal, toggleSearchModal}: any) => {
       >
       <View className='flex w-full h-full bg-white' style={styles.container}>
         <View className='flex items-end'>
-          <Pressable onPress={toggleSearchModal as (e?: GestureResponderEvent) => void} className="p-4">
+          <Pressable onPress={closeModal as (e?: GestureResponderEvent) => void} className="p-4">
             <Image 
               source={icons.cancel}
               className='!w-5 !h-5'
@@ -28,7 +23,7 @@ const CardsScreenHeaderModal = ( {showSearchModal, toggleSearchModal}: any) => {
             />
           </Pressable>
         </View>
-        <View className="flex bg-white px-8 pb-8 flex-1">
+        <View className="flex bg-white px-8 pb-10 flex-1">
           <View className="mt-6">
             <SearchInput handleSearchQuery={handleSearch} />
           </View>
@@ -39,7 +34,7 @@ const CardsScreenHeaderModal = ( {showSearchModal, toggleSearchModal}: any) => {
             <LocationDropdown />
           </View>
           <View className='mt-auto'>
-            <CustomButton label={'Search'} />
+            <CustomButton label={'Search'} handlePress={handleSearch}/>
           </View>
         </View>
       </View>

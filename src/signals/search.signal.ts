@@ -15,14 +15,25 @@ const setCategory = (id: string, value: boolean) => {
   })
 }
 
+const setSearchQuery = (value: string) => {
+  searchQuerySignal.value = value
+}
+
 const resetCategories = () => {
   categorySignal.value = categorySignal.value.map(category => { return {...category, checked: false}})
+}
+
+const getGiftCards = () => {
+  console.log(searchQuerySignal.value, categorySignal.value);
+  
 }
 
 export {
   searchQuerySignal,
   categorySignal,
   setCategory,
-  resetCategories
+  resetCategories,
+  setSearchQuery,
+  getGiftCards
 } 
   

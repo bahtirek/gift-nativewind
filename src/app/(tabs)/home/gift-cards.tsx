@@ -1,7 +1,6 @@
-import { FlatList, View, StyleSheet, Platform } from 'react-native';
+import { FlatList, View, StyleSheet, Platform, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import GiftCard from '@/components/GiftCard';
-/* import CardsScreenHeader from '@/components/cards/CardsScreenHeader'; */
 import { giftCardsSignal } from '@signals/giftcards.signal';
 import SearchModal from '@/components/search/SearchModal';
 import { useEffect, useState } from 'react';
@@ -11,29 +10,52 @@ import SearchButton from '@/components/search/SearchButton';
 const GiftCards = () => {
   const navigation = useNavigation();
   const [showSearchModal, setShowSearchModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    navigation.setOptions({ 
+      headerRight: () => (
+        <SearchButton handlePress={toggleSearchModal}/>
+      ),
+      title: 'Gift Cards',
+      headerTintColor: '#FF4416',
+    });
+
+    handleSearch();
+  }, [])
+
   const toggleSearchModal = () => {
     setShowSearchModal(!showSearchModal); 
   }
 
-  useEffect(() => {
-    navigation.setOptions({ headerRight: () => (
-      <SearchButton handlePress={toggleSearchModal}/>
-    ),});
-  }, [navigation]);
+  const handleSearch = () => {
+    setIsLoading(true);
+    setShowSearchModal(false);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000)
+  }
 
   return (
-    <SafeAreaView className='h-full bg-white'>
-      <FlatList 
-        className='px-5'
-        data={giftCardsSignal.value}
-        keyExtractor={(item) => item.id!}
-        renderItem={({item}) => (
-          <GiftCard giftCard={item} className="mb-5" />
-        )}
-        keyboardDismissMode='on-drag'
-      />
+    <SafeAreaView edges={["left", "right"]} className='h-full bg-white'>
+      {isLoading && 
+        <View className='flex flex-1 justify-center items-center h-full'>
+          <ActivityIndicator size={'large'} color={"#FF4416"} />
+        </View>
+      }
+      {!isLoading && 
+        <FlatList 
+          className='px-5 pt-6'
+          data={giftCardsSignal.value}
+          keyExtractor={(item) => item.id!}
+          renderItem={({item}) => (
+            <GiftCard giftCard={item} className="mb-5" />
+          )}
+          keyboardDismissMode='on-drag'
+        />
+      }
 
-      <SearchModal showSearchModal={showSearchModal} toggleSearchModal={() => {toggleSearchModal()}}/>
+      <SearchModal showSearchModal={showSearchModal} handleSearch={handleSearch} closeModal={() => {setShowSearchModal(false)}}/>
     </SafeAreaView>
   );
 }
