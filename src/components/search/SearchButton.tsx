@@ -5,7 +5,7 @@ import icons from '@constants/icons';
 const SearchButton = ({handlePress}: any) => {
   return (      
   <TouchableOpacity
-    onPress={handlePress}
+    onPressIn={handlePress}
     className='p-4 mr-2'
   >
     <Image 
