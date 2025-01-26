@@ -1,7 +1,7 @@
 import { View, Text, Modal, Image, StyleSheet, Pressable, Platform, GestureResponderEvent } from 'react-native'
 import React from 'react'
 import icons from '@constants/icons';
-import CategoryFilterList from '../CategoryList/CategoryFilterList';
+import CategoryFilterList from '../category/CategoryFilterList';
 import LocationDropdown from './LocationDropdown';
 import SearchInput from '../common/SearchInput';
 import CustomButton from '../common/CustomButton';

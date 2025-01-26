@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from "expo-status-bar";
 
-import CategoryList from '@/components/CategoryList/CategoryList';
+import CategoryList from '@/components/category/CategoryList';
 import { trendingGiftcardsSignal } from '@signals/giftcards.signal';
 import GiftCard from '@/components/GiftCard';
 import icons from '@constants/icons';
