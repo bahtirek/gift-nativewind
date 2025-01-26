@@ -1,10 +1,25 @@
-import { FlatList, View, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import GiftCard from '@/components/GiftCard';
-import CardsScreenHeader from '@/components/cards/CardsScreenHeader';
+/* import CardsScreenHeader from '@/components/cards/CardsScreenHeader'; */
 import { giftCardsSignal } from '@signals/giftcards.signal';
+import SearchModal from '@/components/search/SearchModal';
+import { useEffect, useState } from 'react';
+import { useNavigation } from 'expo-router';
+import SearchButton from '@/components/search/SearchButton';
 
 const GiftCards = () => {
+  const navigation = useNavigation();
+  const [showSearchModal, setShowSearchModal] = useState(false);
+  const toggleSearchModal = () => {
+    setShowSearchModal(!showSearchModal); 
+  }
+
+  useEffect(() => {
+    navigation.setOptions({ headerRight: () => (
+      <SearchButton handlePress={toggleSearchModal}/>
+    ),});
+  }, [navigation]);
 
   return (
     <SafeAreaView className='h-full bg-white'>
@@ -15,14 +30,10 @@ const GiftCards = () => {
         renderItem={({item}) => (
           <GiftCard giftCard={item} className="mb-5" />
         )}
-        ListHeaderComponent={() => (
-          <View className='py-3 px-5 bg-white -mx-5 mb-5' style={styles.shadow}>
-            <CardsScreenHeader />
-          </View>
-        )}
         keyboardDismissMode='on-drag'
-        stickyHeaderIndices={[0]}
       />
+
+      <SearchModal showSearchModal={showSearchModal} toggleSearchModal={() => {toggleSearchModal()}}/>
     </SafeAreaView>
   );
 }
@@ -41,6 +52,20 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
 
     elevation: 6,
+  },
+  container: {
+    ...Platform.select({
+      ios: {
+        paddingTop: 50
+      }
+    })
+  },
+  dropdown: {
+    ...Platform.select({
+      android: {
+        marginLeft: -15
+      }
+    })
   }
 });
 

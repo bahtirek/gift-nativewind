@@ -3,6 +3,7 @@ import { Tabs, router } from 'expo-router';
 import { Image, View, ColorValue, Platform } from 'react-native';
 import { useClientOnlyValue } from '@/hooks/useClientOnlyValue';
 import icons from '@/constants/icons';
+import SearchButton from '@/components/search/SearchButton';
 
 const TabIcon = ({icon, color, name, focused}: {icon: object, color: ColorValue, name: string, focused: boolean}) => {
   return (
