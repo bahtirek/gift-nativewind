@@ -49,6 +49,7 @@ module.exports = {
         },
         gray: {
           100: "#CDCDE0",
+          200: "#B8EFEF"
         },
       },
     },

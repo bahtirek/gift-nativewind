@@ -7,11 +7,11 @@ const CustomButton = ({label, handlePress, containerStyles, textStyles, isLoadin
     <TouchableOpacity
       onPress={handlePress as (e?: GestureResponderEvent) => void}
       activeOpacity={0.7}
-      className={`bg-primary rounded-xl min-h-[56px] justify-center items-center ${containerStyles} ${isLoading ? 'opacity-50' : ''}`}
+      className={`rounded-xl border-b-[5px] border border-gray-200 min-h-[56px] justify-center items-center ${containerStyles} ${isLoading ? 'opacity-50' : ''}`}
       disabled={isLoading}
     >
       <Text
-        className={`text-white font-psemibold text-xl ${textStyles}`}
+        className={`text-primary font-semibold text-2xl ${textStyles}`}
       >{label}</Text>
     </TouchableOpacity>
   )

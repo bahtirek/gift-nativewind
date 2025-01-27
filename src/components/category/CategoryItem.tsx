@@ -22,7 +22,7 @@ const CategoryItem = ({item}: CategoryItemPropType) => {
       className='relative justify-center items-center'
       
     >
-      <View className=' p-3 m-1 rounded-xl border border-secondary-200'>
+      <View className=' p-3 m-1 rounded-xl border border-gray-200' style={styles.shadow}>
         <ImageBackground 
           source={{uri: item.icon}}
           className='w-10 h-10 overflow-hidden'
@@ -38,15 +38,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9660014'
   },
   shadow: {
-    shadowColor: "#000",
+    shadowColor: "#B8EFEF",
     shadowOffset: {
         width: 0,
-        height: 3,
+        height: 4,
     },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
+    shadowOpacity: 1,
+    shadowRadius: 0,
 
-    elevation: 6,
-}
+    elevation: 10,
+  }
 });
 export default CategoryItem

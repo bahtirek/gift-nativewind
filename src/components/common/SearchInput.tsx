@@ -1,4 +1,4 @@
-import { View, TextInput, TouchableOpacity, Image, Alert } from 'react-native'
+import { View, TextInput, TouchableOpacity, Image, Alert, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import icons from '@constants/icons';
 import {setSearchQuery } from "@signals/search.signal";
@@ -9,11 +9,12 @@ const SearchInput = ( { handleSearchQuery }: any) => {
   return (
     <View className="flex flex-row items-center w-full relative">
       <TextInput
-        className="text-base mt-0.5 text-gray flex-1 font-pregular h-14 pl-4 pr-12 rounded-2xl border border-secondary-200 focus:border-primary"
+        className="text-base mt-0.5 text-gray flex-1 font-pregular h-14 pl-4 pr-12 rounded-2xl border-b-[5px] border border-gray-200 focus:border-primary"
         value={query}
         placeholder={'Search for perfect gift place'}
         placeholderTextColor="#FFA07A"
         onChangeText={(e) => setQuery(e)}
+        
       />
 
       <TouchableOpacity
@@ -36,4 +37,20 @@ const SearchInput = ( { handleSearchQuery }: any) => {
   )
 }
 
+const styles = StyleSheet.create({
+  bgLightOrange: {
+    backgroundColor: '#f9660014'
+  },
+  shadow: {
+    shadowColor: "#B8EFEF",
+    shadowOffset: {
+        width: 0,
+        height: 4,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 0,
+
+    elevation: 10,
+  }
+});
 export default SearchInput
