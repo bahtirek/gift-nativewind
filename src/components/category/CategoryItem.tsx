@@ -22,7 +22,7 @@ const CategoryItem = ({item}: CategoryItemPropType) => {
       className='relative justify-center items-center'
       
     >
-      <View className=' p-3 m-1 rounded-xl border border-secondary-200'>
+      <View className=' p-3 m-1 rounded-xl bg-white' style={styles.shadow}>
         <ImageBackground 
           source={{uri: item.icon}}
           className='w-10 h-10 overflow-hidden'
@@ -33,20 +33,37 @@ const CategoryItem = ({item}: CategoryItemPropType) => {
     </TouchableOpacity>
   )
 }
+
 const styles = StyleSheet.create({
   bgLightOrange: {
     backgroundColor: '#f9660014'
   },
   shadow: {
-    shadowColor: "#000",
+    shadowColor: "rgba(152, 152, 152, 0.5)",
     shadowOffset: {
         width: 0,
-        height: 3,
+        height: 7,
     },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
+    shadowOpacity: 0.4,
+    shadowRadius: 7,
 
-    elevation: 6,
-}
+    elevation: 10,
+  }
 });
+/* const styles = StyleSheet.create({
+  bgLightOrange: {
+    backgroundColor: '#f9660014'
+  },
+  shadow: {
+    shadowColor: "#888",
+    shadowOffset: {
+        width: 0,
+        height: 7,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 7,
+
+    elevation: 10,
+  }
+}); */
 export default CategoryItem

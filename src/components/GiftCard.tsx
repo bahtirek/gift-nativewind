@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react';
 import { GiftCardType } from 'src/types';
 import { router } from 'expo-router';
@@ -21,7 +21,8 @@ const GiftCard = ({giftCard, showDescription, className}: GiftCardPropType, ) =>
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={goToCardDetailsScreen}
-        className='p-3 relative w-full rounded-xl border border-secondary-200'
+        className='p-3 relative w-full rounded-xl bg-white'
+        style={styles.shadow}
       >
         <View className=''>
           <Image 
@@ -40,5 +41,54 @@ const GiftCard = ({giftCard, showDescription, className}: GiftCardPropType, ) =>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  bgLightOrange: {
+    backgroundColor: '#f9660014'
+  },
+  shadow: {
+    shadowColor: "rgba(152, 152, 152, 0.5)",
+    shadowOffset: {
+        width: 0,
+        height: 7,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 7,
+
+    elevation: 10,
+  }
+});
+/* const styles = StyleSheet.create({
+  bgLightOrange: {
+    backgroundColor: '#f9660014'
+  },
+  shadow: {
+    shadowColor: "#888",
+    shadowOffset: {
+        width: 0,
+        height: 7,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 7,
+
+    elevation: 10,
+  }
+}); */
+/* const styles = StyleSheet.create({
+  bgLightOrange: {
+    backgroundColor: '#f9660014'
+  },
+  shadow: {
+    shadowColor: "#d1d4db",
+    shadowOffset: {
+        width: 0,
+        height: 10,
+    },
+    shadowOpacity: 0.7,
+    shadowRadius: 10.65,
+
+    elevation: 10,
+}
+}); */
 
 export default GiftCard
