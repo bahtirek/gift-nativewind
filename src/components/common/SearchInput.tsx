@@ -7,14 +7,13 @@ const SearchInput = ( { handleSearchQuery }: any) => {
   const [query, setQuery] = useState('');
 
   return (
-    <View className="flex flex-row items-center w-full relative">
+    <View className="flex flex-row items-center w-full relative bg-white rounded-2xl" style={styles.shadow}>
       <TextInput
         className="text-base mt-0.5 text-gray flex-1 font-pregular bg-white h-14 pl-4 pr-12 rounded-2xl focus:border-primary"
         value={query}
         placeholder={'Search for perfect gift place'}
         placeholderTextColor="#FFA07A"
         onChangeText={(e) => setQuery(e)}
-        style={styles.shadow}
       />
 
       <TouchableOpacity
@@ -48,12 +47,12 @@ const styles = StyleSheet.create({
     shadowRadius: 7,
 
     elevation: 10,
-    /* ...Platform.select({
+    ...Platform.select({
       android: {
-        shadowColor: "#1d00fb",
+        shadowColor: "rgba(0, 0, 0, 0.5)",
         shadowOpacity: 1,
       }
-    }) */
+    })
   }
 });
 

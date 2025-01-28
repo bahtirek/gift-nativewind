@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, ImageBackground, StyleSheet, Platform } from 'react-native'
 import React from 'react'
 import { CategoryItemType } from 'src/types'
 import { setCategory, resetCategories } from '@signals/category.signal';
@@ -48,22 +48,13 @@ const styles = StyleSheet.create({
     shadowRadius: 7,
 
     elevation: 10,
+    ...Platform.select({
+      android: {
+        shadowColor: "rgba(0, 0, 0, 0.5)",
+        shadowOpacity: 1,
+      }
+    })
   }
 });
-/* const styles = StyleSheet.create({
-  bgLightOrange: {
-    backgroundColor: '#f9660014'
-  },
-  shadow: {
-    shadowColor: "#888",
-    shadowOffset: {
-        width: 0,
-        height: 7,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 7,
 
-    elevation: 10,
-  }
-}); */
 export default CategoryItem
