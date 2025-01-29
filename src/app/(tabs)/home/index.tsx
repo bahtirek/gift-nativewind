@@ -17,11 +17,11 @@ export default function TabOneScreen() {
   return (
     <SafeAreaView className='h-full bg-white'>
       <FlatList 
-        className='px-5'
+        className='px-6'
         data={trendingGiftcardsSignal.value}
         keyExtractor={(item) => item.id!}
         renderItem={({item}) => (
-          <GiftCard giftCard={item} className="mb-5" />
+          <GiftCard giftCard={item} className="mb-6" />
         )}
         ListHeaderComponent={() => (
           <View className='mt-6 space-y-6'>
@@ -42,7 +42,7 @@ export default function TabOneScreen() {
 
             <SearchInput handleSearchQuery={goToSearchScreen}/>
 
-            <View className='w-full flex-1'>
+            <View className='w-full flex-1 pt-8'>
               <CategoryList />
 
               <Text className='text-primary text-2xl font-regular mt-4 mb-3'>Trending</Text>
