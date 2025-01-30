@@ -35,8 +35,8 @@ const GiftCard = ({giftCard, showDescription, className}: GiftCardPropType, ) =>
           </View>
           <View className=' flex-1 pb-1 gap-y-1 pl-4'>
             <Text className='text-xl text-primary font-regular' numberOfLines={1}>{label}</Text>
-            <Text className='text-sm text-secondary-700 font-pregular' numberOfLines={1}>{address}</Text>
-            {showDescription && <Text className='text-xs text-secondary-700 font-regular' numberOfLines={1}>{description}</Text>}
+            <Text className='text-sm text-secondary-800 font-pregular' numberOfLines={1}>{address}</Text>
+            {showDescription && <Text className='text-xs text-secondary-600 font-regular' numberOfLines={1}>{description}</Text>}
           </View>
 
         </View>
