@@ -21,19 +21,22 @@ const GiftCard = ({giftCard, showDescription, className}: GiftCardPropType, ) =>
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={goToCardDetailsScreen}
-        className='p-3 relative w-full rounded-xl bg-white'
-        style={styles.shadow}
+        className='relative w-full rounded-xl bg-white'
+        
       >
-        <View className=''>
-          <Image 
-            source={{uri: thumbnail}}
-            className='w-full h-40 rounded-[8px] opacity-90'
-            resizeMode='cover'
-          />
-          <View className=' flex-1 pt-2 pb-1 gap-y-1'>
-            <Text className='text-xl text-primary font-regular'>{label}</Text>
+        <View className='flex flex-row justify-center items-center'>
+          <View className='w-22 h-22 rounded-[8px]' style={styles.shadow}>
+            <Image 
+              source={{uri: thumbnail}}
+              className='w-20 h-20 rounded-[8px] opacity-90'
+              resizeMode='cover'
+              
+            />
+          </View>
+          <View className=' flex-1 pb-1 gap-y-1 pl-4'>
+            <Text className='text-xl text-primary font-regular' numberOfLines={1}>{label}</Text>
             <Text className='text-sm text-secondary-700 font-pregular' numberOfLines={1}>{address}</Text>
-            {showDescription && <Text className='text-xs text-secondary-700 font-regular' numberOfLines={2}>{description}</Text>}
+            {showDescription && <Text className='text-xs text-secondary-700 font-regular' numberOfLines={1}>{description}</Text>}
           </View>
 
         </View>
@@ -47,13 +50,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9660014'
   },
   shadow: {
-    shadowColor: "rgba(152, 152, 152, 0.5)",
+    shadowColor: "#000",
     shadowOffset: {
         width: 0,
-        height: 7,
+        height: 0,
     },
     shadowOpacity: 0.4,
-    shadowRadius: 7,
+    shadowRadius: 10,
 
     elevation: 10,
     ...Platform.select({

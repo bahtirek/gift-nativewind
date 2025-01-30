@@ -45,7 +45,7 @@ export default function TabOneScreen() {
             <View className='w-full flex-1 pt-8'>
               <CategoryList />
 
-              <Text className='text-primary text-2xl font-regular mt-4 mb-3'>Trending</Text>
+              <Text className='text-primary text-2xl font-regular my-5'>Trending</Text>
             </View>
           </View>
         )}
