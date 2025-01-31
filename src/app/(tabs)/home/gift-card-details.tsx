@@ -55,7 +55,7 @@ const GiftCardDetails = () => {
             </View>
             <View className='mt-4'>
               { (selected === 'other') &&
-                <CustomInput onInput={handleOtherAmount} placeholder='Other amount' />
+                <CustomInput onInput={handleOtherAmount} keyboardType="numeric" placeholder='Other amount' />
               }
             </View>
           </View>

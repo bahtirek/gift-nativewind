@@ -1,12 +1,14 @@
-import { View, TextInput, TouchableOpacity, Image, Alert, StyleSheet, Platform } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import icons from '@constants/icons';
+import { View, TextInput, StyleSheet, Platform } from 'react-native'
+import React, { useState } from 'react'
 
-const CustomInput = ( { onInput, placeholder }: any) => {
+const CustomInput = ( { onInput, placeholder, keyboardType }: any) => {
   const [value, setValue] = useState('');
 
-  const onChange = (e: string) => {
-    setValue(e);
+  const onChange = (text: string) => {
+    if(keyboardType && keyboardType == "numeric") {
+      text = text.replace(/[^0-9]/g, '');
+    }
+    setValue(text);
     onInput(value)
   }
 
@@ -17,7 +19,8 @@ const CustomInput = ( { onInput, placeholder }: any) => {
         value={value}
         placeholder={placeholder}
         placeholderTextColor="#FFA07A"
-        onChangeText={(e) => onChange(e)}
+        onChangeText={(text) => onChange(text)}
+        keyboardType={keyboardType || 'default'}
       />
     </View>
   )
