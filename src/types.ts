@@ -33,7 +33,8 @@ export type GiftCardType = {
   label?: string,
   thumbnail?: string,
   description?: string,
-  address?: string
+  address?: string,
+  priceSet?: PriceType[] 
 };
 
 export type CreatorType = {
@@ -42,6 +43,11 @@ export type CreatorType = {
 }
 
 export type Location = {
+  id?: string,
+  name?: string
+}
+
+export type PriceType = {
   id: string,
-  name: string
+  amount: string
 }

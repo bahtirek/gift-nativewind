@@ -37,7 +37,7 @@ const storeLocation = async (value: Location) => {
   }
 };
 
-const locationSignal = signal({});
+const locationSignal = signal<Location>({});
 const allLocationsSignal = signal(getLocations());
 
 export {
