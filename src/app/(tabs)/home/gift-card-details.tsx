@@ -5,16 +5,22 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import RadioButton from '@/components/common/RadioButton';
 import CustomInput from '@/components/common/CustomInput';
 import { useRootNavigationState, Redirect } from 'expo-router';
+import Counter from '@/components/common/Counter';
 
 const GiftCardDetails = () => {
   const [selected, setSelected] = useState('');
   const [otherAmount, setOtherAmount] = useState('');
+  const [quantity, setQuantity] = useState(1)
   const handleSelect = (amount: string) => {
     setSelected(amount);
   }
 
   const handleOtherAmount = (e: any) => {
     setOtherAmount(e);
+  }
+
+  const onCount = (quantity: number) => {
+    setQuantity(quantity)
   }
 
   return (
@@ -53,10 +59,13 @@ const GiftCardDetails = () => {
                 onSelect={() => handleSelect('other')}
               />
             </View>
-            <View className='mt-4'>
+            <View className='my-4'>
               { (selected === 'other') &&
                 <CustomInput onInput={handleOtherAmount} keyboardType="numeric" placeholder='Other amount' />
               }
+            </View>
+            <View className='mt-4'>
+              <Counter onCount={onCount} />
             </View>
           </View>
         </View>
