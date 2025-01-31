@@ -15,8 +15,6 @@ const GiftCardDetails = () => {
 
   const handleOtherAmount = (e: any) => {
     setOtherAmount(e);
-    console.log(otherAmount);
-    
   }
 
   return (
@@ -25,7 +23,7 @@ const GiftCardDetails = () => {
         <View>
           <Image
             source={{uri: giftCardSignal.value.thumbnail}}
-            className='w-full h-[250px] opacity-90'
+            className='w-full h-[200px] opacity-90'
             resizeMode='cover'
           />
           <View className='px-5 pt-6 rounded-2xl bg-white -mt-4'>
@@ -35,27 +33,18 @@ const GiftCardDetails = () => {
               <Text className='text-xs text-secondary-600 font-regular mt-2'>{giftCardSignal.value.description}</Text>
             </View>
             <View>
-              <RadioButton 
-                label="100.000"
-                value='100.000'
-                status={selected === '100.000' ? true : false}
-                className="mt-4"
-                onSelect={() => handleSelect('100.000')}
-              />
-              <RadioButton 
-                label="200.000"
-                value='200.000'
-                status={selected === '200.000' ? true : false}
-                className="mt-4"
-                onSelect={() => handleSelect('200.000')}
-              />
-              <RadioButton 
-                label="300.000"
-                value='300.000'
-                status={selected === '300.000' ? true : false}
-                className="mt-4"
-                onSelect={() => handleSelect('300.000')}
-              />
+              {
+                giftCardSignal.value.priceSet!.map((price, index) => {
+                  return <RadioButton 
+                    label={price.amount}
+                    value={price.amount}
+                    status={selected === price.amount ? true : false}
+                    className="mt-4"
+                    onSelect={() => handleSelect(price.amount)}
+                    key={price.id}
+                  />
+                })
+              }
               <RadioButton 
                 label="other"
                 value='other'
@@ -64,7 +53,7 @@ const GiftCardDetails = () => {
                 onSelect={() => handleSelect('other')}
               />
             </View>
-            <View>
+            <View className='mt-4'>
               { (selected === 'other') &&
                 <CustomInput onInput={handleOtherAmount} placeholder='Other amount' />
               }
