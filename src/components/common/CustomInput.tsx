@@ -2,16 +2,12 @@ import { View, TextInput, TouchableOpacity, Image, Alert, StyleSheet, Platform }
 import React, { useEffect, useState } from 'react'
 import icons from '@constants/icons';
 
-const CustomInput = ( { onInput, initialValue, placeholder }: any) => {
-  useEffect(() => {
-    if(initialValue) setValue(initialValue)
-  }, [initialValue])
-
+const CustomInput = ( { onInput, placeholder }: any) => {
   const [value, setValue] = useState('');
 
   const onChange = (e: string) => {
-    console.log(e);
-    
+    setValue(e);
+    onInput(value)
   }
 
   return (
