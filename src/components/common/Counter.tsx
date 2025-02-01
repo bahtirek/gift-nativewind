@@ -14,16 +14,16 @@ const Counter = ({onCount}: any) => {
   return (
     <View className='flex-row'>
       <TouchableOpacity 
-        className='w-10 h-10 rounded-md border border-1 border-primary flex justify-center items-center bg-white'
+        className=' w-14 h-14 rounded-2xl border border-1 border-primary flex justify-center items-center bg-white'
         onPress={() => handlePress(false)}
       >
         <View className='w-5 h-1 rounded bg-primary'></View>
       </TouchableOpacity>
-      <View className='w-20 h-10 rounded-md bg-white flex justify-center items-center mx-2' style={styles.shadow}>
+      <View className='flex-1 w-full h-14 rounded-2xl bg-white flex justify-center items-center mx-4' style={styles.shadow}>
         <Text className='text-lg text-secondary-800'>{counterValue}</Text>
       </View>
       <TouchableOpacity 
-        className='w-10 h-10 rounded-md border border-1 border-primary relative flex justify-center items-center bg-white'
+        className=' w-14 h-14 rounded-2xl border border-1 border-primary relative flex justify-center items-center bg-white'
         onPress={() => handlePress(true)}
       >
         <View className='w-5 h-1 rounded bg-primary'></View>
