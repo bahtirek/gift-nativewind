@@ -51,3 +51,9 @@ export type PriceType = {
   id: string,
   amount: string
 }
+
+export type CartItemType = {
+  quantity?: number,
+  amount?: string,
+  giftCard?: GiftCardType
+}
