@@ -55,5 +55,7 @@ export type PriceType = {
 export type CartItemType = {
   quantity?: number,
   amount?: string,
+  email?: string,
+  phone?: string,
   giftCard?: GiftCardType
 }

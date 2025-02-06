@@ -1,18 +1,29 @@
-import { View, Text, Modal, Image, StyleSheet, Pressable, Platform, GestureResponderEvent } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, Modal, Image, StyleSheet, Pressable, Platform, GestureResponderEvent, Alert } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import icons from '@constants/icons';
 import CustomButton from './common/CustomButton';
 import { giftCardSignal } from '@/signals/giftcards.signal';
 import RadioButton from './common/RadioButton';
 import CustomInput from './common/CustomInput';
-import Counter from './common/Counter';
 import { addItemToCart } from '@/signals/cart.signal';
 //import { addItemToCart }
 
 const PurchaseModal = ( {showPurchaseModal, closeModal, handlePurchase}: any) => {
+  useEffect(() => {
+    console.log('effect');
+    if(showPurchaseModal) {
+      setSelectedAmount('');
+      setOtherAmount('');
+      setEmail('');
+      setPhone('');
+    }
+  }, [showPurchaseModal])
   const [selectedAmount, setSelectedAmount] = useState('');
   const [otherAmount, setOtherAmount] = useState('');
   const [quantity, setQuantity] = useState(1);
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+
   const handleSelect = (amount: string) => {
     setSelectedAmount(amount);
   }
@@ -20,14 +31,18 @@ const PurchaseModal = ( {showPurchaseModal, closeModal, handlePurchase}: any) =>
     setOtherAmount(e);
   }
 
-  const onCount = (quantity: number) => {
-    setQuantity(quantity)
-  }
-
   const addToCart = () => {
+    console.log(otherAmount, selectedAmount);
+    
     const amount = otherAmount ? otherAmount : selectedAmount;
-    addItemToCart(quantity, amount, giftCardSignal.value);
-    closeModal();
+    if(amount && amount != "other") {
+      addItemToCart(quantity, amount, giftCardSignal.value, email, phone);
+      closeModal();
+    } else {
+      return (
+        Alert.alert('Missing ammount', "Please choose or enter gift card amount!")     
+      )
+    }
   }
   return (
     <Modal
@@ -67,15 +82,20 @@ const PurchaseModal = ( {showPurchaseModal, closeModal, handlePurchase}: any) =>
                 onSelect={() => handleSelect('other')}
               />
           </View>
-          <View className='my-4'>
+          <View className='mt-4 mb-6'>
             { (selectedAmount === 'other') &&
-              <CustomInput onInput={handleOtherAmount} keyboardType="numeric" placeholder='Other amount' />
+              <CustomInput onInput={handleOtherAmount} keyboardType="numeric" placeholder='Other amount' mask='currency' />
             }
           </View>
+          <Text className='text-xl text-secondary-700 mb-2'>Recepient details</Text>
+          <View className='mt-2'>
+            <CustomInput onInput={(email: string) => {setEmail(email)}} placeholder='Email' />
+          </View>
+          <Text className='text-xl text-secondary-700 my-4'>Or</Text>
+          <View className=''>
+            <CustomInput onInput={(phone: string) => {setPhone(phone)}} placeholder='Phone' keyboardType="numeric" mask='phone' maxLength='12' />
+          </View>
           <View className='mt-auto'>
-            <View className='pb-10'>
-              <Counter onCount={onCount} />
-            </View>
             <CustomButton label={'Add to cart'} handlePress={addToCart}/>
           </View>
         </View>
