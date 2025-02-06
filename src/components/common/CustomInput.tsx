@@ -1,14 +1,22 @@
 import { View, TextInput, StyleSheet, Platform } from 'react-native'
 import React, { useState } from 'react'
+import { maskPhone, maskCurrency } from '../../utils/masks'
 
-const CustomInput = ( { onInput, placeholder, keyboardType }: any) => {
+const CustomInput = ( { onInput, keyboardType, mask, ...rest }: any) => {
   const [value, setValue] = useState('');
 
   const onChange = (text: string) => {
-    if(keyboardType && keyboardType == "numeric") {
-      text = text.replace(/[^0-9]/g, '');
+    let newValue = '';
+    if(mask) {
+      if(mask && mask == "numeric") {
+        newValue = text.replace(/[^0-9]/g, '');
+      } else if (mask == "phone") {
+        newValue = maskPhone(text)
+      } else if(mask == "currency") {
+        newValue = maskCurrency(text)
+      }
     }
-    setValue(text);
+    setValue(newValue);
     onInput(value)
   }
 
@@ -17,10 +25,10 @@ const CustomInput = ( { onInput, placeholder, keyboardType }: any) => {
       <TextInput
         className="text-base mt-0.5 text-gray flex-1 font-pregular bg-white h-14 pl-4 pr-12 rounded-2xl focus:border-primary"
         value={value}
-        placeholder={placeholder}
         placeholderTextColor="#FFA07A"
         onChangeText={(text) => onChange(text)}
         keyboardType={keyboardType || 'default'}
+        {...rest}
       />
     </View>
   )
