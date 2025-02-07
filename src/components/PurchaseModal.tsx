@@ -23,6 +23,10 @@ const PurchaseModal = ( {showPurchaseModal, closeModal, handlePurchase}: any) =>
   const [quantity, setQuantity] = useState(1);
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [emailError, setEmailError] = useState<null | string>(null);
+  const [phoneError, setPhoneError] = useState('');
+  const [currencyError, setCurrencyError] = useState('');
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const handleSelect = (amount: string) => {
     setSelectedAmount(amount);
@@ -31,19 +35,31 @@ const PurchaseModal = ( {showPurchaseModal, closeModal, handlePurchase}: any) =>
     setOtherAmount(e);
   }
 
+  const validateData = () => {
+    if(!emailRegex.test(email)){
+      setEmailError('Wrong email format')
+    }
+  }
+
+  const handleEmailInput = (email: string) => {
+    setEmail(email);
+    if(emailRegex.test(email)){
+      setEmailError('')
+    } else {
+      if(emailError != null)
+      setEmailError('Wrong email format')
+    }
+  }
+
   const addToCart = () => {
     console.log(otherAmount, selectedAmount);
-    
     const amount = otherAmount ? otherAmount : selectedAmount;
     if(amount && amount != "other") {
       addItemToCart(quantity, amount, giftCardSignal.value, email, phone);
-      closeModal();
-    } else {
-      return (
-        Alert.alert('Missing ammount', "Please choose or enter gift card amount!")     
-      )
+      //closeModal();
     }
   }
+
   return (
     <Modal
       animationType="slide"
@@ -84,19 +100,37 @@ const PurchaseModal = ( {showPurchaseModal, closeModal, handlePurchase}: any) =>
           </View>
           <View className='mt-4 mb-6'>
             { (selectedAmount === 'other') &&
-              <CustomInput onInput={handleOtherAmount} keyboardType="numeric" placeholder='Other amount' mask='currency' />
+              <CustomInput 
+                onInput={handleOtherAmount} 
+                keyboardType="number-pad" 
+                placeholder='Other amount' 
+                mask='currency'
+                error={currencyError}
+              />
             }
           </View>
           <Text className='text-xl text-secondary-700 mb-2'>Recepient details</Text>
           <View className='mt-2'>
-            <CustomInput onInput={(email: string) => {setEmail(email)}} placeholder='Email' />
+            <CustomInput 
+              onInput={(email: string) => {handleEmailInput(email)}} 
+              placeholder='Email'
+              keyboardType='email-address'
+              error={emailError}
+            />
           </View>
           <Text className='text-xl text-secondary-700 my-4'>Or</Text>
           <View className=''>
-            <CustomInput onInput={(phone: string) => {setPhone(phone)}} placeholder='Phone' keyboardType="numeric" mask='phone' maxLength='12' />
+            <CustomInput 
+              onInput={(phone: string) => {setPhone(phone)}} 
+              placeholder='Phone'
+              mask='phone' 
+              maxLength='12'
+              keyboardType='number-pad'
+              error={phoneError}
+            />
           </View>
           <View className='mt-auto'>
-            <CustomButton label={'Add to cart'} handlePress={addToCart}/>
+            <CustomButton label={'Add to cart'} handlePress={validateData}/>
           </View>
         </View>
       </View>
@@ -121,4 +155,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default PurchaseModal
+export default PurchaseModal;
