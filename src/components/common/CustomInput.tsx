@@ -1,9 +1,14 @@
 import { View, TextInput, StyleSheet, Platform, Text } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { maskPhone, maskCurrency } from '../../utils/masks'
 
 const CustomInput = ( { onInput, mask, error, ...rest }: any) => {
   const [value, setValue] = useState('');
+
+  useEffect(() => {
+    onChange(value)
+  }, [value])
+  
 
   const onChange = (text: string) => {
     let newValue = text;
@@ -27,7 +32,7 @@ const CustomInput = ( { onInput, mask, error, ...rest }: any) => {
           className={`text-base mt-0.5 text-gray flex-1 font-pregular bg-white h-14 pl-4 pr-12 rounded-2xl focus:border-primary ${error ? 'border-red-600' : ''}`}
           value={value}
           placeholderTextColor="#FFA07A"
-          onChangeText={(text) => onChange(text)}
+          onChangeText={onChange}
           {...rest}
         />
       </View>
