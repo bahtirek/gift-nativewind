@@ -10,15 +10,15 @@ const giftCards: GiftCardType[] = [
     priceSet: [
       {
         id: '1',
-        amount: '100.000'
+        amount: '100 000'
       },
       {
         id: '2',
-        amount: '200.000'
+        amount: '200 000'
       },
       {
         id: '3',
-        amount: '300.000'
+        amount: '300 000'
       },
     ] 
   },
@@ -31,15 +31,15 @@ const giftCards: GiftCardType[] = [
     priceSet: [
       {
         id: '1',
-        amount: '100.000'
+        amount: '100 000'
       },
       {
         id: '2',
-        amount: '200.000'
+        amount: '200 000'
       },
       {
         id: '3',
-        amount: '300.000'
+        amount: '300 000'
       },
     ] 
   },
@@ -52,15 +52,15 @@ const giftCards: GiftCardType[] = [
     priceSet: [
       {
         id: '1',
-        amount: '100.000'
+        amount: '100 000'
       },
       {
         id: '2',
-        amount: '200.000'
+        amount: '200 000'
       },
       {
         id: '3',
-        amount: '300.000'
+        amount: '300 000'
       },
     ] 
   },
@@ -73,15 +73,15 @@ const giftCards: GiftCardType[] = [
     priceSet: [
       {
         id: '1',
-        amount: '100.000'
+        amount: '100 000'
       },
       {
         id: '2',
-        amount: '200.000'
+        amount: '200 000'
       },
       {
         id: '3',
-        amount: '300.000'
+        amount: '300 000'
       },
     ] 
   },
@@ -94,15 +94,15 @@ const giftCards: GiftCardType[] = [
     priceSet: [
       {
         id: '1',
-        amount: '100.000'
+        amount: '100 000'
       },
       {
         id: '2',
-        amount: '200.000'
+        amount: '200 000'
       },
       {
         id: '3',
-        amount: '300.000'
+        amount: '300 000'
       },
     ] 
   },
@@ -115,15 +115,15 @@ const giftCards: GiftCardType[] = [
     priceSet: [
       {
         id: '1',
-        amount: '100.000'
+        amount: '100 000'
       },
       {
         id: '2',
-        amount: '200.000'
+        amount: '200 000'
       },
       {
         id: '3',
-        amount: '300.000'
+        amount: '300 000'
       },
     ] 
   },
