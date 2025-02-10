@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tabs, router } from 'expo-router';
-import { Image, View, ColorValue, Platform } from 'react-native';
+import { Image, View, ColorValue, Platform, Text, StyleSheet } from 'react-native';
 import { useClientOnlyValue } from '@/hooks/useClientOnlyValue';
 import icons from '@/constants/icons';
-import SearchButton from '@/components/search/SearchButton';
+import { cartSignal } from '@/signals/cart.signal';
+import { effect } from "@preact/signals-react";
+import { useSignals } from "@preact/signals-react/runtime";
 
-const TabIcon = ({icon, color, name, focused}: {icon: object, color: ColorValue, name: string, focused: boolean}) => {
+const TabIcon = ({icon, color,  name, focused}: {icon: object, color: ColorValue, name: string, focused: boolean}) => {
+  const [totalInCart, setTotalInCart] = useState(0)
   return (
     <View className='items-center justify-center gap-2'>
       <Image 
@@ -17,6 +20,28 @@ const TabIcon = ({icon, color, name, focused}: {icon: object, color: ColorValue,
     </View>
   )
 }
+const CartIcon = ({icon, color,  name, focused}: {icon: object, color: ColorValue, name: string, focused: boolean}) => {
+  useSignals();
+  console.log('cart icon');
+  
+  return (
+    <View className='items-center justify-center gap-2'>
+      <Image 
+      source={icon} 
+      resizeMode='contain' 
+      tintColor={color}
+      className='"!w-6 !h-6'
+    />
+    {
+      cartSignal.value.length > 0 &&
+      <View className='flex justify-center items-center absolute' style={styles.cartTotal}>
+        <Text className=' text-primary rounded-sm text-xs'>{cartSignal.value.length}</Text>
+      </View>
+    }
+    </View>
+  )
+}
+
 export default function TabLayout() {
   let tabHeight = 70;
   if (Platform.OS === 'android') {
@@ -78,7 +103,7 @@ export default function TabLayout() {
           title: 'Basket',
           headerTintColor: '#FF4416',
           tabBarIcon: ({color, focused}) => (
-            <TabIcon 
+            <CartIcon 
               icon={icons.basket}
               color={color}
               name='Basket'
@@ -105,3 +130,13 @@ export default function TabLayout() {
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  cartTotal: {
+    backgroundColor: '#fff',
+    top: -5,
+    left: 45,
+    zIndex: 1,
+    borderRadius: 10
+  },
+});
