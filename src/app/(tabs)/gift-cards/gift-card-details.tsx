@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TextInput, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, TextInput, ScrollView, Platform } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { giftCardSignal, setGiftCard } from '@/signals/giftcards.signal';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -45,7 +45,7 @@ const GiftCardDetails = () => {
               className='w-full h-[240px] opacity-90'
               resizeMode='cover'
             />
-            <View className='px-5 pt-6 rounded-2xl bg-white -mt-4 flex-1'>
+            <View className='px-5 pt-6 rounded-2xl bg-white -mt-4 flex-1' style={styles.shadow}>
               <View className='mb-4'>
                 <Text className='text-3xl text-primary font-regular'>{giftCardSignal.value.label}</Text>
                 <Text className='text-md text-secondary-800 font-pregular mt-2'>{giftCardSignal.value.address}</Text>
@@ -65,6 +65,24 @@ const GiftCardDetails = () => {
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    shadow: {
+      shadowColor: "#000",
+      shadowOffset: {
+          width: 0,
+          height: -1,
+      },
+      shadowOpacity: 0.2,
+      shadowRadius: 10,
+  
+      elevation: 10,
+      ...Platform.select({
+        android: {
+          shadowColor: "rgba(0, 0, 0, 0.5)",
+          shadowOpacity: 1,
+        }
+      })
+    }
+})
 
 export default GiftCardDetails
