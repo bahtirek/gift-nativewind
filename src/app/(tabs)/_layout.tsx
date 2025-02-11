@@ -113,7 +113,7 @@ export default function TabLayout() {
           )
         }}
       />
-      <Tabs.Screen
+{/*       <Tabs.Screen
         name="favorites"
         options={{
           title: 'Favorites',
@@ -127,13 +127,14 @@ export default function TabLayout() {
             />
           ),
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',
           headerTintColor: '#FF4416',
           headerShown: false,
+          headerTitleStyle: { color: '#FF4416' },
           tabBarIcon: ({color, focused}) => (
             <TabIcon 
               icon={icons.profile}

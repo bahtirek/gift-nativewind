@@ -4,7 +4,7 @@ import { giftCardSignal, setGiftCard } from '@/signals/giftcards.signal';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import RadioButton from '@/components/common/RadioButton';
 import CustomInput from '@/components/common/CustomInput';
-import { useRootNavigationState, Redirect } from 'expo-router';
+import { useRootNavigationState, Redirect, Stack } from 'expo-router';
 import Counter from '@/components/common/Counter';
 import CustomButton from '@/components/common/CustomButton';
 import PurchaseModal from '@/components/PurchaseModal';
@@ -38,6 +38,7 @@ const GiftCardDetails = () => {
     <SafeAreaView edges={["left", "right"]} className='h-full bg-white'>
       {giftCardSignal.value.id && 
         <View  className='flex-1'>
+          <Stack.Screen options={{title: `${giftCardSignal.value.label}`, headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />
           <View className='flex-1 pb-10'>
             <Image
               source={{uri: giftCardSignal.value.thumbnail}}

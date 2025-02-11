@@ -6,6 +6,7 @@ const Profile = () => {
   const profileMenuItems = [
     {id: 1, label: "Account", path: 'account'},
     {id: 2, label: "Orders", path: 'orders'},
+    {id: 3, label: "Favorites", path: 'favorites'},
   ]
   const pathname = usePathname();
 
