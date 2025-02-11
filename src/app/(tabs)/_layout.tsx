@@ -74,7 +74,7 @@ export default function TabLayout() {
           headerShown: false,
           tabBarIcon: ({color, focused}) => (
             <TabIcon 
-              icon={icons.allcards}
+              icon={icons.home}
               color={color}
               name='Home'
               focused={focused}
@@ -83,15 +83,16 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="favorites"
+        name="gift-cards"
         options={{
-          title: 'Favorites',
+          title: 'All cards',
           headerTintColor: '#FF4416',
+          headerShown: false,
           tabBarIcon: ({color, focused}) => (
             <TabIcon 
-              icon={icons.bookmark}
+              icon={icons.allcards}
               color={color}
-              name='Bookmark'
+              name='All cards'
               focused={focused}
             />
           ),
@@ -113,10 +114,26 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="favorites"
+        options={{
+          title: 'Favorites',
+          headerTintColor: '#FF4416',
+          tabBarIcon: ({color, focused}) => (
+            <TabIcon 
+              icon={icons.bookmark}
+              color={color}
+              name='Bookmark'
+              focused={focused}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',
           headerTintColor: '#FF4416',
+          headerShown: false,
           tabBarIcon: ({color, focused}) => (
             <TabIcon 
               icon={icons.profile}
