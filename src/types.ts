@@ -34,6 +34,10 @@ export type GiftCardType = {
   thumbnail?: string,
   description?: string,
   address?: string,
+  phone?: string,
+  website?: string,
+  instagram?: string,
+  telegram?: string,
   priceSet: PriceType[] 
 };
 

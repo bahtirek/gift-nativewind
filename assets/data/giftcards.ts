@@ -7,6 +7,8 @@ const giftCards: GiftCardType[] = [
     thumbnail: 'https://station.startng.app/assets/images/cards/napoli.JPG',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     address: '123 Main Street',
+    website: 'www.website.com',
+    phone: '(99) 123-4567',
     priceSet: [
       {
         id: '1',
@@ -28,6 +30,8 @@ const giftCards: GiftCardType[] = [
     thumbnail: 'https://station.startng.app/assets/images/cards/bon.JPG',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     address: '123 Main Street',
+    website: 'www.website.com',
+    phone: '(99) 123-4567',
     priceSet: [
       {
         id: '1',
@@ -49,6 +53,8 @@ const giftCards: GiftCardType[] = [
     thumbnail: 'https://station.startng.app/assets/images/cards/caffelito.JPG',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     address: '123 Main Street',
+    website: 'www.website.com',
+    phone: '(99) 123-4567',
     priceSet: [
       {
         id: '1',
@@ -70,6 +76,8 @@ const giftCards: GiftCardType[] = [
     thumbnail: 'https://station.startng.app/assets/images/cards/forn.JPG',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     address: '123 Main Street',
+    website: 'www.website.com',
+    phone: '(99) 123-4567',
     priceSet: [
       {
         id: '1',
@@ -91,6 +99,8 @@ const giftCards: GiftCardType[] = [
     thumbnail: 'https://station.startng.app/assets/images/cards/qanotchi.JPG',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     address: '123 Main Street',
+    website: 'www.website.com',
+    phone: '(99) 123-4567',
     priceSet: [
       {
         id: '1',
@@ -112,6 +122,8 @@ const giftCards: GiftCardType[] = [
     thumbnail: 'https://station.startng.app/assets/images/cards/allora.JPG',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     address: '123 Main Street',
+    website: 'www.website.com',
+    phone: '(99) 123-4567',
     priceSet: [
       {
         id: '1',
