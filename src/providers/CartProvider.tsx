@@ -4,7 +4,7 @@ import { createContext, PropsWithChildren, useContext, useEffect, useState } fro
 
 type CartType = {
   items: CartItemType[];
-  addItem: (quantity: number, amount: string, giftCard: GiftCardType, email: string, phone: string) => void;
+  addItem: (quantity: number, amount: string, giftCard: GiftCardType, email: string, phone: string, note: string) => void;
   totalItemsInCart: number
 }
 export const CartContext = createContext<CartType>({
@@ -21,14 +21,15 @@ const CartProvider = ({children}: PropsWithChildren) => {
     setTotalItems(items.length)
   }, [items])
 
-  const addItem = (quantity: number, amount: string, giftCard: GiftCardType, email: string, phone: string) => {
+  const addItem = (quantity: number, amount: string, giftCard: GiftCardType, email: string, phone: string, note: string) => {
     const newCartItem = {
       id: randomUUID(),
       quantity, 
       amount, 
       giftCard, 
       email, 
-      phone
+      phone, 
+      note
     }
     setItems([...items, newCartItem]);
     console.log("items",items);

@@ -83,6 +83,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="gift-cards"
         options={{
+          lazy: false,
           title: 'All cards',
           headerTintColor: '#FF4416',
           headerShown: false,

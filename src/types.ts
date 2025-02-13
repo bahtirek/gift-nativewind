@@ -62,5 +62,6 @@ export type CartItemType = {
   amount?: string,
   email?: string,
   phone?: string,
+  note?: string,
   giftCard?: GiftCardType
 }
