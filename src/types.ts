@@ -57,6 +57,7 @@ export type PriceType = {
 }
 
 export type CartItemType = {
+  id?: string,
   quantity?: number,
   amount?: string,
   email?: string,
