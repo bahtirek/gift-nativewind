@@ -5,9 +5,9 @@ import CustomButton from './common/CustomButton';
 import { giftCardSignal } from '@/signals/giftcards.signal';
 import RadioButton from './common/RadioButton';
 import CustomInput from './common/CustomInput';
-import { addItemToCart } from '@/signals/cart.signal';
-import {isEmpty, validateAmount, validateEmail, validateLength} from '../utils/input-validation';
-//import { addItemToCart }
+import {validateAmount, validateEmail, validateLength} from '../utils/input-validation';
+import { useCart } from '@/providers/CartProvider';
+
 
 const PurchaseModal = ( {showPurchaseModal, closeModal, handlePurchase}: any) => {
   useEffect(() => {
@@ -27,7 +27,8 @@ const PurchaseModal = ( {showPurchaseModal, closeModal, handlePurchase}: any) =>
   const [emailError, setEmailError] = useState<null | string>(null);
   const [phoneError, setPhoneError] = useState('');
   const [amountError, setAmountError] = useState('');
-  const [isValidated, setIsValidated] = useState(false)
+  const [isValidated, setIsValidated] = useState(false);
+  const { addItem } = useCart();
 
   const minAmount = giftCardSignal?.value?.priceSet[0].amount;
 
@@ -60,7 +61,7 @@ const PurchaseModal = ( {showPurchaseModal, closeModal, handlePurchase}: any) =>
     validateData();
     const amount = otherAmount ? otherAmount : selectedAmount;
     if((amount && amount != "other") && (email || phone) && !emailError && !phoneError && !amountError) {
-      addItemToCart(quantity, amount, giftCardSignal.value, email, phone);
+      addItem(quantity, amount, giftCardSignal.value, email, phone);
       closeModal();
     }
   }

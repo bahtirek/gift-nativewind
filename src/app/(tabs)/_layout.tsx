@@ -3,12 +3,11 @@ import { Tabs, router } from 'expo-router';
 import { Image, View, ColorValue, Platform, Text, StyleSheet } from 'react-native';
 import { useClientOnlyValue } from '@/hooks/useClientOnlyValue';
 import icons from '@/constants/icons';
-import { cartSignal } from '@/signals/cart.signal';
-import { effect } from "@preact/signals-react";
-import { useSignals } from "@preact/signals-react/runtime";
+import { useCart } from '@/providers/CartProvider';
 
 const TabIcon = ({icon, color,  name, focused}: {icon: object, color: ColorValue, name: string, focused: boolean}) => {
-  const [totalInCart, setTotalInCart] = useState(0)
+  const [totalInCart, setTotalInCart] = useState(0);
+
   return (
     <View className='items-center justify-center gap-2'>
       <Image 
@@ -21,8 +20,7 @@ const TabIcon = ({icon, color,  name, focused}: {icon: object, color: ColorValue
   )
 }
 const CartIcon = ({icon, color,  name, focused}: {icon: object, color: ColorValue, name: string, focused: boolean}) => {
-  useSignals();
-  console.log('cart icon');
+  const { totalItemsInCart } = useCart();
   
   return (
     <View className='items-center justify-center gap-2'>
@@ -33,9 +31,9 @@ const CartIcon = ({icon, color,  name, focused}: {icon: object, color: ColorValu
       className='"!w-6 !h-6'
     />
     {
-      cartSignal.value.length > 0 &&
+      totalItemsInCart > 0 &&
       <View className='flex justify-center items-center absolute' style={styles.cartTotal}>
-        <Text className=' text-primary rounded-sm text-xs'>{cartSignal.value.length}</Text>
+        <Text className=' text-primary rounded-sm text-xs'>{totalItemsInCart}</Text>
       </View>
     }
     </View>
