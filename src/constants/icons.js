@@ -9,6 +9,11 @@ import controlsa from "./../../assets/icons/controlsa.png";
 import search_orange from "./../../assets/icons/search_orange.png";
 import allcards from "./../../assets/icons/allcards.png";
 import cancel from "./../../assets/icons/cancel.png";
+import list from "./../../assets/icons/list.png";
+import bin from "./../../assets/icons/bin.png";
+import pencil from "./../../assets/icons/pencil.png";
+import emptyBasketGray from "./../../assets/icons/empty-basket-gray.png";
+import emptyBasketOrange from "./../../assets/icons/empty-basket-orange.png";
 
 export default {
   bookmark,
@@ -21,5 +26,10 @@ export default {
   controlsa,
   search_orange,
   allcards,
-  cancel
+  cancel,
+  list,
+  bin,
+  pencil,
+  emptyBasketGray,
+  emptyBasketOrange
 };
