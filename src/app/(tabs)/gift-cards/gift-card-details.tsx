@@ -18,14 +18,14 @@ const GiftCardDetails = () => {
       {giftCardSignal.value.id && 
         <View  className='flex-1'>
           <Stack.Screen options={{title: `Gift Cards`, headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />
-          <View className='flex-1 pb-10'>
+          <View className='flex-1'>
             <Image
               source={{uri: giftCardSignal.value.thumbnail}}
               className='w-full h-[240px] opacity-90'
               resizeMode='cover'
             />
-            <View className='px-5 pt-6 rounded-2xl bg-white -mt-4 flex-1' style={styles.shadow}>
-              <View className='mb-4'>
+            <View className='px-5 pt-6 rounded-t-2xl bg-white -mt-4 flex-1 pb-6' style={styles.shadow}>
+              <View className='mb-12'>
                 <Text className='text-3xl text-primary font-regular'>{giftCardSignal.value.label}</Text>
                 <Text className='text-xs text-secondary-600 font-regular mt-2'>{giftCardSignal.value.description}</Text>
                 <Text className='text-md text-secondary-800 font-pregular mt-6'>{giftCardSignal.value.address}</Text>

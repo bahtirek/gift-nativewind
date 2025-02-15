@@ -45,7 +45,7 @@ const GiftCards = () => {
       }
       {!isLoading && 
         <FlatList 
-          className='px-5 pt-6'
+          className='px-6 pt-6'
           data={giftCardsSignal.value}
           keyExtractor={(item) => item.id!}
           renderItem={({item}) => (

@@ -38,7 +38,7 @@ const GiftCardDetails = () => {
     <SafeAreaView edges={["left", "right"]} className='h-full bg-white'>
       {giftCardSignal.value.id && 
         <View  className='flex-1'>
-          <View className='flex-1 pb-10'>
+          <View className='flex-1 pb-6'>
             <Image
               source={{uri: giftCardSignal.value.thumbnail}}
               className='w-full h-[240px] opacity-90'
