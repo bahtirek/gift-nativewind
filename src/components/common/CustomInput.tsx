@@ -29,7 +29,7 @@ const CustomInput = ( { onInput, mask, error, ...rest }: any) => {
     <View>
       <View className='flex flex-row items-center w-full relative bg-white rounded-2xl' style={styles.shadow}>
         <TextInput
-          className={`text-base mt-0.5 text-gray flex-1 font-pregular bg-white h-14 pl-4 pr-12 rounded-2xl focus:border-primary ${error ? 'border-red-600' : ''}`}
+          className={`text-base mt-0.5 text-gray flex-1 font-pregular bg-white h-16 pl-4 pr-12 rounded-2xl focus:border-primary ${error ? 'border-red-600' : ''}`}
           value={value}
           placeholderTextColor="#FFA07A"
           onChangeText={onChange}
