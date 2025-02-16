@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image, Platform } from 'react-native'
 import React, { useState } from 'react'
 import { giftCardSignal } from '@/signals/giftcards.signal';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Redirect, Stack, Link, Href } from 'expo-router';
+import { Redirect, Stack, Link, Href, router } from 'expo-router';
 import CustomButton from '@/components/common/CustomButton';
 import PurchaseModal from '@/components/PurchaseModal';
 
@@ -10,7 +10,7 @@ const GiftCardDetails = () => {
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
 
   const handlePurchase = () => {
-    setShowPurchaseModal(!showPurchaseModal);
+    router.navigate('/purchase-modal')
   }
 
   return (
@@ -34,16 +34,13 @@ const GiftCardDetails = () => {
               </View>
               
               <View className='mt-auto'>
-                <CustomButton label='Purchase' handlePress={()=>{setShowPurchaseModal(true)}} />
+                <CustomButton label='Purchase' handlePress={()=>{handlePurchase()}} />
               </View>
             </View>
           </View>
         </View>
       }
       {!giftCardSignal.value.id && <Redirect href={'/home'} />}
-      {giftCardSignal.value.id && 
-        <PurchaseModal showPurchaseModal={showPurchaseModal} handlePurchase={handlePurchase} closeModal={() => {setShowPurchaseModal(false)}}/>
-      }
       </SafeAreaView>
   )
 }

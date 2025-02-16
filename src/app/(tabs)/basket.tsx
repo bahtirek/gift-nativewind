@@ -1,7 +1,6 @@
 import { View, Text, FlatList, Image, RefreshControl, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { StatusBar } from "expo-status-bar";
 
 import CartItem from '@/components/cart/CartItem';
 import { useCart } from '@/providers/CartProvider'; 
@@ -13,7 +12,6 @@ export default function Basket() {
 
   const checkout = () => {
     console.log('checkout');
-    
   }
   return (
     <SafeAreaView edges={["left", "right"]} className='h-full bg-white'>

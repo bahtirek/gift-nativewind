@@ -38,7 +38,7 @@ export type GiftCardType = {
   website?: string,
   instagram?: string,
   telegram?: string,
-  priceSet: PriceType[] 
+  priceSet?: PriceType[] 
 };
 
 export type CreatorType = {
@@ -64,4 +64,5 @@ export type CartItemType = {
   phone?: string,
   note?: string,
   giftCard?: GiftCardType
+  otherAmount?: string
 }
