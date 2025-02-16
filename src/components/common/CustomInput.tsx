@@ -18,7 +18,6 @@ const CustomInput = ( { onInput, mask, error, presetValue, ...rest }: any) => {
 
   const onChange = (text: string) => {
     let newValue = text;
-    console.log(text);
     
     if(mask) {
       if(mask && mask == "numeric") {

@@ -84,7 +84,6 @@ const PurchaseModal = () => {
     const amount = otherAmount ? otherAmount : selectedAmount;
     if((amount && amount != "other") && (email || phone) && !emailError && !phoneError && !amountError) {
       const id = cartItemToEdit.id ? cartItemToEdit.id : '';
-      console.log(quantity, amount, giftCardSignal.value, email, phone, note, otherAmount, id);
       addItem(quantity, amount, giftCardSignal.value, email, phone, note, otherAmount, id);
       router.back();
     }
