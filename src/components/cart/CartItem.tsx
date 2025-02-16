@@ -4,6 +4,8 @@ import { CartItemType } from 'src/types';
 import RecipientDetails from './RecepientDetails';
 import icons from '@/constants/icons';
 import IconButton from '../common/IconButton';
+import { router } from 'expo-router';
+import { useCart } from '@/providers/CartProvider';
 
 
 type GiftCardPropType = {
@@ -15,14 +17,15 @@ type GiftCardPropType = {
 const GiftCard = ({cartItem}: GiftCardPropType, ) => {
   const {amount, phone, email, giftCard, note} = cartItem;
   const {label, thumbnail} = giftCard!;
-  const [showRecipientDetails, setShowRecipientDetails] = useState(false);
+  const {addItemToEdit} = useCart();
 
-  const goToCardDetailsScreen = () => {
-    //router.push('/gift-cards/gift-card-details')
+  const editCartItem = () => {
+    addItemToEdit(cartItem)
+    router.navigate('/purchase-modal')
   }
 
-  const toggleRecepientDetails = () => {
-    setShowRecipientDetails(!showRecipientDetails)
+  const deleteCartItem = () => {
+
   }
 
   return (
@@ -59,10 +62,10 @@ const GiftCard = ({cartItem}: GiftCardPropType, ) => {
         </View>
         <View className=''>
           <View className='my-1'>
-            <IconButton icon={icons.pencil} handlePress={toggleRecepientDetails} />
+            <IconButton icon={icons.pencil} handlePress={editCartItem} />
           </View>
           <View className='my-1'>
-            <IconButton icon={icons.bin} handlePress={toggleRecepientDetails} />
+            <IconButton icon={icons.bin} handlePress={deleteCartItem} />
           </View>
         </View>
       </View>
