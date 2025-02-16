@@ -1,5 +1,5 @@
 import { GiftCardType } from "@/types";
-import giftcards from "@assets/data/giftcards";
+import allGiftCards from "@assets/data/allcards";
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
 
 type GiftCardProviderType = {
@@ -12,10 +12,10 @@ export const GiftCardContext = createContext<GiftCardProviderType>({
 
 
 const GiftCardProvider = ({children}: PropsWithChildren) => {
-  const [giftCards, setGiftCards] = useState([]);
+  const [giftCards, setGiftCards] = useState<GiftCardType[]>([]);
 
   useEffect(() => {
-    setGiftCards(giftCards)
+    setGiftCards(allGiftCards)
   }, [])
 
   return(
