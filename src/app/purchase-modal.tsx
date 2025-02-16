@@ -17,6 +17,7 @@ const PurchaseModal = () => {
     if(cartItemToEdit.id) {
       if(cartItemToEdit.otherAmount) {
         setOtherAmount(cartItemToEdit.otherAmount);
+        setSelectedAmount('other');
       } else {
         setSelectedAmount(cartItemToEdit.amount!);
       }
@@ -50,6 +51,7 @@ const PurchaseModal = () => {
 
   const handleSelect = (amount: string) => {
     setSelectedAmount(amount);
+    if(amount != 'other') setOtherAmount('');
   }
 
   const handleEmailInput = (email: string) => {
@@ -82,6 +84,7 @@ const PurchaseModal = () => {
     const amount = otherAmount ? otherAmount : selectedAmount;
     if((amount && amount != "other") && (email || phone) && !emailError && !phoneError && !amountError) {
       const id = cartItemToEdit.id ? cartItemToEdit.id : '';
+      console.log(quantity, amount, giftCardSignal.value, email, phone, note, otherAmount, id);
       addItem(quantity, amount, giftCardSignal.value, email, phone, note, otherAmount, id);
       router.back();
     }
@@ -148,6 +151,7 @@ const PurchaseModal = () => {
                   placeholder='Other amount' 
                   mask='currency'
                   error={amountError}
+                  presetValue={cartItemToEdit.otherAmount}
                 />
               }
             </View>
@@ -158,7 +162,7 @@ const PurchaseModal = () => {
                 placeholder='Email'
                 keyboardType='email-address'
                 error={emailError}
-                value={email}
+                presetValue={cartItemToEdit.email}
               />
             </View>
             <Text className='text-xl text-secondary-700 my-4'>Or</Text>
@@ -170,7 +174,7 @@ const PurchaseModal = () => {
                 maxLength={12}
                 keyboardType='number-pad'
                 error={phoneError}
-                value={phone}
+                presetValue={cartItemToEdit.phone}
               />
             </View>
             <Text className='text-xl text-secondary-700 my-4'>Gift note:</Text>
@@ -181,7 +185,7 @@ const PurchaseModal = () => {
                 error={phoneError}
                 multiline={true}
                 numberOfLines={10}
-                value={note}
+                presetValue={cartItemToEdit.note}
                 style={{ 
                   height: 100,
                   textAlignVertical: 'top',

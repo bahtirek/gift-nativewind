@@ -2,16 +2,24 @@ import { View, TextInput, StyleSheet, Platform, Text } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { maskPhone, maskCurrency } from '../../utils/masks'
 
-const CustomInput = ( { onInput, mask, error, ...rest }: any) => {
+const CustomInput = ( { onInput, mask, error, presetValue, ...rest }: any) => {
   const [value, setValue] = useState('');
 
   useEffect(() => {
     onChange(value)
   }, [value])
+
+  useEffect(() => {
+    if(presetValue) {
+      onChange(presetValue)
+    }
+  }, [presetValue])
   
 
   const onChange = (text: string) => {
     let newValue = text;
+    console.log(text);
+    
     if(mask) {
       if(mask && mask == "numeric") {
         newValue = text.replace(/[^0-9]/g, '');
