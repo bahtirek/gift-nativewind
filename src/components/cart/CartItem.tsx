@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet, Platform } from 'react-native'
+import { View, Text, Image, TouchableOpacity, StyleSheet, Platform, Alert } from 'react-native'
 import React, { useState } from 'react';
 import { CartItemType } from 'src/types';
 import RecipientDetails from './RecepientDetails';
@@ -17,7 +17,7 @@ type GiftCardPropType = {
 const GiftCard = ({cartItem}: GiftCardPropType, ) => {
   const {amount, phone, email, giftCard, note} = cartItem;
   const {label, thumbnail} = giftCard!;
-  const {addItemToEdit} = useCart();
+  const {addItemToEdit, deleteItemFromCart} = useCart();
 
   const editCartItem = () => {
     addItemToEdit(cartItem)
@@ -25,7 +25,14 @@ const GiftCard = ({cartItem}: GiftCardPropType, ) => {
   }
 
   const deleteCartItem = () => {
-
+    Alert.alert('Remove Gift Card', 'Are sure you want to remove from cart?', [
+      {
+        text: 'Cancel',
+        onPress: () => () => {return},
+        style: 'cancel',
+      },
+      {text: 'Remove', onPress: () => deleteItemFromCart(cartItem.id!)},
+    ]);
   }
 
   return (

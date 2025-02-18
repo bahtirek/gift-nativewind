@@ -11,7 +11,7 @@ import { router, Stack } from 'expo-router';
 
 
 const PurchaseModal = () => {
-  const { cartItemToEdit } = useCart();
+  const { addItemToEdit, cartItemToEdit } = useCart();
 
   useEffect(() => {
     if(cartItemToEdit.id) {
@@ -85,6 +85,7 @@ const PurchaseModal = () => {
     if((amount && amount != "other") && (email || phone) && !emailError && !phoneError && !amountError) {
       const id = cartItemToEdit.id ? cartItemToEdit.id : '';
       addItem(quantity, amount, giftCardSignal.value, email, phone, note, otherAmount, id);
+      addItemToEdit({})
       router.back();
     }
   }

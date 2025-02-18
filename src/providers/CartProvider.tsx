@@ -8,6 +8,7 @@ type CartType = {
   cartItemToEdit: CartItemType
   addItem: (quantity: number, amount: string, giftCard: GiftCardType, email: string, phone: string, note: string, otherAmount: string, id: string) => void;
   addItemToEdit: (item: CartItemType) => void,
+  deleteItemFromCart: (id: string) => void,
 }
 export const CartContext = createContext<CartType>({
   items: [],
@@ -15,6 +16,7 @@ export const CartContext = createContext<CartType>({
   cartItemToEdit: {},
   addItem: () => {},
   addItemToEdit: () => {},
+  deleteItemFromCart: () => {},
 });
 
 
@@ -58,8 +60,17 @@ const CartProvider = ({children}: PropsWithChildren) => {
   const addItemToEdit = (item: CartItemType) => {
     setCartItemToEdit(item)
   }
+
+  const deleteItemFromCart = (id: string) => {
+    setItems(
+      items.map((item) =>
+        item.id !== id ? item : {}
+      ).filter((item) => item.id)
+    );
+  }
+
   return(
-    <CartContext.Provider value={{items, addItem, totalItemsInCart, addItemToEdit, cartItemToEdit}}>
+    <CartContext.Provider value={{items, addItem, totalItemsInCart, addItemToEdit, cartItemToEdit, deleteItemFromCart}}>
       {children}
     </CartContext.Provider>
   )
