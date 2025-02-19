@@ -124,7 +124,7 @@ const PurchaseModal = () => {
   return (
     <SafeAreaView edges={["left", "right"]} className='h-full bg-white'>
       <Stack.Screen options={{title: `${giftCardSignal.value.label}`, headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />
-      <ScrollView>
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View className='flex w-full h-full bg-white pt-6' style={styles.container}>
           <View className="flex bg-white px-8 pb-10 flex-1">
             <Text className='text-xl text-secondary-700 mb-2'>Choose amount</Text>
@@ -184,7 +184,7 @@ const PurchaseModal = () => {
               />
             </View>
             <Text className='text-xl text-secondary-700 my-4'>Gift note:</Text>
-            <View className='mb-12'>
+            <View>
               <CustomInput 
                 onInput={(note: string) => {handleNoteInput(note)}} 
                 placeholder='Best wishes'
@@ -200,7 +200,7 @@ const PurchaseModal = () => {
                 }}
               />
             </View>
-            <View className='mt-auto'>
+            <View className='mt-auto pt-8'>
               <CustomButton label={'Add to cart'} handlePress={addToCart}/>
             </View>
           </View>
