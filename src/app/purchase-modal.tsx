@@ -82,7 +82,13 @@ const PurchaseModal = () => {
   const addToCart = () => {
     validateData();
     const amount = otherAmount ? otherAmount : selectedAmount;
-    if((amount && amount != "other") && (email || phone) && !emailError && !phoneError && !amountError) {
+    if(
+      (amount && amount != "other") && 
+      (email || phone) && 
+      !validateEmail(email) && 
+      !validateLength(phone, 12) && 
+      !validateAmount(otherAmount, minAmount)
+    ) {
       const id = cartItemToEdit.id ? cartItemToEdit.id : '';
       addItem(quantity, amount, giftCardSignal.value, email, phone, note, otherAmount, id);
       addItemToEdit({})
