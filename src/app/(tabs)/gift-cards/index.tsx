@@ -13,13 +13,6 @@ const GiftCards = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    navigation.setOptions({ 
-      headerRight: () => (
-        <SearchButton handlePress={toggleSearchModal}/>
-      ),
-      title: 'Gift Cards',
-      headerTintColor: '#FF4416',
-    });
 
     handleSearch();
   }, [])
