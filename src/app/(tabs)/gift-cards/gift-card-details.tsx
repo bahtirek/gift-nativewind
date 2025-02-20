@@ -4,7 +4,6 @@ import { giftCardSignal } from '@/signals/giftcards.signal';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Redirect, Stack, Link, Href, router } from 'expo-router';
 import CustomButton from '@/components/common/CustomButton';
-import PurchaseModal from '@/components/PurchaseModal';
 
 const GiftCardDetails = () => {
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);

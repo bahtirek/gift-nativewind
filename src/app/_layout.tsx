@@ -60,7 +60,8 @@ function RootLayoutNav() {
         <CartProvider>
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="purchase-modal" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="search-settings-modal" options={{ presentation: 'modal' }} />
           </Stack>
         </CartProvider>
       </GiftCardProvider>

@@ -4,7 +4,7 @@ import GiftCard from '@/components/GiftCard';
 import { giftCardsSignal } from '@signals/giftcards.signal';
 import SearchModal from '@/components/search/SearchModal';
 import { useEffect, useState } from 'react';
-import { useNavigation } from 'expo-router';
+import { router, useNavigation } from 'expo-router';
 import SearchButton from '@/components/search/SearchButton';
 
 const GiftCards = () => {
@@ -25,7 +25,7 @@ const GiftCards = () => {
   }, [])
 
   const toggleSearchModal = () => {
-    setShowSearchModal(!showSearchModal); 
+    router.navigate('/search-modal')
   }
 
   const handleSearch = () => {
