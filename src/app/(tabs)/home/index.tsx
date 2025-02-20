@@ -6,9 +6,7 @@ import { StatusBar } from "expo-status-bar";
 import CategoryList from '@/components/category/CategoryList';
 import GiftCard from '@/components/GiftCard';
 import icons from '@constants/icons';
-import SearchInput from '@/components/common/SearchInput';
-import { Href, router } from 'expo-router';
-import { getTrendingCards } from '@/api/gift-cards';
+import SearchInput from '@/components/search/SearchInput';
 import { GiftCardType } from '@/types';
 import allGiftCards from '@assets/data/allcards';
 
@@ -20,9 +18,6 @@ export default function Home() {
   useEffect(() => {
     api();
   }, [])
-  const goToSearchScreen = () => {
-    router.push('/home/gift-cards' as Href);
-  }
 
   const api = () => {
     /* setLoading(true)
@@ -68,7 +63,7 @@ export default function Home() {
               </View>
             </View>
 
-            <SearchInput handleSearchQuery={goToSearchScreen}/>
+            <SearchInput />
 
             <View className='w-full flex-1 pt-8'>
               <CategoryList />
