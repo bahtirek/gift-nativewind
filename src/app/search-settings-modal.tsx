@@ -11,7 +11,7 @@ import { Stack } from 'expo-router';
 const SearchModal = ( {closeModal, handleSearch}: any) => {
   return (
     <SafeAreaView edges={["left", "right"]} className='h-full bg-white flex-1'>
-      <Stack.Screen options={{title: `Search Gift Cards`, headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />
+      <Stack.Screen options={{title: `Search settings`, headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <View className='flex w-full h-full bg-white' style={styles.container}>
         <View className="flex bg-white px-8 pt-4 flex-1">
