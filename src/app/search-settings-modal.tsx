@@ -1,14 +1,11 @@
-import { View, Text, Image, StyleSheet, Pressable, Platform, GestureResponderEvent, Alert, ScrollView } from 'react-native'
+import { View, Text, StyleSheet,  Platform, ScrollView } from 'react-native'
 import React from 'react'
-import icons from '@constants/icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import CategoryFilterList from '../components/category/CategoryFilterList';
+import CategoryFilterList from '../components/search/CategoryFilterList';
 import LocationDropdown from '../components/search/LocationDropdown';
-import SearchInput from '../components/search/SearchInput';
-import CustomButton from '../components/common/CustomButton';
 import { Stack } from 'expo-router';
 
-const SearchModal = ( {closeModal, handleSearch}: any) => {
+const SearchModal = () => {
   return (
     <SafeAreaView edges={["left", "right"]} className='h-full bg-white flex-1'>
       <Stack.Screen options={{title: `Search settings`, headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />

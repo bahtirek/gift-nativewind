@@ -1,10 +1,11 @@
 import { signal } from "@preact/signals-react";
-import categories from "@assets/data/categories";
+import allCategories from "@assets/data/categories";
+import { CategoryItemType } from "@/types";
 
-const categorySignal = signal(categories);
+const categorySignal = signal<CategoryItemType[]>(allCategories);
 
 const setCategory = (id: string, value: boolean) => {
-  categorySignal.value = categorySignal.value.map(category => {
+  categorySignal.value = categorySignal.value.map((category: CategoryItemType) => {
     if(category.id == id) {
       return { ...category, checked: value}
     }
@@ -14,7 +15,7 @@ const setCategory = (id: string, value: boolean) => {
 }
 
 const resetCategories = () => {
-  categorySignal.value = categorySignal.value.map(category => { return {...category, checked: false}})
+  categorySignal.value = categorySignal.value.map((category: CategoryItemType) => { return {...category, checked: false}})
 }
 
 export {

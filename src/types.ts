@@ -24,8 +24,9 @@ export type FormFieldType = {
 
 export type CategoryItemType = {
   label?: string,
-  icon: string,
-  id: string,
+  icon?: string,
+  id?: string,
+  checked?: boolean
 };
 
 export type GiftCardType = {
@@ -46,7 +47,7 @@ export type CreatorType = {
   avatar: string
 }
 
-export type Location = {
+export type LocationType = {
   id?: string,
   name?: string
 }

@@ -1,4 +1,4 @@
-const categories = [
+const allCategories = [
   {
     icon: 'https://station.startng.app/assets/images/categories/serving.png',
     label: 'Restaurants',
@@ -43,4 +43,4 @@ const categories = [
   },
 ]
 
-export default categories;
+export default allCategories;
