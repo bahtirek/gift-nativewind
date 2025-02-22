@@ -1,6 +1,7 @@
 import { View, TextInput, StyleSheet, Platform, Text } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { maskPhone, maskCurrency } from '../../utils/masks'
+import { useFocusEffect } from 'expo-router';
 
 const CustomInput = ( { onInput, mask, error, presetValue, className, ...rest }: any) => {
   const [value, setValue] = useState('');
@@ -15,6 +16,13 @@ const CustomInput = ( { onInput, mask, error, presetValue, className, ...rest }:
     }
   }, [presetValue])
   
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        setValue('')
+      };
+    }, [])
+  );
 
   const onChange = (text: string) => {
     let newValue = text;
