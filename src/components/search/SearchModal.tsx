@@ -1,9 +1,9 @@
 import { View, Text, Modal, Image, StyleSheet, Pressable, Platform, GestureResponderEvent } from 'react-native'
 import React from 'react'
 import icons from '@constants/icons';
-import CategoryFilterList from '../category/CategoryFilterList';
+import CategoryFilterList from './CategoryFilterList';
 import LocationDropdown from './LocationDropdown';
-import SearchInput from '../common/SearchInput';
+import SearchInput from './SearchInput';
 import CustomButton from '../common/CustomButton';
 
 const CardsScreenHeaderModal = ( {showSearchModal, closeModal, handleSearch}: any) => {
@@ -25,10 +25,10 @@ const CardsScreenHeaderModal = ( {showSearchModal, closeModal, handleSearch}: an
         </View>
         <View className="flex bg-white px-8 pb-10 flex-1">
           <View className="mt-6">
-            <SearchInput handleSearchQuery={handleSearch} />
+            {/* <SearchInput handleSearchQuery={handleSearch} /> */}
           </View>
           <Text className='text-primary mt-5 mb-2'>Category</Text>
-          <CategoryFilterList />
+          {/* <CategoryFilterList /> */}
           <Text className='text-primary mt-7'>Location</Text>
           <View style={styles.dropdown}>
             <LocationDropdown />

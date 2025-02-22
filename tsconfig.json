@@ -9,6 +9,7 @@
       "@assets/*": ["assets/*"],
       "@constants/*": ["src/constants/*"],
       "@signals/*": ["src/signals/*"],
+      "@api/*": ["src/api/*"],
     }
   },
   "include": [

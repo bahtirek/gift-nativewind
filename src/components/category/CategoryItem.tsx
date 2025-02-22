@@ -12,7 +12,7 @@ const CategoryItem = ({item}: CategoryItemPropType) => {
   const handelCheckBoxSelect = (id: string) => {
     resetCategories();
     setCategory(id, true);
-    router.navigate('/home/gift-cards');
+    router.navigate('/gift-cards');
   }
 
   return (

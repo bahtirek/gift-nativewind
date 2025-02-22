@@ -9,6 +9,9 @@ import { setInitialLocation } from '@signals/location.signal'
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import "../../global.css";
+import CartProvider from '@/providers/CartProvider';
+import GiftCardProvider from '@/providers/GiftCardProvider';
+import SearchSettingsProvider from '@/providers/SearchSettingsProvider';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -54,10 +57,17 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
+      <SearchSettingsProvider>
+        <GiftCardProvider>
+          <CartProvider>
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="purchase-modal" options={{ presentation: 'modal' }} />
+              <Stack.Screen name="search-settings-modal" options={{ presentation: 'modal' }} />
+            </Stack>
+          </CartProvider>
+        </GiftCardProvider>
+      </SearchSettingsProvider>
     </ThemeProvider>
   );
 }

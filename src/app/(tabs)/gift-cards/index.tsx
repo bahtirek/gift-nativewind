@@ -4,8 +4,9 @@ import GiftCard from '@/components/GiftCard';
 import { giftCardsSignal } from '@signals/giftcards.signal';
 import SearchModal from '@/components/search/SearchModal';
 import { useEffect, useState } from 'react';
-import { useNavigation } from 'expo-router';
+import { router, useNavigation } from 'expo-router';
 import SearchButton from '@/components/search/SearchButton';
+import SearchInput from '@/components/search/SearchInput';
 
 const GiftCards = () => {
   const navigation = useNavigation();
@@ -13,20 +14,8 @@ const GiftCards = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    navigation.setOptions({ 
-      headerRight: () => (
-        <SearchButton handlePress={toggleSearchModal}/>
-      ),
-      title: 'Gift Cards',
-      headerTintColor: '#FF4416',
-    });
-
     handleSearch();
   }, [])
-
-  const toggleSearchModal = () => {
-    setShowSearchModal(!showSearchModal); 
-  }
 
   const handleSearch = () => {
     setIsLoading(true);
@@ -37,7 +26,10 @@ const GiftCards = () => {
   }
 
   return (
-    <SafeAreaView edges={["left", "right"]} className='h-full bg-white'>
+    <SafeAreaView edges={["left", "right"]} className='h-full bg-white pt-10'>
+      <View className='pl-6 pr-4 py-4'>
+        <SearchInput />
+      </View>
       {isLoading && 
         <View className='flex flex-1 justify-center items-center h-full'>
           <ActivityIndicator size={'large'} color={"#FF4416"} />
@@ -45,7 +37,7 @@ const GiftCards = () => {
       }
       {!isLoading && 
         <FlatList 
-          className='px-5 pt-6'
+          className='px-6 pt-4'
           data={giftCardsSignal.value}
           keyExtractor={(item) => item.id!}
           renderItem={({item}) => (
@@ -54,41 +46,8 @@ const GiftCards = () => {
           keyboardDismissMode='on-drag'
         />
       }
-
-      <SearchModal showSearchModal={showSearchModal} handleSearch={handleSearch} closeModal={() => {setShowSearchModal(false)}}/>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  bgLightOrange: {
-    backgroundColor: '#f9660014'
-  },
-  shadow: {
-    shadowColor: "#FF4416",
-    shadowOffset: {
-        width: 0,
-        height: 1,
-    },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
-
-    elevation: 6,
-  },
-  container: {
-    ...Platform.select({
-      ios: {
-        paddingTop: 50
-      }
-    })
-  },
-  dropdown: {
-    ...Platform.select({
-      android: {
-        marginLeft: -15
-      }
-    })
-  }
-});
 
 export default GiftCards;

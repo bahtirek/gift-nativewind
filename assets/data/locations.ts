@@ -1,6 +1,6 @@
-import { Location } from "@/types";
+import { LocationType } from "@/types";
 
-const locations: Location[] = [
+const allLocations: LocationType[] = [
   {
     id: '0',
     name: 'Not selected'
@@ -31,4 +31,4 @@ const locations: Location[] = [
   }
 ]
 
-export default locations;
+export default allLocations;

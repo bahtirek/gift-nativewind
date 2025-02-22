@@ -1,6 +1,6 @@
 import { signal, effect, computed } from "@preact/signals-react";
 import locations from "@assets/data/locations";
-import { Location } from "@/types";
+import { LocationType } from "@/types";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -28,7 +28,7 @@ const setLocation = (id: string) => {
   }
 }
 
-const storeLocation = async (value: Location) => {
+const storeLocation = async (value: LocationType) => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem('location', jsonValue);
@@ -37,7 +37,7 @@ const storeLocation = async (value: Location) => {
   }
 };
 
-const locationSignal = signal<Location>({});
+const locationSignal = signal<LocationType>({});
 const allLocationsSignal = signal(getLocations());
 
 export {

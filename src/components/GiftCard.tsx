@@ -14,7 +14,7 @@ const GiftCard = ({giftCard, showDescription, className}: GiftCardPropType, ) =>
   const {label, thumbnail, description, address} = giftCard;
   const goToCardDetailsScreen = () => {
     setGiftCard(giftCard)
-    router.push('/home/gift-card-details')
+    router.push('/gift-cards/gift-card-details')
   }
   return (
     <View className={`flex flex-col items-center ${className}`}>

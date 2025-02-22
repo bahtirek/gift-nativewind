@@ -1,6 +1,6 @@
 import { GiftCardType } from "@/types";
 
-const giftCards: GiftCardType[] = [
+const allGiftCards: GiftCardType[] = [
   {
     id: '1',
     label: 'Pizzeria Bella Napoli',
@@ -302,4 +302,4 @@ const giftCards: GiftCardType[] = [
   },
 ];
 
-export default giftCards;
+export default allGiftCards;

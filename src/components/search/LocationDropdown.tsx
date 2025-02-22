@@ -1,16 +1,20 @@
 import { View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Picker} from '@react-native-picker/picker';
-import { locationSignal, allLocationsSignal, setLocation } from '@/signals/location.signal';
+import { useSearchSettings } from '@/providers/SearchSettingsProvider';
 
 
 const LocationDropdown = () => {
-  const [selectedLocation, setSelectedLocation] = useState(locationSignal.value.id);
+  const { locations, location, updateLocation } = useSearchSettings();
+  const [selectedLocation, setSelectedLocation] = useState('');
 
-  const setLocationSignal = (locationId: string) => {
-    console.log(locationId);
+  useEffect(() => {
+    if(location) setSelectedLocation(location.id!)
+  }, [location])
+
+  const setLocation = (locationId: string) => {
     setSelectedLocation(locationId)
-    setLocation(locationId)
+    updateLocation(locationId)
   }
   
   return (
@@ -18,9 +22,9 @@ const LocationDropdown = () => {
       <Picker
         className='mt-2 text-md text-secondary-700 h-14 rounded-xl border border-secondary-200 focus:border-primary'
         selectedValue={selectedLocation}
-        onValueChange={(locationId, index) => setLocationSignal(locationId)}>
+        onValueChange={(locationId) => setLocation(locationId)}>
         {
-          allLocationsSignal.value.map((location, index) => {
+          locations?.map((location) => {
             return <Picker.Item label={location.name} value={location.id} key={location.id} />
           })
         }

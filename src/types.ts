@@ -24,8 +24,9 @@ export type FormFieldType = {
 
 export type CategoryItemType = {
   label?: string,
-  icon: string,
-  id: string,
+  icon?: string,
+  id?: string,
+  checked?: boolean
 };
 
 export type GiftCardType = {
@@ -34,7 +35,11 @@ export type GiftCardType = {
   thumbnail?: string,
   description?: string,
   address?: string,
-  priceSet: PriceType[] 
+  phone?: string,
+  website?: string,
+  instagram?: string,
+  telegram?: string,
+  priceSet?: PriceType[] 
 };
 
 export type CreatorType = {
@@ -42,7 +47,7 @@ export type CreatorType = {
   avatar: string
 }
 
-export type Location = {
+export type LocationType = {
   id?: string,
   name?: string
 }
@@ -53,9 +58,12 @@ export type PriceType = {
 }
 
 export type CartItemType = {
+  id?: string,
   quantity?: number,
   amount?: string,
   email?: string,
   phone?: string,
+  note?: string,
   giftCard?: GiftCardType
+  otherAmount?: string
 }
