@@ -6,6 +6,9 @@ import CartItem from '@/components/cart/CartItem';
 import { useCart } from '@/providers/CartProvider'; 
 import EmptyCart from '@/components/cart/EmptyCart';
 import CustomButton from '@/components/common/CustomButton';
+import ListEmptyComponent from '@/components/common/ListEmptyComponent';
+import icons from '@/constants/icons';
+import { router } from 'expo-router';
 
 export default function Basket() {
   const { items } = useCart();
@@ -13,6 +16,11 @@ export default function Basket() {
   const checkout = () => {
     console.log('checkout');
   }
+
+  const openSearchModal = () => {
+    router.navigate('/gift-cards')
+  }
+
   return (
     <SafeAreaView edges={["left", "right"]} className='h-full bg-white'>
       <FlatList 
@@ -24,7 +32,10 @@ export default function Basket() {
         )}
         keyboardDismissMode='on-drag'
         ListEmptyComponent={() => (
-          <EmptyCart
+          <ListEmptyComponent
+            icon={icons.emptyBasketGray}
+            actionIcon={icons.search_orange}
+            handleAction={openSearchModal}
             title='No Gift cards Found'
             subtitle='Get best Gift for your friends, co-worker or loved ones'
           />
