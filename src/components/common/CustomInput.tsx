@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { maskPhone, maskCurrency } from '../../utils/masks'
 import { useFocusEffect } from 'expo-router';
 
-const CustomInput = ( { onInput, mask, error, presetValue, className, ...rest }: any) => {
+const CustomInput = ( { onInput, mask, error, presetValue, className, reset, ...rest }: any) => {
   const [value, setValue] = useState('');
 
   useEffect(() => {
@@ -15,14 +15,18 @@ const CustomInput = ( { onInput, mask, error, presetValue, className, ...rest }:
       onChange(presetValue)
     }
   }, [presetValue])
-  
+
   useFocusEffect(
     useCallback(() => {
-      return () => {
-        setValue('')
-      };
-    }, [])
-  );
+      setValue('')
+    }, [reset])
+  )
+
+  useEffect(() => {
+    if(reset) {
+      setValue('')
+    }
+  }, [reset])
 
   const onChange = (text: string) => {
     let newValue = text;
