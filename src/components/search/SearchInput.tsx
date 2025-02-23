@@ -1,23 +1,37 @@
 import { View, Alert } from 'react-native'
-import React, { useState } from 'react'
+import { router, usePathname } from 'expo-router';
+import { useSearchSettings } from '@/providers/SearchSettingsProvider';
+import React, {  useEffect, useState } from 'react'
 import icons from '@constants/icons';
 import CustomInput from '../common/CustomInput';
-import { router } from 'expo-router';
 import IconButton from '../common/IconButton';
+import { setSearchQuerySignal } from '@/signals/search.signal';
 
 const SearchInput = () => {
+  const { updateSearchQuery } = useSearchSettings();
   const [searchQuery, setSearchQuery] = useState('');
-
+  const pathname= usePathname();
+  
   const handleSearchInput = (value: string) => {
     setSearchQuery(value)
-  }
+  }  
+  
+  useEffect(() => {
+    setSearchQuerySignal(searchQuery)
+    updateSearchQuery(searchQuery);
 
+  }, [searchQuery])
+  
   const handleSearchQuery = () => {
     if(!searchQuery) {
       Alert.alert('Missing data', "Please input search query")
     } else {
-      console.log(searchQuery);
-      
+      //setSearchQuery('');
+      if(pathname.includes('/gift-cards')) {
+
+      } else {
+        router.navigate('/gift-cards');
+      }
     }
   }
 
@@ -31,6 +45,7 @@ const SearchInput = () => {
         <CustomInput 
           onInput={(value: string) => {handleSearchInput(value)}} 
           placeholder='Search for perfect gift'
+          reset={true}
         />
 
         <View className='absolute right-4'>
