@@ -14,6 +14,7 @@ import bin from "./../../assets/icons/bin.png";
 import pencil from "./../../assets/icons/pencil.png";
 import emptyBasketGray from "./../../assets/icons/empty-basket-gray.png";
 import emptyBasketOrange from "./../../assets/icons/empty-basket-orange.png";
+import zoom_out_d4d4d4 from "./../../assets/icons/zoom-out-d4d4d4.png";
 
 export default {
   bookmark,
@@ -31,5 +32,6 @@ export default {
   bin,
   pencil,
   emptyBasketGray,
-  emptyBasketOrange
+  emptyBasketOrange,
+  zoom_out_d4d4d4
 };
