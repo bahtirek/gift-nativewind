@@ -5,7 +5,6 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-import { setInitialLocation } from '@signals/location.signal'
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import "../../global.css";
@@ -46,8 +45,6 @@ export default function RootLayout() {
   if (!loaded) {
     return null;
   }
-
-  setInitialLocation();
 
   return <RootLayoutNav />;
 }
