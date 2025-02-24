@@ -9,6 +9,7 @@ import icons from '@constants/icons';
 import SearchInput from '@/components/search/SearchInput';
 import { GiftCardType } from '@/types';
 import allGiftCards from '@assets/data/allcards';
+import { router } from 'expo-router';
 
 export default function Home() {
   const [items, setItems] = useState<GiftCardType[]>([]);
@@ -37,6 +38,20 @@ export default function Home() {
     return <ActivityIndicator />;
   } */
 
+  const handleSearch = (searchQuery: string) => {
+    console.log('handle',searchQuery);
+    if(!searchQuery) {
+      Alert.alert('Missing data', "Please input search query")
+    } else {
+      router.navigate({
+        pathname: '/gift-cards',
+        params: {
+          search: searchQuery
+        }
+      })
+    }
+  }
+
   return (
     <SafeAreaView className='h-full bg-white'>
       <FlatList 
@@ -63,7 +78,7 @@ export default function Home() {
               </View>
             </View>
 
-            <SearchInput />
+            <SearchInput handleSearch={handleSearch} />
 
             <View className='w-full flex-1 pt-8'>
               <CategoryList />

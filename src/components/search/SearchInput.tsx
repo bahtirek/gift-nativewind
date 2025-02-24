@@ -5,10 +5,8 @@ import React, {  useEffect, useState } from 'react'
 import icons from '@constants/icons';
 import CustomInput from '../common/CustomInput';
 import IconButton from '../common/IconButton';
-import { setSearchQuerySignal } from '@/signals/search.signal';
 
-const SearchInput = () => {
-  const { updateSearchQuery } = useSearchSettings();
+const SearchInput = ({handleSearch}: any) => {
   const pathname = usePathname();
   let searchQuery = ''
   
@@ -17,18 +15,7 @@ const SearchInput = () => {
   }  
   
   const handleSearchQuery = () => {
-    if(!searchQuery) {
-      Alert.alert('Missing data', "Please input search query")
-    } else {
-      updateSearchQuery(searchQuery);
-      
-      if(pathname.includes('/gift-cards')) {
-        console.log(searchQuery);
-
-      } else {
-        router.navigate('/gift-cards');
-      }
-    }
+    handleSearch(searchQuery);
   }
 
   const openSettings = () => {

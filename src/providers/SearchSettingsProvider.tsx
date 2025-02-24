@@ -5,23 +5,19 @@ import { createContext, PropsWithChildren, useContext, useEffect, useState } fro
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type SearchSettingsProviderType = {
-  categories: CategoryItemType[];
-  locations: LocationType[];
-  location: LocationType | undefined;
-  searchQuery: string,
-  updateCategories: (id: string, value: boolean) => void
+  categories: CategoryItemType[],
+  locations: LocationType[],
+  location: LocationType | undefined,
+  updateCategories: (id: string, value: boolean) => void,
   updateLocation: (id: string) => void,
-  updateSearchQuery: (query: string) => void
 }
 
 export const SearchSettingsContext = createContext<SearchSettingsProviderType>({
   categories: [],
   locations: [],
   location: {},
-  searchQuery: '',
   updateCategories: () => {},
   updateLocation: () => {},
-  updateSearchQuery: () => {},
 });
 
 
@@ -29,7 +25,6 @@ const SearchSettingsProvider = ({children}: PropsWithChildren) => {
   const [categories, setCategories] = useState<CategoryItemType[]>([]);
   const [locations, setLocations] = useState<LocationType[]>([]);
   const [location, setLocation] = useState<LocationType>();
-  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     getCategoriesFromStorage();
@@ -44,10 +39,6 @@ const SearchSettingsProvider = ({children}: PropsWithChildren) => {
   useEffect(() => {
     saveLocationToStorage()
   }, [location])
-
-  const updateSearchQuery = (query: string) => {
-    setSearchQuery(query);
-  }
 
   const updateCategories = (id: string, value: boolean) => {
     setCategories(categories.map((category: CategoryItemType) => {
@@ -124,7 +115,7 @@ const SearchSettingsProvider = ({children}: PropsWithChildren) => {
   }
 
   return(
-    <SearchSettingsContext.Provider value={{categories, locations, location, searchQuery, updateCategories, updateLocation, updateSearchQuery}}>
+    <SearchSettingsContext.Provider value={{categories, locations, location, updateCategories, updateLocation}}>
       {children}
     </SearchSettingsContext.Provider>
   )

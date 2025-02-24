@@ -9,25 +9,28 @@ import GiftCard from '@/components/GiftCard';
 import ListEmptyComponent from '@/components/common/ListEmptyComponent';
 import icons from '@/constants/icons';
 import { GiftCardType } from '@/types';
-import { useFocusEffect } from 'expo-router';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 
 const GiftCards = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [giftCards, setGiftCards] = useState<GiftCardType[]>([])
-  const { searchQuery, location, categories, updateSearchQuery } = useSearchSettings();
+  const { location, categories } = useSearchSettings();
+  let { search } = useLocalSearchParams();
 
   useFocusEffect(
     useCallback(() => {
       handleSearch()
       return () => {
-        updateSearchQuery('')
+        router.setParams({});
+        search = ''
       };
-    }, [searchQuery])
+    }, [search])
   );
 
+  
   const handleSearch = () => {
     setIsLoading(true);
-    if(searchQuery) {
+    if(search) {
       setGiftCards([]);
       setTimeout(() => {
         setIsLoading(false);
@@ -38,10 +41,16 @@ const GiftCards = () => {
     }
   }
 
+  const handleSearchFromInput = (searchQuery: string) => {
+    search = searchQuery;
+    router.setParams({search: searchQuery});
+    handleSearch();
+  }
+
   return (
     <SafeAreaView edges={["left", "right"]} className='h-full bg-white pt-10'>
       <View className='pl-6 pr-4 py-4'>
-        <SearchInput />
+        <SearchInput handleSearch={handleSearchFromInput} />
       </View>
       {isLoading && 
         <View className='flex flex-1 justify-center items-center h-full'>
