@@ -1,34 +1,56 @@
-import { FlatList, View, StyleSheet, Platform, ActivityIndicator } from 'react-native';
+import { FlatList, View, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import GiftCard from '@/components/GiftCard';
 import { giftCardsSignal } from '@signals/giftcards.signal';
-import SearchModal from '@/components/search/SearchModal';
-import { useEffect, useState } from 'react';
-import { router, useNavigation } from 'expo-router';
-import SearchButton from '@/components/search/SearchButton';
+import { useCallback, useEffect, useState } from 'react';
+import { useSearchSettings } from '@/providers/SearchSettingsProvider';
+import { useGiftCard } from '@/providers/GiftCardProvider';
 import SearchInput from '@/components/search/SearchInput';
+import GiftCard from '@/components/GiftCard';
+import ListEmptyComponent from '@/components/common/ListEmptyComponent';
+import icons from '@/constants/icons';
+import { GiftCardType } from '@/types';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 
 const GiftCards = () => {
-  const navigation = useNavigation();
-  const [showSearchModal, setShowSearchModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [giftCards, setGiftCards] = useState<GiftCardType[]>([])
+  const { location, categories } = useSearchSettings();
+  let { search } = useLocalSearchParams();
 
-  useEffect(() => {
-    handleSearch();
-  }, [])
+  useFocusEffect(
+    useCallback(() => {
+      handleSearch()
+      return () => {
+        router.setParams({});
+        search = ''
+      };
+    }, [search])
+  );
 
+  
   const handleSearch = () => {
     setIsLoading(true);
-    setShowSearchModal(false);
-    setTimeout(() => {
+    if(search) {
+      setGiftCards([]);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    } else {
+      setGiftCards(giftCardsSignal.value)
       setIsLoading(false);
-    }, 1000)
+    }
+  }
+
+  const handleSearchFromInput = (searchQuery: string) => {
+    search = searchQuery;
+    router.setParams({search: searchQuery});
+    handleSearch();
   }
 
   return (
     <SafeAreaView edges={["left", "right"]} className='h-full bg-white pt-10'>
       <View className='pl-6 pr-4 py-4'>
-        <SearchInput />
+        <SearchInput handleSearch={handleSearchFromInput} />
       </View>
       {isLoading && 
         <View className='flex flex-1 justify-center items-center h-full'>
@@ -38,12 +60,19 @@ const GiftCards = () => {
       {!isLoading && 
         <FlatList 
           className='px-6 pt-4'
-          data={giftCardsSignal.value}
+          data={giftCards}
           keyExtractor={(item) => item.id!}
           renderItem={({item}) => (
             <GiftCard giftCard={item} className="mb-5" />
           )}
           keyboardDismissMode='on-drag'
+          ListEmptyComponent={() => (
+            <ListEmptyComponent
+              icon={icons.zoom_out_d4d4d4}
+              title='No Gift cards Found'
+              subtitle='Get best Gift for your friends, co-worker or loved ones'
+            />
+          )}
         />
       }
     </SafeAreaView>

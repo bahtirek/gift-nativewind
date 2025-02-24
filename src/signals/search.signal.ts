@@ -15,7 +15,7 @@ const setCategory = (id: string, value: boolean) => {
   })
 }
 
-const setSearchQuery = (value: string) => {
+const setSearchQuerySignal = (value: string) => {
   searchQuerySignal.value = value
 }
 
@@ -33,7 +33,7 @@ export {
   categorySignal,
   setCategory,
   resetCategories,
-  setSearchQuery,
+  setSearchQuerySignal,
   getGiftCards
 } 
   

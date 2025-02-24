@@ -5,11 +5,11 @@ import { createContext, PropsWithChildren, useContext, useEffect, useState } fro
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type SearchSettingsProviderType = {
-  categories: CategoryItemType[];
-  locations: LocationType[];
-  location: LocationType | undefined;
-  updateCategories: (id: string, value: boolean) => void
-  updateLocation: (id: string) => void
+  categories: CategoryItemType[],
+  locations: LocationType[],
+  location: LocationType | undefined,
+  updateCategories: (id: string, value: boolean) => void,
+  updateLocation: (id: string) => void,
 }
 
 export const SearchSettingsContext = createContext<SearchSettingsProviderType>({
@@ -17,7 +17,7 @@ export const SearchSettingsContext = createContext<SearchSettingsProviderType>({
   locations: [],
   location: {},
   updateCategories: () => {},
-  updateLocation: () => {}
+  updateLocation: () => {},
 });
 
 
