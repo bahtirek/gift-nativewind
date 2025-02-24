@@ -78,7 +78,7 @@ const SearchSettingsProvider = ({children}: PropsWithChildren) => {
   const getCategoriesFromStorage = async() => {
     try {
       const jsonValue = await AsyncStorage.getItem('categories');
-      if(jsonValue != null) {
+      if(jsonValue != null && JSON.parse(jsonValue).length > 0) {
         setCategories(JSON.parse(jsonValue)) 
       } else {
         //pull from back
