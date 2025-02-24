@@ -9,25 +9,21 @@ import { setSearchQuerySignal } from '@/signals/search.signal';
 
 const SearchInput = () => {
   const { updateSearchQuery } = useSearchSettings();
-  const [searchQuery, setSearchQuery] = useState('');
-  const pathname= usePathname();
+  const pathname = usePathname();
+  let searchQuery = ''
   
   const handleSearchInput = (value: string) => {
-    setSearchQuery(value)
+    searchQuery = value 
   }  
-  
-  useEffect(() => {
-    setSearchQuerySignal(searchQuery)
-    updateSearchQuery(searchQuery);
-
-  }, [searchQuery])
   
   const handleSearchQuery = () => {
     if(!searchQuery) {
       Alert.alert('Missing data', "Please input search query")
     } else {
-      //setSearchQuery('');
+      updateSearchQuery(searchQuery);
+      
       if(pathname.includes('/gift-cards')) {
+        console.log(searchQuery);
 
       } else {
         router.navigate('/gift-cards');
