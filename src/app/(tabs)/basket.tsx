@@ -42,7 +42,7 @@ export default function Basket() {
       />
       {
         items.length > 0 &&
-        <View className='px-5 pb-6 pt-2'>
+        <View className='px-6 pb-6 pt-2'>
           <CustomButton label='Checkout' handlePress={checkout} />
         </View>
       }
