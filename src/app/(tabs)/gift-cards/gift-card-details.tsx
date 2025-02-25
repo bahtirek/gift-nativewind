@@ -51,7 +51,7 @@ const GiftCardDetails = () => {
 const styles = StyleSheet.create({
   image: {
     width: '100%',
-    aspectRatio: 1,
+    aspectRatio: 1.15,
   },
   shadow: {
     shadowColor: "#000",
