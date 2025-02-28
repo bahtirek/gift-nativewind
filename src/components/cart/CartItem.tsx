@@ -6,6 +6,7 @@ import icons from '@/constants/icons';
 import IconButton from '../common/IconButton';
 import { router } from 'expo-router';
 import { useCart } from '@/providers/CartProvider';
+import { setGiftCard } from '@/signals/giftcards.signal';
 
 
 type GiftCardPropType = {
@@ -20,7 +21,8 @@ const GiftCard = ({cartItem}: GiftCardPropType, ) => {
   const {addItemToEdit, deleteItemFromCart} = useCart();
 
   const editCartItem = () => {
-    addItemToEdit(cartItem)
+    addItemToEdit(cartItem);
+    setGiftCard(giftCard!)
     router.navigate('/purchase-modal')
   }
 

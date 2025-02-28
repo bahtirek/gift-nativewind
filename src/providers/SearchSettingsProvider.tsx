@@ -67,6 +67,7 @@ const SearchSettingsProvider = ({children}: PropsWithChildren) => {
   }
 
   const saveLocationToStorage = async() => {
+    if(!location) return;
     try {
       const jsonValue = JSON.stringify(location);
       await AsyncStorage.setItem('location', jsonValue);
@@ -92,7 +93,7 @@ const SearchSettingsProvider = ({children}: PropsWithChildren) => {
   const getLocationFromStorage = async() => {
     try {
       const jsonValue = await AsyncStorage.getItem('location');
-      if(jsonValue != null) {
+      if(jsonValue != null && jsonValue != undefined) {
         setLocation(JSON.parse(jsonValue)) 
       }
     } catch (e) {
