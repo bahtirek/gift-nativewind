@@ -1,6 +1,7 @@
 import { CartItemType, GiftCardType } from "@/types";
 import { randomUUID } from "expo-crypto";
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type CartType = {
   items: CartItemType[];
@@ -29,9 +30,13 @@ const CartProvider = ({children}: PropsWithChildren) => {
     setTotalItems(items.length)
   }, [items])
 
+  useEffect(() => {
+    getCartItemsFromStorage()
+  }, [])
+
   const addItem = (quantity: number, amount: string, giftCard: GiftCardType, email: string, phone: string, note: string, otherAmount: string, id: string) => {
     if(id) {
-      setItems( items.map((item) => item.id !== id ? item : {
+      const updatedItems = items.map((item) => item.id !== id ? item : {
         id,
         quantity, 
         amount, 
@@ -40,7 +45,8 @@ const CartProvider = ({children}: PropsWithChildren) => {
         phone, 
         note,
         otherAmount
-      }))
+      })
+      saveItems(updatedItems)
     } else {
       const newCartItem = {
         id: randomUUID(),
@@ -52,9 +58,8 @@ const CartProvider = ({children}: PropsWithChildren) => {
         note,
         otherAmount
       }
-      setItems([...items, newCartItem]);   
+      saveItems([...items, newCartItem]);   
     }
-    setTotalItems(items.length)
   }
 
   const addItemToEdit = (item: CartItemType) => {
@@ -62,11 +67,36 @@ const CartProvider = ({children}: PropsWithChildren) => {
   }
 
   const deleteItemFromCart = (id: string) => {
-    setItems(
-      items.map((item) =>
-        item.id !== id ? item : {}
-      ).filter((item) => item.id)
-    );
+    const updatedItems = items.map((item) =>
+      item.id !== id ? item : {}
+    ).filter((item) => item.id);
+
+    setItems(updatedItems);
+  }
+
+  const saveItems = (items: CartItemType[]) => {
+    setItems(items);
+    saveItemsToStorage(items);
+  }
+
+  const saveItemsToStorage = async (items: CartItemType[]) => {
+    try {
+      const jsonValue = JSON.stringify(items);
+      await AsyncStorage.setItem('cartItems', jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const getCartItemsFromStorage = async() => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('cartItems');
+      if(jsonValue != null && JSON.parse(jsonValue).length > 0) {
+        setItems(JSON.parse(jsonValue)) 
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return(

@@ -16,16 +16,20 @@ const GiftCardDetails = () => {
     <SafeAreaView edges={["left", "right"]} className='h-full bg-white'>
       {giftCardSignal.value.id && 
         <View  className='flex-1'>
-          <Stack.Screen options={{title: `Gift Cards`, headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />
-          <View className='flex-1'>
-            <Image
-              source={{uri: giftCardSignal.value.thumbnail}}
-              className='w-full h-[240px] opacity-90'
-              resizeMode='cover'
-            />
-            <View className='px-5 pt-6 rounded-t-2xl bg-white -mt-4 flex-1 pb-6' style={styles.shadow}>
+          <Stack.Screen options={{title: `${giftCardSignal.value.label}`, headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />
+          <View className='px-6 flex-1 py-6'>
+            <View 
+              className='flex rounded-2xl'
+              style={[styles.image, styles.shadow]}
+            >
+              <Image
+                source={{uri: giftCardSignal.value.thumbnail}}
+                className='opacity-90 w-full h-full rounded-2xl'
+                resizeMode='cover'
+              />
+            </View>
+            <View className='pt-4 bg-white flex-1'>
               <View className='mb-12'>
-                <Text className='text-3xl text-primary font-regular'>{giftCardSignal.value.label}</Text>
                 <Text className='text-xs text-secondary-600 font-regular mt-2'>{giftCardSignal.value.description}</Text>
                 <Text className='text-md text-secondary-800 font-pregular mt-6'>{giftCardSignal.value.address}</Text>
                 <Link className='text-md text-secondary-800 font-pregular mt-2' href={`https://${giftCardSignal.value.website}` as Href}>{giftCardSignal.value.website}</Link>
@@ -45,23 +49,27 @@ const GiftCardDetails = () => {
 }
 
 const styles = StyleSheet.create({
-    shadow: {
-      shadowColor: "#000",
-      shadowOffset: {
-          width: 0,
-          height: -1,
-      },
-      shadowOpacity: 0.2,
-      shadowRadius: 10,
-  
-      elevation: 10,
-      ...Platform.select({
-        android: {
-          shadowColor: "rgba(0, 0, 0, 0.5)",
-          shadowOpacity: 1,
-        }
-      })
-    }
+  image: {
+    width: '100%',
+    aspectRatio: 1.15,
+  },
+  shadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+        width: 0,
+        height: -1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+
+    elevation: 10,
+    ...Platform.select({
+      android: {
+        shadowColor: "rgba(0, 0, 0, 0.5)",
+        shadowOpacity: 1,
+      }
+    })
+  }
 })
 
 export default GiftCardDetails

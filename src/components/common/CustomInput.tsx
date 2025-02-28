@@ -16,12 +16,6 @@ const CustomInput = ( { onInput, mask, error, presetValue, className, reset, ...
     }
   }, [presetValue])
 
-  useFocusEffect(
-    useCallback(() => {
-      setValue('')
-    }, [reset])
-  )
-
   useEffect(() => {
     if(reset) {
       setValue('')

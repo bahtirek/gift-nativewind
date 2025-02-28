@@ -4,7 +4,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import CartItem from '@/components/cart/CartItem';
 import { useCart } from '@/providers/CartProvider'; 
-import EmptyCart from '@/components/cart/EmptyCart';
 import CustomButton from '@/components/common/CustomButton';
 import ListEmptyComponent from '@/components/common/ListEmptyComponent';
 import icons from '@/constants/icons';
@@ -24,7 +23,7 @@ export default function Basket() {
   return (
     <SafeAreaView edges={["left", "right"]} className='h-full bg-white'>
       <FlatList 
-        className='px-5 pt-6'
+        className='px-6 pt-6'
         data={items}
         keyExtractor={(item) => item.id!}
         renderItem={({item }) => (
@@ -43,7 +42,7 @@ export default function Basket() {
       />
       {
         items.length > 0 &&
-        <View className='px-5 pb-6 pt-2'>
+        <View className='px-6 pb-6 pt-2'>
           <CustomButton label='Checkout' handlePress={checkout} />
         </View>
       }

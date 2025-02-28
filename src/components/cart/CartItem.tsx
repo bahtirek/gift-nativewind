@@ -6,6 +6,7 @@ import icons from '@/constants/icons';
 import IconButton from '../common/IconButton';
 import { router } from 'expo-router';
 import { useCart } from '@/providers/CartProvider';
+import { setGiftCard } from '@/signals/giftcards.signal';
 
 
 type GiftCardPropType = {
@@ -20,7 +21,8 @@ const GiftCard = ({cartItem}: GiftCardPropType, ) => {
   const {addItemToEdit, deleteItemFromCart} = useCart();
 
   const editCartItem = () => {
-    addItemToEdit(cartItem)
+    addItemToEdit(cartItem);
+    setGiftCard(giftCard!)
     router.navigate('/purchase-modal')
   }
 
@@ -36,8 +38,8 @@ const GiftCard = ({cartItem}: GiftCardPropType, ) => {
   }
 
   return (
-    <View className={`flex flex-col pb-8`}>
-      <View className='flex-row'>
+    <View className={`flex flex-col pb-4 mb-8 border-b border-secondary-200`}>
+      <View className=''>
         <View className='flex-1'>
           <View className='flex flex-row'>
             <View className='w-16 h-16 rounded-[8px]' style={styles.shadow}>
@@ -49,7 +51,10 @@ const GiftCard = ({cartItem}: GiftCardPropType, ) => {
             </View>
             <View className=' flex-1 pb-1 gap-y-1 pl-4'>
               <Text className='text-xl text-primary font-regular' numberOfLines={1}>{label}</Text>
-              <Text className='text-lg text-secondary-900 font-pregular'>{amount}</Text>
+              <View className='flex flex-row justify-between'>
+                <Text className='text-lg text-secondary-600 font-pregular'>Value:</Text>
+                <Text className='text-lg text-secondary-900 font-pregular'>{amount}</Text>
+              </View>
             </View>
           </View>
           <View>
@@ -67,11 +72,11 @@ const GiftCard = ({cartItem}: GiftCardPropType, ) => {
             </View>
           </View>
         </View>
-        <View className=''>
-          <View className='my-1'>
+        <View className='flex-row justify-end mt-3'>
+          <View className='mr-2'>
             <IconButton icon={icons.pencil} handlePress={editCartItem} />
           </View>
-          <View className='my-1'>
+          <View className=''>
             <IconButton icon={icons.bin} handlePress={deleteCartItem} />
           </View>
         </View>
@@ -81,9 +86,6 @@ const GiftCard = ({cartItem}: GiftCardPropType, ) => {
 }
 
 const styles = StyleSheet.create({
-  bgLightOrange: {
-    backgroundColor: '#f9660014'
-  },
   shadow: {
     shadowColor: "#000",
     shadowOffset: {
