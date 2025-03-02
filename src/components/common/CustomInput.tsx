@@ -1,6 +1,6 @@
 import { View, TextInput, StyleSheet, Platform, Text } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
-import { maskPhone, maskCurrency } from '../../utils/masks'
+import { maskPhone, maskCurrency, maskVisaCard, maskExpDate, maskName } from '../../utils/masks'
 import { useFocusEffect } from 'expo-router';
 
 const CustomInput = ( { onInput, mask, error, presetValue, className, reset, ...rest }: any) => {
@@ -32,6 +32,12 @@ const CustomInput = ( { onInput, mask, error, presetValue, className, reset, ...
         newValue = maskPhone(text)
       } else if(mask == "currency") {
         newValue = maskCurrency(text)
+      } else if(mask == "maskVisaCard") {
+        newValue = maskVisaCard(text)
+      } else if(mask == "maskExpDate") {
+        newValue = maskExpDate(text)
+      } else if(mask == "maskName") {
+        newValue = maskName(text)
       }
     }
     setValue(newValue);
