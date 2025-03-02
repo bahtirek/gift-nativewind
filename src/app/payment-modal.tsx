@@ -27,7 +27,7 @@ const CheckoutModal = () => {
  
   return (
     <SafeAreaView edges={["left", "right"]} className='h-full bg-white'>
-      <Stack.Screen options={{title: 'Payment type', headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />
+      <Stack.Screen options={{title: 'Payment method', headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View className='flex w-full h-full bg-white pt-6' style={styles.container}>
           <View className="flex bg-white px-8 pb-10 flex-1">
