@@ -1,14 +1,11 @@
-import { View, Text, Modal, Image, StyleSheet, Pressable, Platform, GestureResponderEvent, Alert, ScrollView } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { View, StyleSheet, Platform, ScrollView } from 'react-native'
+import React, { useState } from 'react'
 import CustomButton from '../components/common/CustomButton';
 import RadioButton from '../components/common/RadioButton';
-import CustomInput from '../components/common/CustomInput';
-import { giftCardSignal } from '@/signals/giftcards.signal';
-import { isEmpty, validateCreditCard, validateLength, validateExpDate } from '../utils/input-validation';
-import { useCart } from '@/providers/CartProvider';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, Stack } from 'expo-router';
 import CreditCardForm from '@/components/cart/CreditCardForm';
+import ClickForm from '@/components/cart/ClickForm';
 
 
 const CheckoutModal = () => {
@@ -50,7 +47,14 @@ const CheckoutModal = () => {
                 onSelect={() => handleSelect('click')}
               />
             </View>
-            <CreditCardForm validate={validate} paymanetUpdated={onPaymentUpdated} />
+            {
+              paymentType == 'visa' &&
+              <CreditCardForm validate={validate} paymanetUpdated={onPaymentUpdated} />
+            }
+            {
+              paymentType == 'click' &&
+              <ClickForm />
+            }
             <View className='mt-auto pt-8'>
               <CustomButton label={'Review'} handlePress={onReview} />
             </View>
