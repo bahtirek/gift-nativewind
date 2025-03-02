@@ -67,7 +67,7 @@ const PurchaseModal = () => {
 
   const handlePhoneInput = (phone: string) => {
     if(isValidated) {
-      setPhoneError(validateLength(phone, 12))
+      setPhoneError(validateLength(phone, 12, 'Wrong phone number'))
     }
     setPhone(phone)
   }
@@ -86,7 +86,7 @@ const PurchaseModal = () => {
       (amount && amount != "other") && 
       (email || phone) && 
       !validateEmail(email) && 
-      !validateLength(phone, 12) && 
+      !validateLength(phone, 12, 'Wrong phone number') && 
       !validateAmount(otherAmount, minAmount)
     ) {
       const id = cartItemToEdit.id ? cartItemToEdit.id : '';
@@ -114,7 +114,7 @@ const PurchaseModal = () => {
       return Alert.alert('Missing data', "Please provide recepient details")
     } 
     if(phone) {
-      setPhoneError(validateLength(phone, 12))
+      setPhoneError(validateLength(phone, 12, 'Wrong phone number'))
     } 
     if(email){
       setEmailError(validateEmail(email));
