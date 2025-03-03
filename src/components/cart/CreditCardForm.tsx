@@ -2,6 +2,8 @@ import { View, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react';
 import { isEmpty, validateCreditCard, validateLength, validateExpDate } from '../../utils/input-validation';
 import CustomInput from '../common/CustomInput';
+import { PaymentType } from '@/types';
+import { setPaymentSignal } from '@/signals/payment.signal';
 
 const CreditCardForm = ({validate, paymanetUpdated}: any) => {
   const [cardholderName, setCardholderName] = useState('');
@@ -17,15 +19,26 @@ const CreditCardForm = ({validate, paymanetUpdated}: any) => {
   useEffect(() => {
     console.log('validate', validate);
     if(!isValidated) setIsValidated(validate);
-    paymanetUpdated(isFormCompleted());
     validateData();
+    isFormCompleted();
   }, [validate])
-
+  
   const isFormCompleted = () => {
-    return (
+    if (
       !cardholderNameError && !creditCardError && !expDateError && !cvvError &&
       !!cardholderName && !!creditCard && !!expDate && !!cvv
-    )
+    ) {
+      const payment: PaymentType = {
+        cardholderName: cardholderName,
+        creditCard: creditCard,
+        expDate: expDate,
+        cvv: cvv
+      };
+      setPaymentSignal(payment);
+      paymanetUpdated(true);
+    } else {
+      paymanetUpdated(false);
+    }
   }
   
   const handleCardholderNameInput = (cardholderName: string) => {

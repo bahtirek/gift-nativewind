@@ -67,3 +67,10 @@ export type CartItemType = {
   giftCard?: GiftCardType
   otherAmount?: string
 }
+
+export type PaymentType = {
+  cardholderName?: string,
+  creditCard?: string,
+  expDate?: string,
+  cvv?: string,
+}
