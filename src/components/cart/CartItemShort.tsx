@@ -24,9 +24,9 @@ const GiftCard = ({cartItem}: GiftCardPropType, ) => {
     <View className={`flex flex-col pb-2 mb-4 border-b border-secondary-200`}>
       <View className='flex flex-row'>
         <View className=' flex-1 pb-1 gap-y-1'>
-          <Text className='text-lg text-primary font-regular' numberOfLines={1}>{label}</Text>
+          <Text className='text-md text-primary font-regular' numberOfLines={1}>{label}</Text>
           <View className='flex flex-row justify-between'>
-            <Text className='text-md text-secondary-600 font-pregular'>Value:</Text>
+            <Text className='text-sm text-secondary-600 font-pregular'>Value:</Text>
             <Text className='text-md text-secondary-900 font-pregular'>{amount}</Text>
           </View>
         </View>

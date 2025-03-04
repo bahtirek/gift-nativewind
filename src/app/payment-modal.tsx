@@ -30,7 +30,7 @@ const CheckoutModal = () => {
       <Stack.Screen options={{title: 'Payment method', headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View className='flex w-full h-full bg-white pt-6' style={styles.container}>
-          <View className="flex bg-white px-8 pb-10 flex-1">
+          <View className="flex bg-white px-6 pb-6 flex-1">
             <View className='mb-6 mt-1'>
               <RadioButton 
                 label={'Visa / Uzcard / Humo'}
