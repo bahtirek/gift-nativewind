@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Modal, ActivityIndicator } from 'react-native'
+import { View, Text, ScrollView, Modal, ActivityIndicator, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { paymentSignal } from '@/signals/payment.signal'
 import { useCart } from '@/providers/CartProvider'; 
@@ -8,14 +8,15 @@ import CartItem from '@/components/cart/CartItem';
 import CartItemShort from '@/components/cart/CartItemShort';
 import { CartItemType } from '@/types';
 import { maskCurrency } from '@/utils/masks';
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 
 
 const SubmitOrder = () => {
-  const { items } = useCart();
+  const { items, deleteAllItemsFromCart } = useCart();
   const [totalAmount, setTotalAmount] = useState('');
   const [maskedCreditCard, setMaskedCreditCard] = useState('**** **** **** ****');
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+
 
   useEffect(() => {
     getTotalAmount();
@@ -49,6 +50,15 @@ const SubmitOrder = () => {
   const onSubmit = () => {
     setShowModal(true);
     setTimeout(() => {
+      if(Math.floor(Math.random() * 10) > 5) {
+        Alert.alert('Something went wrong!', 'Please try later', [
+          {text: 'OK', onPress: () => router.replace('/basket')},
+        ]);
+        router.replace('/basket')
+      } else {
+        deleteAllItemsFromCart();
+        router.replace('/order-confirmation-modal')
+      }
       setShowModal(false)
     }, 1000)
   }

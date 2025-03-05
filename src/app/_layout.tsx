@@ -63,6 +63,7 @@ function RootLayoutNav() {
               <Stack.Screen name="search-settings-modal" options={{ presentation: 'modal' }} />
               <Stack.Screen name="payment-modal" options={{ presentation: 'modal' }} />
               <Stack.Screen name="submit-order-modal" options={{ presentation: 'modal' }} />
+              <Stack.Screen name="order-confirmation-modal" options={{ presentation: 'modal' }} />
             </Stack>
           </CartProvider>
         </GiftCardProvider>
