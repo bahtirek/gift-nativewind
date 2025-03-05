@@ -10,6 +10,7 @@ type CartType = {
   addItem: (quantity: number, amount: string, giftCard: GiftCardType, email: string, phone: string, note: string, otherAmount: string, id: string) => void;
   addItemToEdit: (item: CartItemType) => void,
   deleteItemFromCart: (id: string) => void,
+  deleteAllItemsFromCart: () => void,
 }
 export const CartContext = createContext<CartType>({
   items: [],
@@ -18,6 +19,7 @@ export const CartContext = createContext<CartType>({
   addItem: () => {},
   addItemToEdit: () => {},
   deleteItemFromCart: () => {},
+  deleteAllItemsFromCart: () => {},
 });
 
 
@@ -99,8 +101,17 @@ const CartProvider = ({children}: PropsWithChildren) => {
     }
   }
 
+  const deleteAllItemsFromCart = async() => {
+    try {
+      await AsyncStorage.removeItem('cartItems');
+      setItems([]);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return(
-    <CartContext.Provider value={{items, addItem, totalItemsInCart, addItemToEdit, cartItemToEdit, deleteItemFromCart}}>
+    <CartContext.Provider value={{items, addItem, totalItemsInCart, addItemToEdit, cartItemToEdit, deleteItemFromCart, deleteAllItemsFromCart}}>
       {children}
     </CartContext.Provider>
   )

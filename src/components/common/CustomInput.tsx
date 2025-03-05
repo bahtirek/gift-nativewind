@@ -1,6 +1,6 @@
 import { View, TextInput, StyleSheet, Platform, Text } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
-import { maskPhone, maskCurrency } from '../../utils/masks'
+import { maskPhone, maskCurrency, maskVisaCard, maskExpDate, maskName } from '../../utils/masks'
 import { useFocusEffect } from 'expo-router';
 
 const CustomInput = ( { onInput, mask, error, presetValue, className, reset, ...rest }: any) => {
@@ -32,6 +32,12 @@ const CustomInput = ( { onInput, mask, error, presetValue, className, reset, ...
         newValue = maskPhone(text)
       } else if(mask == "currency") {
         newValue = maskCurrency(text)
+      } else if(mask == "maskVisaCard") {
+        newValue = maskVisaCard(text)
+      } else if(mask == "maskExpDate") {
+        newValue = maskExpDate(text)
+      } else if(mask == "maskName") {
+        newValue = maskName(text)
       }
     }
     setValue(newValue);
@@ -42,7 +48,7 @@ const CustomInput = ( { onInput, mask, error, presetValue, className, reset, ...
     <View className='w-full'>
       <View className='flex flex-row items-center w-full relative bg-white rounded-2xl' style={styles.shadow}>
         <TextInput
-          className={`text-base mt-0.5 text-gray flex-1 font-pregular bg-white h-16 pl-4 pr-12 rounded-2xl focus:border-primary ${error ? 'border-red-600' : ''} ${className}`}
+          className={`text-base mt-0.5 text-gray flex-1 font-pregular bg-white h-16 px-4 rounded-2xl focus:border-primary ${error ? 'border-red-600' : ''} ${className}`}
           value={value}
           placeholderTextColor="#FFA07A"
           onChangeText={onChange}

@@ -29,6 +29,7 @@ const SearchInput = ({handleSearch}: any) => {
           onInput={(value: string) => {handleSearchInput(value)}} 
           placeholder='Search for perfect gift'
           reset={true}
+          className={'pr-12'}
         />
 
         <View className='absolute right-4'>
