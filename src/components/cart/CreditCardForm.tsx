@@ -19,13 +19,16 @@ const CreditCardForm = ({validate, paymanetUpdated}: any) => {
   useEffect(() => {
     console.log('validate', validate);
     if(!isValidated) setIsValidated(validate);
+    console.log('validate', validate);
     validateData();
     isFormCompleted();
   }, [validate])
   
   const isFormCompleted = () => {
+    console.log("validateCreditCard(creditCard)",validateCreditCard(creditCard), isEmpty(cardholderName));
+    
     if (
-      !cardholderNameError && !creditCardError && !expDateError && !cvvError &&
+      !isEmpty(cardholderName) && !validateCreditCard(creditCard) && !validateExpDate(expDate) && !validateLength(cvv, 3, 'Wrong cvv') &&
       !!cardholderName && !!creditCard && !!expDate && !!cvv
     ) {
       const payment: PaymentType = {
@@ -72,7 +75,7 @@ const CreditCardForm = ({validate, paymanetUpdated}: any) => {
   }
 
   const validateData = () => {
-    setIsValidated(true)
+    //setIsValidated(true)
  
     if (!cardholderName || !creditCard || !expDate || !cvv ) {
       console.log('Missing data', "Please provide payment details");

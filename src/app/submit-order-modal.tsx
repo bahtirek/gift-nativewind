@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, Modal, ActivityIndicator, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { paymentSignal } from '@/signals/payment.signal'
+import { paymentSignal, resetPaymentSignal } from '@/signals/payment.signal'
 import { useCart } from '@/providers/CartProvider'; 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '@/components/common/CustomButton';
@@ -19,10 +19,9 @@ const SubmitOrder = () => {
 
 
   useEffect(() => {
+    if(!paymentSignal.value.creditCard || !items || items.length == 0) router.back();
     getTotalAmount();
-    maskCreditCard();
-    console.log(totalAmount);
-    
+    maskCreditCard();    
   }, [])
   
   const getTotalAmount = () => {
@@ -57,6 +56,7 @@ const SubmitOrder = () => {
         router.replace('/basket')
       } else {
         deleteAllItemsFromCart();
+        resetPaymentSignal();
         router.replace('/order-confirmation-modal')
       }
       setShowModal(false)

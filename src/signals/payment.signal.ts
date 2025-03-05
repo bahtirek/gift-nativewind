@@ -10,7 +10,7 @@ const setPaymentSignal = (payment: PaymentType) => {
 }
 
 const resetPaymentSignal = () => {
-
+  paymentSignal.value = {}
 }
 
 export {

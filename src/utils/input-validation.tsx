@@ -29,7 +29,7 @@ function validateEmail(value: string) {
 function validateCreditCard(value: string) {
   const ccRegex = /^4[0-9]{12}(?:[0-9]{3})?$/;
   value = value.replace(/\s/g, '')
-  if (value && ccRegex.test(value)) {
+  if (value && ccRegex.test(value) && value.length == 16) {
     return ''
   } else {
     return `Wrong credit card` 
