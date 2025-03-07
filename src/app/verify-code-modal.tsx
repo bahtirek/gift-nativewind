@@ -5,11 +5,13 @@ import CustomInput from '../components/common/CustomInput';
 import { isEmpty } from '../utils/input-validation';
 import { Stack } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAccount } from '@/providers/AccountProvider';
 
 const VerifyCode = () => {
   const [code, setCode] = useState('');
   const [codeError, setCodeError] = useState('');
   const [isValidated, setIsValidated] = useState(false);
+  const { saveAccount } = useAccount();
 
   const handleCodeInput = (code: string) => {
     if(isValidated) {      
@@ -19,7 +21,9 @@ const VerifyCode = () => {
   }
 
   const sendCode = () => {
-     
+    setTimeout(() => {
+      saveAccount('', '')
+    })
   }
 
   const resendCode = () => {

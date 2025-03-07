@@ -5,12 +5,14 @@ import CustomInput from '../common/CustomInput';
 import { validateLength, isEmpty } from '../../utils/input-validation';
 import { router, Stack } from 'expo-router';
 import LoadingModal from '../common/LoadingModal';
+import { useAccount } from '@/providers/AccountProvider';
 
 type AccountPropType = {
   edit?: string
 }
 
 const AccountForm = ({edit}: AccountPropType) => {
+  const { account, setTempAccount } = useAccount();
   const [phone, setPhone] = useState('');
   const [name, setName] = useState('')
   const [phoneError, setPhoneError] = useState('');
@@ -45,6 +47,7 @@ const AccountForm = ({edit}: AccountPropType) => {
       setIsLoading(true)
       setTimeout(() => {
         setIsLoading(false);
+        setTempAccount(phone, name)
         router.navigate('/verify-code-modal')
       }, 1000);
     }

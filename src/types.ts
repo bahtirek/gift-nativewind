@@ -74,3 +74,8 @@ export type PaymentType = {
   expDate?: string,
   cvv?: string,
 }
+
+export type AccountType = {
+  phone?: string,
+  name?: string,
+}
