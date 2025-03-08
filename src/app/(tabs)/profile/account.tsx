@@ -1,22 +1,39 @@
 import { View, Text } from 'react-native'
-import React, { useEffect, useState} from 'react'
-import { Stack } from 'expo-router'
+import React, { useEffect, useState, useCallback} from 'react'
+import { Stack, useFocusEffect } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AccountForm from '@/components/profile/AccountForm';
 import { useAccount } from '@/providers/AccountProvider';
+import CustomButton from '@/components/common/CustomButton';
 
 const Account = () => {
   const { account } = useAccount();
-  const [name, setName] = useState('');
-  const [isAccountExist, setIsAccountExist] = useState<boolean | null>(null);
+  const [editName, setEditName] = useState('');
+  const [showAccountForm, setShowAccountForm] = useState<boolean | null>(null);
 
   useEffect(() => {
-    if(account.phone) {
-      setIsAccountExist(true);
-    } else {
-      setIsAccountExist(false);
-    }
+    toggleAccountForm()
   }, [])
+
+  useFocusEffect(
+    useCallback(() => {
+      toggleAccountForm();
+      setEditName('')
+    }, [])
+  );
+
+  const toggleAccountForm = () => {
+    if(account.phone) {
+      setShowAccountForm(false);
+    } else {
+      setShowAccountForm(true);
+    }
+  }
+
+  const onEdit = () => {
+    setEditName(account.name!);
+    setShowAccountForm(true)
+  }
 
 
   return (
@@ -24,12 +41,26 @@ const Account = () => {
       <Stack.Screen options={{title: `Account`, headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />
       <View className='p-6 h-full'>
         { 
-          isAccountExist != null && !isAccountExist &&
-          <AccountForm edit={name} />
+          showAccountForm != null && showAccountForm &&
+          <AccountForm edit={editName} />
         }
         { 
-          isAccountExist != null && isAccountExist &&
-          <Text>{account.phone}</Text>
+          showAccountForm != null && !showAccountForm &&
+          <View className='justify-between h-full'>
+            <View>
+              <View className='flex flex-row justify-between mt-4'>
+                <Text className='text-lg text-secondary-600 font-pregular'>Name:</Text>
+                <Text className='text-lg text-secondary-900 font-pregular'>{account.name}</Text>
+              </View>
+              <View className='flex flex-row justify-between mt-4'>
+                <Text className='text-lg text-secondary-600 font-pregular'>Phone:</Text>
+                <Text className='text-lg text-secondary-900 font-pregular'>{account.phone}</Text>
+              </View>
+            </View>
+            <View>
+              <CustomButton label='Edit name' handlePress={onEdit} />
+            </View>
+          </View>
         }
       </View>
     </SafeAreaView>

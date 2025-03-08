@@ -12,7 +12,7 @@ type AccountPropType = {
 }
 
 const AccountForm = ({edit}: AccountPropType) => {
-  const { account, setTempAccount } = useAccount();
+  const { account, setTempAccount, saveAccount } = useAccount();
   const [phone, setPhone] = useState('');
   const [name, setName] = useState('')
   const [phoneError, setPhoneError] = useState('');
@@ -41,7 +41,8 @@ const AccountForm = ({edit}: AccountPropType) => {
       setIsLoading(true)
       setTimeout(() => {
         setIsLoading(false);
-        router.back();
+        saveAccount(account.phone!, name)
+        router.replace('/profile/account');
       }, 1000);
     } else if( !phoneError && !nameError && !!phone && !!name ) {
       setIsLoading(true)
