@@ -12,7 +12,7 @@ const Profile = () => {
   const pathname = usePathname();
 
   const goToScreen = (path: RelativePathString) => {
-    router.push(`${pathname}/${path}` as RelativePathString)
+    router.push(`/profile/${path}` as RelativePathString)
   }
 
   return (
