@@ -38,7 +38,7 @@ const AccountProvider = ({children}: PropsWithChildren) => {
   const saveAccountToStorage = async (account: AccountType) => {
     try {
       const jsonValue = JSON.stringify(account);
-      await AsyncStorage.setItem('cartAccount', jsonValue);
+      await AsyncStorage.setItem('account', jsonValue);
       setAccount(account);
     } catch (e) {
       console.log(e);
@@ -48,7 +48,7 @@ const AccountProvider = ({children}: PropsWithChildren) => {
   const getAccountFromStorage = async() => {
     try {
       const jsonValue = await AsyncStorage.getItem('account');
-      if(jsonValue != null && JSON.parse(jsonValue).length > 0) {
+      if(jsonValue != null) {
         setAccount(JSON.parse(jsonValue)) 
       }
     } catch (e) {
