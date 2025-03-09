@@ -12,7 +12,7 @@ import { router, Stack } from 'expo-router';
 
 
 const SubmitOrder = () => {
-  const { items, deleteAllItemsFromCart } = useCart();
+  const { items, submitOrder } = useCart();
   const [totalAmount, setTotalAmount] = useState('');
   const [maskedCreditCard, setMaskedCreditCard] = useState('**** **** **** ****');
   const [showModal, setShowModal] = useState(false);
@@ -20,9 +20,7 @@ const SubmitOrder = () => {
 
   useEffect(() => {
     getTotalAmount();
-    maskCreditCard();
-    console.log(totalAmount);
-    
+    maskCreditCard(); 
   }, [])
   
   const getTotalAmount = () => {
@@ -42,7 +40,6 @@ const SubmitOrder = () => {
     const lastFour = paymentSignal.value.creditCard!.slice(-4);
     let remaining = paymentSignal.value.creditCard!.slice(0, paymentSignal.value.creditCard!.length - 4);
     remaining = remaining.replace(/\d/g, "*");
-    console.log(remaining.replace(/\d/g, "*"));
     
     setMaskedCreditCard(`${remaining}${lastFour}`)
   }
@@ -50,13 +47,13 @@ const SubmitOrder = () => {
   const onSubmit = () => {
     setShowModal(true);
     setTimeout(() => {
-      if(Math.floor(Math.random() * 10) > 5) {
+      if(Math.floor(Math.random() * 10) > 8) {
         Alert.alert('Something went wrong!', 'Please try later', [
           {text: 'OK', onPress: () => router.replace('/basket')},
         ]);
         router.replace('/basket')
       } else {
-        deleteAllItemsFromCart();
+        submitOrder();
         router.replace('/order-confirmation-modal')
       }
       setShowModal(false)

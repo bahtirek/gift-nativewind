@@ -10,7 +10,7 @@ type CartType = {
   addItem: (quantity: number, amount: string, giftCard: GiftCardType, email: string, phone: string, note: string, otherAmount: string, id: string) => void;
   addItemToEdit: (item: CartItemType) => void,
   deleteItemFromCart: (id: string) => void,
-  deleteAllItemsFromCart: () => void,
+  submitOrder: () => void,
 }
 export const CartContext = createContext<CartType>({
   items: [],
@@ -19,7 +19,7 @@ export const CartContext = createContext<CartType>({
   addItem: () => {},
   addItemToEdit: () => {},
   deleteItemFromCart: () => {},
-  deleteAllItemsFromCart: () => {},
+  submitOrder: () => {}
 });
 
 
@@ -101,7 +101,7 @@ const CartProvider = ({children}: PropsWithChildren) => {
     }
   }
 
-  const deleteAllItemsFromCart = async() => {
+  const deleteAllItemsFromCartAndStorage = async() => {
     try {
       await AsyncStorage.removeItem('cartItems');
       setItems([]);
@@ -110,8 +110,26 @@ const CartProvider = ({children}: PropsWithChildren) => {
     }
   }
 
+  const submitOrder = () => {
+    const orderedDate = new Date().toLocaleString();
+    const orders: CartItemType[] = items.map((order) => {
+      return {...order, orderedDate}
+    })
+    saveSubmitedOrdersToStorage(orders)
+  }
+
+  const saveSubmitedOrdersToStorage = async(orders: CartItemType[]) => {
+    try {
+      const jsonValue = JSON.stringify(orders);
+      await AsyncStorage.setItem('orders', jsonValue);
+      deleteAllItemsFromCartAndStorage()
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return(
-    <CartContext.Provider value={{items, addItem, totalItemsInCart, addItemToEdit, cartItemToEdit, deleteItemFromCart, deleteAllItemsFromCart}}>
+    <CartContext.Provider value={{items, addItem, totalItemsInCart, addItemToEdit, cartItemToEdit, deleteItemFromCart, submitOrder}}>
       {children}
     </CartContext.Provider>
   )
