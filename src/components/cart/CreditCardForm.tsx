@@ -17,7 +17,6 @@ const CreditCardForm = ({validate, paymanetUpdated}: any) => {
   const [isValidated, setIsValidated] = useState(false);
 
   useEffect(() => {
-    console.log('validate', validate);
     if(!isValidated) setIsValidated(validate);
     validateData();
     isFormCompleted();
@@ -43,8 +42,6 @@ const CreditCardForm = ({validate, paymanetUpdated}: any) => {
   
   const handleCardholderNameInput = (cardholderName: string) => {
     if(isValidated) {
-      console.log('isv', isValidated, cardholderName);
-      
       setCardholderNameError(isEmpty(cardholderName))
     }
     setCardholderName(cardholderName);
