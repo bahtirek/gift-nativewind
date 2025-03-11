@@ -7,7 +7,6 @@ import { useCart } from '@/providers/CartProvider';
 import ListEmptyComponent from '@/components/common/ListEmptyComponent';
 import { CartItemType } from '@/types';
 import icons from '@/constants/icons';
-import RecipientDetails from '@/components/cart/RecepientDetails';
 
 const OrderDetails = () => {
   const { itemParam } = useLocalSearchParams<{ itemParam: string }>();
@@ -39,12 +38,7 @@ const OrderDetails = () => {
       <View className='p-6'>
         {
           !!item.id && 
-          <View>
-            <CartItem cartItem={item} className="mb-6" />
-            <View className='mt-3'>
-              <RecipientDetails label="Ordered on" description={item.orderedDate} />
-            </View>
-          </View>
+          <CartItem cartItem={item} className="mb-6" />
         }
       </View>
     </SafeAreaView>

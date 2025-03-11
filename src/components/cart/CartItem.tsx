@@ -16,7 +16,7 @@ type GiftCardPropType = {
 }
 
 const GiftCard = ({cartItem}: GiftCardPropType, ) => {
-  const {amount, phone, email, giftCard, note} = cartItem;
+  const {amount, phone, email, giftCard, note, orderedDate} = cartItem;
   const {label, thumbnail} = giftCard!;
   const {addItemToEdit, deleteItemFromCart} = useCart();
 
@@ -38,7 +38,7 @@ const GiftCard = ({cartItem}: GiftCardPropType, ) => {
   }
 
   return (
-    <View className={`flex flex-col pb-4 mb-8 border-b border-secondary-200`}>
+    <View className={`flex flex-col`}>
       <View className=''>
         <View className='flex-1'>
           <View className='flex flex-row'>
@@ -72,15 +72,28 @@ const GiftCard = ({cartItem}: GiftCardPropType, ) => {
             </View>
           </View>
         </View>
-        <View className='flex-row justify-end mt-3'>
-          <View className='mr-2'>
-            <IconButton icon={icons.pencil} handlePress={editCartItem} />
+        {
+          !!orderedDate &&
+          <View className='mt-3'>
+            <RecipientDetails label="Ordered on" description={orderedDate} />
           </View>
-          <View className=''>
-            <IconButton icon={icons.bin} handlePress={deleteCartItem} />
+        }
+        {
+          !(!!orderedDate) &&
+          <View className='flex-row justify-end mt-3'>
+            <View className='mr-2'>
+              <IconButton icon={icons.pencil} handlePress={editCartItem} />
+            </View>
+            <View className=''>
+              <IconButton icon={icons.bin} handlePress={deleteCartItem} />
+            </View>
           </View>
-        </View>
+        }
       </View>
+      {
+        !(!!orderedDate) &&
+        <View className=' mt-4 mb-8 border-b border-secondary-200'></View>
+      }
     </View>
   )
 }
