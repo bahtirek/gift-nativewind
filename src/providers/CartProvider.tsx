@@ -11,6 +11,7 @@ type CartType = {
   addItemToEdit: (item: CartItemType) => void,
   deleteItemFromCart: (id: string) => void,
   submitOrder: () => void,
+  getOrders: () => any,
 }
 export const CartContext = createContext<CartType>({
   items: [],
@@ -19,7 +20,8 @@ export const CartContext = createContext<CartType>({
   addItem: () => {},
   addItemToEdit: () => {},
   deleteItemFromCart: () => {},
-  submitOrder: () => {}
+  submitOrder: () => {},
+  getOrders: () => {},
 });
 
 
@@ -128,8 +130,19 @@ const CartProvider = ({children}: PropsWithChildren) => {
     }
   }
 
+  const getOrders = async() => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('orders');
+      if(jsonValue != null) {
+        return JSON.parse(jsonValue) 
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return(
-    <CartContext.Provider value={{items, addItem, totalItemsInCart, addItemToEdit, cartItemToEdit, deleteItemFromCart, submitOrder}}>
+    <CartContext.Provider value={{items, addItem, totalItemsInCart, addItemToEdit, cartItemToEdit, deleteItemFromCart, submitOrder, getOrders}}>
       {children}
     </CartContext.Provider>
   )
