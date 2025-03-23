@@ -8,6 +8,7 @@ import CustomButton from '@/components/common/CustomButton';
 import ListEmptyComponent from '@/components/common/ListEmptyComponent';
 import { CartItemType } from '@/types';
 import icons from '@/constants/icons';
+import { setOrderDetails } from '@/signals/order-details.signal';
 
 const Orders = () => {
   const { getOrders } = useCart();
@@ -23,8 +24,8 @@ const Orders = () => {
   }
 
   const showOrderDetails = (item: CartItemType) => {
-    const param = JSON.stringify(item)
-    router.navigate({pathname: '/profile/order-details', params: {itemParam: param}})
+    setOrderDetails(item)
+    router.navigate('/profile/order-details')
   }
 
   return (
