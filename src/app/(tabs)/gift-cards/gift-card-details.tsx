@@ -9,7 +9,7 @@ const GiftCardDetails = () => {
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
 
   const handlePurchase = () => {
-    router.navigate('/purchase-modal')
+    router.navigate('/gift-cards/purchase-details')
   }
 
   return (

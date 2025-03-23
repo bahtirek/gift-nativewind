@@ -14,7 +14,7 @@ export default function Basket() {
 
   const checkout = () => {
     console.log('checkout');
-    router.navigate('/payment-modal')
+    router.navigate('/basket/payment-details')
   }
 
   const openSearchModal = () => {

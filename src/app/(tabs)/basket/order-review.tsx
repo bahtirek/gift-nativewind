@@ -4,9 +4,7 @@ import { paymentSignal } from '@/signals/payment.signal'
 import { useCart } from '@/providers/CartProvider'; 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '@/components/common/CustomButton';
-import CartItem from '@/components/cart/CartItem';
 import CartItemShort from '@/components/cart/CartItemShort';
-import { CartItemType } from '@/types';
 import { maskCurrency } from '@/utils/masks';
 import { router, Stack } from 'expo-router';
 

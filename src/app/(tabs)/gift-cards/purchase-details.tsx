@@ -1,16 +1,16 @@
-import { View, Text, Modal, Image, StyleSheet, Pressable, Platform, GestureResponderEvent, Alert, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, Platform, Alert, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import CustomButton from '../components/common/CustomButton';
-import RadioButton from '../components/common/RadioButton';
-import CustomInput from '../components/common/CustomInput';
+import CustomButton from '../../../components/common/CustomButton';
+import RadioButton from '../../../components/common/RadioButton';
+import CustomInput from '../../../components/common/CustomInput';
 import { giftCardSignal } from '@/signals/giftcards.signal';
-import { validateAmount, validateEmail, validateLength } from '../utils/input-validation';
+import { validateAmount, validateEmail, validateLength } from '../../../utils/input-validation';
 import { useCart } from '@/providers/CartProvider';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, Stack } from 'expo-router';
 
 
-const PurchaseModal = () => {
+const PurchaseDetails = () => {
   const { addItemToEdit, cartItemToEdit } = useCart();
 
   useEffect(() => {
@@ -227,4 +227,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default PurchaseModal;
+export default PurchaseDetails;
