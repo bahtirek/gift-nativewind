@@ -1,4 +1,4 @@
-import { View, Alert } from 'react-native'
+import { View, Alert, StyleSheet, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react';
 import { isEmpty, validateCreditCard, validateLength, validateExpDate } from '../../utils/input-validation';
 import CustomInput from '../common/CustomInput';
@@ -18,14 +18,19 @@ const CreditCardForm = ({validate, paymanetUpdated}: any) => {
 
   useEffect(() => {
     if(!isValidated) setIsValidated(validate);
-    validateData();
     isFormCompleted();
   }, [validate])
   
   const isFormCompleted = () => {
-    if (
-      !cardholderNameError && !creditCardError && !expDateError && !cvvError &&
-      !!cardholderName && !!creditCard && !!expDate && !!cvv
+    if (!cardholderName || !creditCard || !expDate || !cvv ) {
+      console.log('Missing data', "Please provide payment details");
+      
+      return Alert.alert('Missing data', "Please provide payment details")
+    } else if (
+      !isEmpty(cardholderName) && 
+      !validateCreditCard(creditCard) && 
+      !validateExpDate(expDate) && 
+      !validateLength(cvv, 3, 'Wrong cvv')
     ) {
       const payment: PaymentType = {
         cardholderName: cardholderName,
@@ -36,6 +41,7 @@ const CreditCardForm = ({validate, paymanetUpdated}: any) => {
       setPaymentSignal(payment);
       paymanetUpdated(true);
     } else {
+      validateData();
       paymanetUpdated(false);
     }
   }
@@ -67,16 +73,8 @@ const CreditCardForm = ({validate, paymanetUpdated}: any) => {
     }
     setCvv(cvv)
   }
-
-  const validateData = () => {
-    setIsValidated(true)
  
-    if (!cardholderName || !creditCard || !expDate || !cvv ) {
-      console.log('Missing data', "Please provide payment details");
-      
-      return Alert.alert('Missing data', "Please provide payment details")
-    }
-
+  const validateData = () => {
     if(cardholderName) {
       setCardholderNameError(isEmpty(cardholderName))
     }
@@ -90,9 +88,9 @@ const CreditCardForm = ({validate, paymanetUpdated}: any) => {
       setCvvError(validateLength(cvv, 3, 'Wrong cvv'))
     }    
   }
- 
+
   return (
-    <View>
+    <ScrollView className='px-1'>
       <View className='mb-6 mt-1'>
         <CustomInput 
           onInput={(cardholderName: string) => {handleCardholderNameInput(cardholderName)}} 
@@ -111,9 +109,8 @@ const CreditCardForm = ({validate, paymanetUpdated}: any) => {
           error={creditCardError}
         />
       </View>
-      <View className='flex-row justify-between'>
-        <View>
-          <View className='mb-6 mt-1'>
+      <View style={styles.flexRow}>
+          <View className='mb-6 mt-1' style={styles.expDate}>
             <CustomInput 
               onInput={(expDate: string) => {handleExpDateInput(expDate)}} 
               placeholder='Exp. date'
@@ -121,12 +118,9 @@ const CreditCardForm = ({validate, paymanetUpdated}: any) => {
               keyboardType='number-pad'
               maxLength={5}
               error={expDateError}
-              className={'w-[180px]'}
             />
           </View>
-        </View>
-        <View>
-          <View className='mb-6 mt-1'>
+          <View className='mb-6 mt-1' style={styles.cvv}>
             <CustomInput 
               onInput={(cvv: string) => {handleCvvInput(cvv)}} 
               placeholder='CVV'
@@ -134,13 +128,26 @@ const CreditCardForm = ({validate, paymanetUpdated}: any) => {
               keyboardType='number-pad'
               maxLength={3}
               mask='numeric'
-              className={'w-[120px]'}
             />
           </View>
-        </View>
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
+const styles = StyleSheet.create({
+  flexRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    flexShrink: 1,
+    height: '100%'
+  },
+  expDate: {
+    width: 150,
+  },
+  cvv: {
+    width: 130
+  }
+});
 export default CreditCardForm;
