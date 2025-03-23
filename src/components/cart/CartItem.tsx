@@ -40,7 +40,7 @@ const GiftCard = ({cartItem}: GiftCardPropType, ) => {
   return (
     <View className={`flex flex-col`}>
       <View className=''>
-        <View className='flex-1'>
+        <View className=''>
           <View className='flex flex-row'>
             <View className='w-16 h-16 rounded-[8px]' style={styles.shadow}>
               <Image 
