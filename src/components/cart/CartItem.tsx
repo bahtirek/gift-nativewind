@@ -23,7 +23,7 @@ const GiftCard = ({cartItem}: GiftCardPropType, ) => {
   const editCartItem = () => {
     addItemToEdit(cartItem);
     setGiftCard(giftCard!)
-    router.navigate('/purchase-modal')
+    router.navigate('/basket/purchase-details')
   }
 
   const deleteCartItem = () => {
