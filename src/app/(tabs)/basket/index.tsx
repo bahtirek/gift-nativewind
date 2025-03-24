@@ -7,7 +7,7 @@ import { useCart } from '@/providers/CartProvider';
 import CustomButton from '@/components/common/CustomButton';
 import ListEmptyComponent from '@/components/common/ListEmptyComponent';
 import icons from '@/constants/icons';
-import { router } from 'expo-router';
+import { router, Stack } from 'expo-router';
 
 export default function Basket() {
   const { items } = useCart();
@@ -23,6 +23,7 @@ export default function Basket() {
 
   return (
     <SafeAreaView edges={["left", "right"]} className='h-full bg-white'>
+      <Stack.Screen options={{title: 'Basket', headerShown: true, headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />
       <FlatList 
         className='px-6 pt-6'
         data={items}
