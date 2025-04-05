@@ -1,10 +1,16 @@
 import { View, TextInput, StyleSheet, Platform, Text } from 'react-native'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { maskPhone, maskCurrency, maskVisaCard, maskExpDate, maskName } from '../../utils/masks'
-import { useFocusEffect } from 'expo-router';
 
-const CustomInput = ( { onInput, mask, error, presetValue, className, reset, ...rest }: any) => {
+type validationProp = {
+  isValid: boolean,
+  error: string
+}
+
+const CustomInput = ( { onInput, mask, presetValue, className, reset, rules, ...rest }: any) => {
   const [value, setValue] = useState('');
+  const [touched, setTouched] = useState(false);
+  const [validation, setValidation] = useState<validationProp>({isValid: true, error: ''})
 
   useEffect(() => {
     onChange(value)
@@ -41,22 +47,51 @@ const CustomInput = ( { onInput, mask, error, presetValue, className, reset, ...
       }
     }
     setValue(newValue);
-    onInput(value);    
+    onInput(value);
+    if(touched) {
+      validateRules(value) 
+    }
+  }
+
+  const validateRules = (value: string) => {
+    if(!rules) return;
+
+    rules.some((rule: Function) => {
+      const result = rule(value);
+      if(result === true) {
+        setValidation({
+          isValid: true,
+          error: ''
+        })
+      } else {
+        setValidation({
+          isValid: false,
+          error: result
+        })
+        return true
+      }
+    });
+  }
+
+  const onBlur = () => {
+    setTouched(true);
+    validateRules(value);
   }
 
   return (
     <View className='w-full'>
       <View className='flex flex-row items-center w-full relative bg-white rounded-2xl' style={styles.shadow}>
         <TextInput
-          className={`text-base mt-0.5 text-gray flex-1 font-pregular bg-white h-16 px-4 rounded-2xl focus:border-primary ${error ? 'border-red-600' : ''} ${className}`}
+          className={`text-base mt-0.5 text-gray flex-1 font-pregular bg-white h-16 px-4 rounded-2xl focus:border-primary ${!validation.isValid ? 'border-red-600' : ''} ${className}`}
           value={value}
           placeholderTextColor="#FFA07A"
           onChangeText={onChange}
+          onBlur={onBlur}
           {...rest}
         />
       </View>
       {
-        (!!error) && <Text className='text-red-500 mt-1 ml-4'>{error}</Text>
+        (!validation.isValid) && <Text className='text-red-500 mt-1 ml-4'>{validation.error}</Text>
       }
     </View>
   )

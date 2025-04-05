@@ -67,7 +67,7 @@ const PurchaseDetails = ({ handleButtonPress }: any) => {
 
   const handlePhoneInput = (phone: string) => {
     if(isValidated) {
-      setPhoneError(validateLength(phone, 12, 'Wrong phone number'))
+      //setPhoneError(validateLength(phone, 12, 'Wrong phone number'))
     }
     setPhone(phone)
   }
@@ -117,12 +117,17 @@ const PurchaseDetails = ({ handleButtonPress }: any) => {
       return Alert.alert('Missing data', "Please provide recepient details")
     } 
     if(phone) {
-      setPhoneError(validateLength(phone, 12, 'Wrong phone number'))
+      //setPhoneError(validateLength(phone, 12, 'Wrong phone number'))
     } 
     if(email){
       setEmailError(validateEmail(email));
     }    
   }
+
+  const phoneRules = [
+    (val: string) => !!val || 'Field is required',
+    (val: string) => validateLength(val, 12) || 'Wrong phone number'
+  ]
 
   return (
     <SafeAreaView edges={["left", "right"]} className='h-full bg-white'>
@@ -173,8 +178,8 @@ const PurchaseDetails = ({ handleButtonPress }: any) => {
                 mask='phone' 
                 maxLength={12}
                 keyboardType='number-pad'
-                error={phoneError}
                 presetValue={cartItemToEdit.phone}
+                rules={phoneRules}
               />
             </View>
             <Text className='text-xl text-secondary-700 my-4'>Or</Text>

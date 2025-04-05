@@ -48,12 +48,8 @@ function validateCreditCard(value: string) {
   */
 }
 
-function validateLength(value: string, minLength: number, errorText: string) {
-  if (value.length == 0 || value.length >= minLength) {
-    return ''
-  } else {
-    return errorText 
-  }
+function validateLength(value: string, minLength: number, errorText?: string) {
+  return (value.length == 0 || value.length >= minLength)
 }
 
 function validateExpDate(value: string) {
