@@ -77,7 +77,7 @@ const SubmitOrder = () => {
           <Text className='text-xs text-secondary-900 pr-2'>Credit Card #</Text>
           <Text className='text-md text-secondary-600'>{maskedCreditCard}</Text>
         </View>
-        <View className='mt-2 flex-row justify-between items-baseline'>
+        <View className='mt-2 flex-row justify-between items-baseline mb-8'>
           <Text className='text-xs text-secondary-900 pr-2'>Exp. Date</Text>
           <Text className='text-md text-secondary-600'>{paymentSignal.value.expDate}</Text>
         </View>
