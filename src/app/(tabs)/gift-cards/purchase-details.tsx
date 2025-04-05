@@ -1,10 +1,14 @@
 import React from 'react'
-import PurachaseDetails from '../../../components/common/PurchaseDetails';
+import PurchaseDetails from '../../../components/common/PurchaseDetails';
+import { router } from 'expo-router';
 
 
 const PurchaseDetailsPage = () => {
+  const handleButtonPress = () => {
+    router.navigate('/gift-cards');
+  }
   return (
-    <PurachaseDetails />
+    <PurchaseDetails handleButtonPress={handleButtonPress} />
   )
 }
 

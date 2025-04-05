@@ -10,7 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Href, Redirect, router, Stack } from 'expo-router';
 
 
-const PurchaseDetails = () => {
+const PurchaseDetails = ({ handleButtonPress }: any) => {
   const { addItemToEdit, cartItemToEdit } = useCart();
 
   useEffect(() => {
@@ -93,7 +93,9 @@ const PurchaseDetails = () => {
       addItem(quantity, amount, giftCardSignal.value, email, phone, note, otherAmount, id);
       addItemToEdit({})
       setGiftCard({})
-      router.back();
+      //router.back();
+      console.log(handleButtonPress)
+      handleButtonPress();
     }
   }
 
