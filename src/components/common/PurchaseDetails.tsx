@@ -166,16 +166,6 @@ const PurchaseDetails = () => {
             <Text className='text-xl text-secondary-700 mb-2'>Recepient details:</Text>
             <View className='mt-2'>
               <CustomInput 
-                onInput={(email: string) => {handleEmailInput(email)}} 
-                placeholder='Email'
-                keyboardType='email-address'
-                error={emailError}
-                presetValue={cartItemToEdit.email}
-              />
-            </View>
-            <Text className='text-xl text-secondary-700 my-4'>Or</Text>
-            <View className=''>
-              <CustomInput 
                 onInput={(phone: string) => {handlePhoneInput(phone)}} 
                 placeholder='Phone'
                 mask='phone' 
@@ -183,6 +173,16 @@ const PurchaseDetails = () => {
                 keyboardType='number-pad'
                 error={phoneError}
                 presetValue={cartItemToEdit.phone}
+              />
+            </View>
+            <Text className='text-xl text-secondary-700 my-4'>Or</Text>
+            <View className=''>
+              <CustomInput 
+                onInput={(email: string) => {handleEmailInput(email)}} 
+                placeholder='Email'
+                keyboardType='email-address'
+                error={emailError}
+                presetValue={cartItemToEdit.email}
               />
             </View>
             <Text className='text-xl text-secondary-700 my-4'>Gift note:</Text>
