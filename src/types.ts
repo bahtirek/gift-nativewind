@@ -65,7 +65,8 @@ export type CartItemType = {
   phone?: string,
   note?: string,
   giftCard?: GiftCardType
-  otherAmount?: string
+  otherAmount?: string,
+  orderedDate?: string
 }
 
 export type PaymentType = {
@@ -73,4 +74,9 @@ export type PaymentType = {
   creditCard?: string,
   expDate?: string,
   cvv?: string,
+}
+
+export type AccountType = {
+  phone?: string,
+  name?: string,
 }

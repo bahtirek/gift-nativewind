@@ -4,12 +4,15 @@ import { giftCardSignal } from '@/signals/giftcards.signal';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Redirect, Stack, Link, Href, router } from 'expo-router';
 import CustomButton from '@/components/common/CustomButton';
+import { useCart } from '@/providers/CartProvider';
 
 const GiftCardDetails = () => {
+  const {addItemToEdit} = useCart();
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
 
   const handlePurchase = () => {
-    router.navigate('/purchase-modal')
+    addItemToEdit({});
+    router.navigate('/gift-cards/purchase-details')
   }
 
   return (

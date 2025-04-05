@@ -1,7 +1,7 @@
 import { View, StyleSheet, Platform, ScrollView } from 'react-native'
 import React, { useState } from 'react'
-import CustomButton from '../components/common/CustomButton';
-import RadioButton from '../components/common/RadioButton';
+import CustomButton from '@components/common/CustomButton';
+import RadioButton from '@components/common/RadioButton';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, Stack } from 'expo-router';
 import CreditCardForm from '@/components/cart/CreditCardForm';
@@ -18,7 +18,7 @@ const CheckoutModal = () => {
 
   const onPaymentUpdated = (value: boolean) => {
     console.log('payment updated',value);
-    if(value) router.navigate('/submit-order-modal')
+    if(value) router.navigate('/basket/order-review')
   }
 
   const handleSelect = (value: string) => {

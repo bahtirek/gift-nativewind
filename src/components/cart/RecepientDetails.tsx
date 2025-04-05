@@ -6,7 +6,7 @@ import { StyleSheet } from 'nativewind';
 const RecipientDetails = ({label, description}: any) => {
   return (
     <View className='flex flex-row mt-2 justify-between'>
-      <View className='w-16'>
+      <View className='w-18'>
         <Text className='text-md text-secondary-600 font-pregular'>{label}:</Text>
       </View>
       <View className='w-[240px]'>

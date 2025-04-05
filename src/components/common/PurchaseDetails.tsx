@@ -1,16 +1,16 @@
-import { View, Text, Modal, Image, StyleSheet, Pressable, Platform, GestureResponderEvent, Alert, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, Platform, Alert, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import CustomButton from '../components/common/CustomButton';
-import RadioButton from '../components/common/RadioButton';
-import CustomInput from '../components/common/CustomInput';
-import { giftCardSignal } from '@/signals/giftcards.signal';
-import { validateAmount, validateEmail, validateLength } from '../utils/input-validation';
+import CustomButton from './CustomButton';
+import RadioButton from './RadioButton';
+import CustomInput from './CustomInput';
+import { giftCardSignal, setGiftCard } from '@/signals/giftcards.signal';
+import { validateAmount, validateEmail, validateLength } from '../../utils/input-validation';
 import { useCart } from '@/providers/CartProvider';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { router, Stack } from 'expo-router';
+import { Href, Redirect, router, Stack } from 'expo-router';
 
 
-const PurchaseModal = () => {
+const PurchaseDetails = () => {
   const { addItemToEdit, cartItemToEdit } = useCart();
 
   useEffect(() => {
@@ -92,6 +92,7 @@ const PurchaseModal = () => {
       const id = cartItemToEdit.id ? cartItemToEdit.id : '';
       addItem(quantity, amount, giftCardSignal.value, email, phone, note, otherAmount, id);
       addItemToEdit({})
+      setGiftCard({})
       router.back();
     }
   }
@@ -123,31 +124,32 @@ const PurchaseModal = () => {
 
   return (
     <SafeAreaView edges={["left", "right"]} className='h-full bg-white'>
-      <Stack.Screen options={{title: `${giftCardSignal.value.label}`, headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />
+      <Stack.Screen options={{title: `${giftCardSignal.value?.label}`, headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />
+      {giftCardSignal.value.id  &&
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <View className='flex w-full h-full bg-white pt-6' style={styles.container}>
           <View className="flex bg-white px-8 pb-10 flex-1">
             <Text className='text-xl text-secondary-700 mb-2'>Choose amount</Text>
             <View>
-                {
-                  giftCardSignal.value.priceSet!.map((price, index) => {
-                    return <RadioButton 
-                      label={price.amount}
-                      value={price.amount}
-                      status={selectedAmount === price.amount ? true : false}
-                      className="mt-4"
-                      onSelect={() => handleSelect(price.amount)}
-                      key={price.id}
-                    />
-                  })
-                }
-                <RadioButton 
-                  label="other"
-                  value='other'
-                  status={selectedAmount === 'other' ? true : false}
-                  className="mt-4"
-                  onSelect={() => handleSelect('other')}
-                />
+              {
+                giftCardSignal.value.priceSet!.map((price, index) => {
+                  return <RadioButton 
+                    label={price.amount}
+                    value={price.amount}
+                    status={selectedAmount === price.amount ? true : false}
+                    className="mt-4"
+                    onSelect={() => handleSelect(price.amount)}
+                    key={price.id}
+                  />
+                })
+              }
+              <RadioButton 
+                label="other"
+                value='other'
+                status={selectedAmount === 'other' ? true : false}
+                className="mt-4"
+                onSelect={() => handleSelect('other')}
+              />
             </View>
             <View className='mt-4 mb-6'>
               { (selectedAmount === 'other') &&
@@ -164,16 +166,6 @@ const PurchaseModal = () => {
             <Text className='text-xl text-secondary-700 mb-2'>Recepient details:</Text>
             <View className='mt-2'>
               <CustomInput 
-                onInput={(email: string) => {handleEmailInput(email)}} 
-                placeholder='Email'
-                keyboardType='email-address'
-                error={emailError}
-                presetValue={cartItemToEdit.email}
-              />
-            </View>
-            <Text className='text-xl text-secondary-700 my-4'>Or</Text>
-            <View className=''>
-              <CustomInput 
                 onInput={(phone: string) => {handlePhoneInput(phone)}} 
                 placeholder='Phone'
                 mask='phone' 
@@ -181,6 +173,16 @@ const PurchaseModal = () => {
                 keyboardType='number-pad'
                 error={phoneError}
                 presetValue={cartItemToEdit.phone}
+              />
+            </View>
+            <Text className='text-xl text-secondary-700 my-4'>Or</Text>
+            <View className=''>
+              <CustomInput 
+                onInput={(email: string) => {handleEmailInput(email)}} 
+                placeholder='Email'
+                keyboardType='email-address'
+                error={emailError}
+                presetValue={cartItemToEdit.email}
               />
             </View>
             <Text className='text-xl text-secondary-700 my-4'>Gift note:</Text>
@@ -206,6 +208,8 @@ const PurchaseModal = () => {
           </View>
         </View>
       </ScrollView>
+      }
+      {!giftCardSignal.value.id && <Redirect href={'/home'} />}
     </SafeAreaView>
   )
 }
@@ -227,4 +231,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default PurchaseModal;
+export default PurchaseDetails;

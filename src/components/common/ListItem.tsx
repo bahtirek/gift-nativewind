@@ -11,9 +11,9 @@ const ListItem = ({
     <TouchableOpacity
       onPress={handlePress as (e?: GestureResponderEvent) => void}
       activeOpacity={0.7}
-      className={`px-6 py-4 border border-t-0 border-x-0 border-gray-400 ${containerStyles}`}
+      className={`px-6 py-4  ${containerStyles}`}
     >
-      <Text className='text-lg'>{label}</Text>
+      <Text className='text-lg text-primary-700'>{label}</Text>
     </TouchableOpacity>
   )
 }

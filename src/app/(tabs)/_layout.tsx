@@ -102,6 +102,7 @@ export default function TabLayout() {
         options={{
           title: 'Basket',
           headerTintColor: '#FF4416',
+          headerShown: false,
           tabBarIcon: ({color, focused}) => (
             <CartIcon 
               icon={icons.basket}

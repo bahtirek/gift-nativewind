@@ -15,7 +15,7 @@ const ListEmptyComponent = ({title, subtitle, icon, actionIcon, handleAction}: E
     <View className='justify-center items-center mt-20'>
       <Image
         source={icon}
-        className='w-[270px] h-[215px]'
+        className='w-[100px] h-[80px]'
         resizeMode='contain'
       />
       <Text className='text-xl font-psemibold text-gray-700 mt-4'>{title}</Text>
