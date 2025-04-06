@@ -47,7 +47,7 @@ const CustomInput = ( { onInput, mask, presetValue, className, reset, rules, ...
       }
     }
     setValue(newValue);
-    onInput(value);
+    onInput({value: value, isValid: validation.isValid});
     if(touched) {
       validateRules(value) 
     }

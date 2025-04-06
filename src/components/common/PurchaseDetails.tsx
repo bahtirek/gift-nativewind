@@ -7,7 +7,8 @@ import { giftCardSignal, setGiftCard } from '@/signals/giftcards.signal';
 import { validateAmount, validateEmail, validateLength } from '../../utils/input-validation';
 import { useCart } from '@/providers/CartProvider';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Href, Redirect, router, Stack } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
+import { InputValueType } from '@/types';
 
 
 const PurchaseDetails = ({ handleButtonPress }: any) => {
@@ -16,32 +17,24 @@ const PurchaseDetails = ({ handleButtonPress }: any) => {
   useEffect(() => {
     if(cartItemToEdit.id) {
       if(cartItemToEdit.otherAmount) {
-        setOtherAmount(cartItemToEdit.otherAmount);
+        setOtherAmount({value: cartItemToEdit.otherAmount});
         setSelectedAmount('other');
       } else {
         setSelectedAmount(cartItemToEdit.amount!);
       }
-      if(cartItemToEdit.email) setEmail(cartItemToEdit.email);
-      if(cartItemToEdit.phone) setPhone(cartItemToEdit.phone);
-      if(cartItemToEdit.note) setNote(cartItemToEdit.note);
+      if(cartItemToEdit.email) setEmail({value: cartItemToEdit.email});
+      if(cartItemToEdit.phone) setPhone({value: cartItemToEdit.phone});
+      if(cartItemToEdit.note) setNote({value: cartItemToEdit.note});
     } else {
-      setSelectedAmount('');
-      setOtherAmount('');
-      setEmail('');
-      setPhone('');
-      setNote('');
+      resetForm()
     }
   }, [])
   const [selectedAmount, setSelectedAmount] = useState('');
-  const [otherAmount, setOtherAmount] = useState('');
+  const [otherAmount, setOtherAmount] = useState<InputValueType>({value: '', isValid: true});
   const [quantity, setQuantity] = useState(1);
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [emailError, setEmailError] = useState<null | string>(null);
-  const [phoneError, setPhoneError] = useState('');
-  const [amountError, setAmountError] = useState('');
-  const [isValidated, setIsValidated] = useState(false);
-  const [note, setNote] = useState('');
+  const [email, setEmail] = useState<InputValueType>({value: '', isValid: true});
+  const [phone, setPhone] = useState<InputValueType>({value: '', isValid: true});
+  const [note, setNote] = useState<InputValueType>({value: '', isValid: true});
   const { addItem } = useCart();
 
   let minAmount = '';
@@ -51,82 +44,80 @@ const PurchaseDetails = ({ handleButtonPress }: any) => {
 
   const handleSelect = (amount: string) => {
     setSelectedAmount(amount);
-    if(amount != 'other') setOtherAmount('');
+    if(amount != 'other') setOtherAmount({value: ''});
   }
 
-  const handleEmailInput = (email: string) => {
-    if(isValidated) {
-      setEmailError(validateEmail(email))
-    }
+  const handleEmailInput = (email: InputValueType) => {
     setEmail(email)
   }
 
-  const handleNoteInput = (note: string) => {
+  const handleNoteInput = (note: InputValueType) => {
     setNote(note)
   }
 
-  const handlePhoneInput = (phone: string) => {
-    if(isValidated) {
-      //setPhoneError(validateLength(phone, 12, 'Wrong phone number'))
-    }
+  const handlePhoneInput = (phone: InputValueType) => {
     setPhone(phone)
   }
 
-  const handleAmountInput = (amount: string) => {
-    if(isValidated) {
-      setAmountError(validateAmount(amount, minAmount));
-    }
+  const handleAmountInput = (amount: InputValueType) => {
     setOtherAmount(amount)
   }
 
   const addToCart = () => {
-    validateData();
-    const amount = otherAmount ? otherAmount : selectedAmount;
+    isFormCompleted();
+    const amount = otherAmount.value ? otherAmount.value : selectedAmount;
     if(
-      (amount && amount != "other") && 
-      (email || phone) && 
-      !validateEmail(email) && 
-      !validateLength(phone, 12, 'Wrong phone number') && 
-      !validateAmount(otherAmount, minAmount)
+      ((amount && amount != "other") || otherAmount.isValid) &&
+      (email.isValid || phone.isValid)
     ) {
       const id = cartItemToEdit.id ? cartItemToEdit.id : '';
-      addItem(quantity, amount, giftCardSignal.value, email, phone, note, otherAmount, id);
-      addItemToEdit({})
-      setGiftCard({})
-      //router.back();
-      console.log(handleButtonPress)
+      console.log(note);
+      
+      addItem(quantity, amount, giftCardSignal.value, email.value, phone.value, note.value, otherAmount.value, id);
+      addItemToEdit({});
+      setGiftCard({});
+      resetForm();
       handleButtonPress();
     }
   }
 
-  const validateData = () => {
-    setIsValidated(true)
+  const resetForm =() => {
+    setSelectedAmount('');
+    setOtherAmount({value: ''});
+    setEmail({value: ''});
+    setPhone({value: ''});
+    setNote({value: ''});
+  }
+
+  const isFormCompleted = () => {
     if(!selectedAmount) {
+      console.log('Missing data', "Please select amount")
       return Alert.alert('Missing data', "Please select amount")
     }
 
     if (selectedAmount == 'other') {
-      if(!otherAmount) {
+      if(!otherAmount.value) {
+        console.log('Missing data', "Please select amount")
         return Alert.alert('Missing data', "Please select amount")
-      } else {
-        setAmountError(validateAmount(otherAmount, minAmount));
       }
     }
 
-    if (!email && !phone) {
+    if (!email.value && !phone.value) {
+      console.log('Missing data', "Please provide recepient details")
       return Alert.alert('Missing data', "Please provide recepient details")
-    } 
-    if(phone) {
-      //setPhoneError(validateLength(phone, 12, 'Wrong phone number'))
-    } 
-    if(email){
-      setEmailError(validateEmail(email));
-    }    
+    }   
   }
 
   const phoneRules = [
-    (val: string) => !!val || 'Field is required',
     (val: string) => validateLength(val, 12) || 'Wrong phone number'
+  ]
+
+  const emailRules = [
+    (val: string) => validateEmail(val) || 'Wrong email format'
+  ]
+
+  const amountRules = [
+    (val: string) => validateAmount(val, minAmount) || `Amount can't be less than ${minAmount}`
   ]
 
   return (
@@ -161,19 +152,19 @@ const PurchaseDetails = ({ handleButtonPress }: any) => {
             <View className='mt-4 mb-6'>
               { (selectedAmount === 'other') &&
                 <CustomInput 
-                  onInput={(amount: string) => {handleAmountInput(amount)}} 
+                  onInput={(amount: InputValueType) => {handleAmountInput(amount)}} 
                   keyboardType="number-pad" 
                   placeholder='Other amount' 
                   mask='currency'
-                  error={amountError}
                   presetValue={cartItemToEdit.otherAmount}
+                  rules={amountRules}
                 />
               }
             </View>
             <Text className='text-xl text-secondary-700 mb-2'>Recepient details:</Text>
             <View className='mt-2'>
               <CustomInput 
-                onInput={(phone: string) => {handlePhoneInput(phone)}} 
+                onInput={(phone: InputValueType) => {handlePhoneInput(phone)}} 
                 placeholder='Phone'
                 mask='phone' 
                 maxLength={12}
@@ -185,19 +176,18 @@ const PurchaseDetails = ({ handleButtonPress }: any) => {
             <Text className='text-xl text-secondary-700 my-4'>Or</Text>
             <View className=''>
               <CustomInput 
-                onInput={(email: string) => {handleEmailInput(email)}} 
+                onInput={(email: InputValueType) => {handleEmailInput(email)}} 
                 placeholder='Email'
                 keyboardType='email-address'
-                error={emailError}
                 presetValue={cartItemToEdit.email}
+                rules={emailRules}
               />
             </View>
             <Text className='text-xl text-secondary-700 my-4'>Gift note:</Text>
             <View>
               <CustomInput 
-                onInput={(note: string) => {handleNoteInput(note)}} 
+                onInput={(note: InputValueType) => {handleNoteInput(note)}} 
                 placeholder='Best wishes'
-                error={phoneError}
                 multiline={true}
                 numberOfLines={10}
                 presetValue={cartItemToEdit.note}

@@ -6,6 +6,7 @@ import { validateLength, isEmpty } from '../../utils/input-validation';
 import { router, Stack } from 'expo-router';
 import LoadingModal from '../common/LoadingModal';
 import { useAccount } from '@/providers/AccountProvider';
+import { InputValueType } from '@/types';
 
 type AccountPropType = {
   edit?: string
@@ -13,18 +14,13 @@ type AccountPropType = {
 
 const AccountForm = ({edit}: AccountPropType) => {
   const { account, setTempAccount, saveAccount } = useAccount();
-  const [phone, setPhone] = useState('');
+  const [phone, setPhone] = useState<InputValueType>({value: '', isValid: true});
   const [name, setName] = useState('')
-  const [phoneError, setPhoneError] = useState('');
   const [nameError, setNameError] = useState('')
   const [isValidated, setIsValidated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const nameToEdit = ''
 
-  const handlePhoneInput = (phone: string) => {
-    if(isValidated) {
-      setPhoneError(validateLength(phone, 12, 'Wrong phone number'))
-    }
+  const handlePhoneInput = (phone: InputValueType) => {
     setPhone(phone)
   }
 
@@ -44,11 +40,11 @@ const AccountForm = ({edit}: AccountPropType) => {
         saveAccount(account.phone!, name)
         router.replace('/profile/account');
       }, 1000);
-    } else if( !phoneError && !nameError && !!phone && !!name ) {
+    } else if( phone.isValid && !nameError && !!phone.value && !!name ) {
       setIsLoading(true)
       setTimeout(() => {
         setIsLoading(false);
-        setTempAccount(phone, name)
+        setTempAccount(phone.value, name)
         router.navigate('/verify-code-modal')
       }, 1000);
     }
@@ -61,13 +57,12 @@ const AccountForm = ({edit}: AccountPropType) => {
       return Alert.alert('Missing data', "Please provide recepient details")
     }
 
-    if(phone) {
-      setPhoneError(validateLength(phone, 12, 'Wrong phone number'))
-    } else {
-      setPhoneError(isEmpty(phone))
-    }
     setNameError(isEmpty(name))
   }
+
+  const phoneRules = [
+    (val: string) => validateLength(val, 12) || 'Wrong phone number'
+  ]
 
   return (
     <View className='h-full justify-between'>
@@ -92,12 +87,12 @@ const AccountForm = ({edit}: AccountPropType) => {
           !(!!edit) &&
           <View className='mb-6 mt-1'>
             <CustomInput 
-              onInput={(phone: string) => {handlePhoneInput(phone)}} 
+              onInput={(phone: InputValueType) => {handlePhoneInput(phone)}} 
               placeholder='Phone'
               mask='phone' 
               maxLength={12}
               keyboardType='number-pad'
-              error={phoneError}
+              rules={phoneRules}
             />
           </View>
         }

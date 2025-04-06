@@ -10,20 +10,12 @@ function validateAmount (value: string, minValue: string) {
   const amount = parseInt(value.replace(/\s/g, ''));
   const minAmount = parseInt(minValue.replace(/\s/g, ''));
   
-  if (!value || amount >= minAmount) {
-    return ''
-  } else {
-    return `Amount can't be less than ${minValue}` 
-  }
+  return !value || amount >= minAmount
 }
 
 function validateEmail(value: string) {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if (!value || emailRegex.test(value)) {
-    return ''
-  } else {
-    return `Wrong email format` 
-  }
+  return !value || emailRegex.test(value)
 }
 
 function validateCreditCard(value: string) {
@@ -48,7 +40,7 @@ function validateCreditCard(value: string) {
   */
 }
 
-function validateLength(value: string, minLength: number, errorText?: string) {
+function validateLength(value: string, minLength: number, errorText? : string) {
   return (value.length == 0 || value.length >= minLength)
 }
 
