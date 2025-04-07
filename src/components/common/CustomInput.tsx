@@ -47,42 +47,36 @@ const CustomInput = ( { onInput, mask, presetValue, className, reset, rules, ...
       }
     }
     setValue(newValue);
-    onInput({value: value, isValid: validation.isValid});
-    if(touched) {
-      validateRules(value) 
-    }
+    const validationResult: validationProp = validateRules(value);
+    setValidation(validationResult);
+    onInput({value: value, isValid: validationResult.isValid});
   }
 
-  const validateRules = (value: string) => {
-    if(!rules) return;
+  const validateRules = (value: string):validationProp => {
+    let validationResult = { isValid: true, error: '' }
+    if(!rules) return validationResult;
 
-    rules.some((rule: Function) => {
+    rules.find((rule: Function) => {
       const result = rule(value);
-      if(result === true) {
-        setValidation({
-          isValid: true,
-          error: ''
-        })
-      } else {
-        setValidation({
+      if(result !== true) {
+        validationResult = {
           isValid: false,
           error: result
-        })
-        return true
+        }
       }
     });
+    return validationResult
   }
 
   const onBlur = () => {
     setTouched(true);
-    validateRules(value);
   }
 
   return (
     <View className='w-full'>
       <View className='flex flex-row items-center w-full relative bg-white rounded-2xl' style={styles.shadow}>
         <TextInput
-          className={`text-base mt-0.5 text-gray flex-1 font-pregular bg-white h-16 px-4 rounded-2xl focus:border-primary ${!validation.isValid ? 'border-red-600' : ''} ${className}`}
+          className={`text-base mt-0.5 text-gray flex-1 font-pregular bg-white h-16 px-4 rounded-2xl focus:border-primary ${!validation.isValid && touched ? 'border-red-600' : ''} ${className}`}
           value={value}
           placeholderTextColor="#FFA07A"
           onChangeText={onChange}
@@ -91,7 +85,7 @@ const CustomInput = ( { onInput, mask, presetValue, className, reset, rules, ...
         />
       </View>
       {
-        (!validation.isValid) && <Text className='text-red-500 mt-1 ml-4'>{validation.error}</Text>
+        (!validation.isValid && touched) && <Text className='text-red-500 mt-1 ml-4'>{validation.error}</Text>
       }
     </View>
   )

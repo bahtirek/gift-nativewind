@@ -32,8 +32,8 @@ const PurchaseDetails = ({ handleButtonPress }: any) => {
   const [selectedAmount, setSelectedAmount] = useState('');
   const [otherAmount, setOtherAmount] = useState<InputValueType>({value: '', isValid: true});
   const [quantity, setQuantity] = useState(1);
-  const [email, setEmail] = useState<InputValueType>({value: '', isValid: true});
-  const [phone, setPhone] = useState<InputValueType>({value: '', isValid: true});
+  const [email, setEmail] = useState<InputValueType>({value: '', isValid: false});
+  const [phone, setPhone] = useState<InputValueType>({value: '', isValid: false});
   const [note, setNote] = useState<InputValueType>({value: '', isValid: true});
   const { addItem } = useCart();
 
@@ -65,13 +65,13 @@ const PurchaseDetails = ({ handleButtonPress }: any) => {
 
   const addToCart = () => {
     isFormCompleted();
+    
     const amount = otherAmount.value ? otherAmount.value : selectedAmount;
     if(
       ((amount && amount != "other") || otherAmount.isValid) &&
       (email.isValid || phone.isValid)
     ) {
       const id = cartItemToEdit.id ? cartItemToEdit.id : '';
-      console.log(note);
       
       addItem(quantity, amount, giftCardSignal.value, email.value, phone.value, note.value, otherAmount.value, id);
       addItemToEdit({});
