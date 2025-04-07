@@ -11,7 +11,7 @@ import { Redirect, Stack } from 'expo-router';
 import { InputValueType } from '@/types';
 
 
-const PurchaseDetails = ({ handleButtonPress }: any) => {
+const PurchaseDetails = ({ handleButtonPress, buttonLabel }: any) => {
   const { addItemToEdit, cartItemToEdit } = useCart();
 
   useEffect(() => {
@@ -200,7 +200,7 @@ const PurchaseDetails = ({ handleButtonPress }: any) => {
               />
             </View>
             <View className='mt-auto pt-8'>
-              <CustomButton label={'Add to cart'} handlePress={addToCart}/>
+              <CustomButton label={buttonLabel} handlePress={addToCart}/>
             </View>
           </View>
         </View>
