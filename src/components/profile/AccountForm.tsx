@@ -27,7 +27,7 @@ const AccountForm = ({edit}: AccountPropType) => {
   }
 
   const onSubmit = () => {
-    validateData();
+    isFormCompleted();
     if(edit && name.isValid) {
       setIsLoading(true)
       setTimeout(() => {
@@ -45,7 +45,7 @@ const AccountForm = ({edit}: AccountPropType) => {
     }
   }
 
-  const validateData = () => {
+  const isFormCompleted = () => {
     if (!edit && (!name.value || !phone.value)) {
       return Alert.alert('Missing data', "Please provide recepient details")
     }
@@ -56,7 +56,7 @@ const AccountForm = ({edit}: AccountPropType) => {
   ]
 
   const phoneRules = [
-    (val: string) => !!val || 'Name is required',
+    (val: string) => !!val || 'Phone is required',
     (val: string) => validateLength(val, 12) || 'Wrong phone number'
   ]
 

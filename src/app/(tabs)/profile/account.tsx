@@ -19,7 +19,7 @@ const Account = () => {
     useCallback(() => {
       toggleAccountForm();
       setEditName('')
-    }, [])
+    }, [account])
   );
 
   const toggleAccountForm = () => {
