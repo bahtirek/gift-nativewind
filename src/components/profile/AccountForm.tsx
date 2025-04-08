@@ -14,53 +14,49 @@ type AccountPropType = {
 
 const AccountForm = ({edit}: AccountPropType) => {
   const { account, setTempAccount, saveAccount } = useAccount();
-  const [phone, setPhone] = useState<InputValueType>({value: '', isValid: true});
-  const [name, setName] = useState('')
-  const [nameError, setNameError] = useState('')
-  const [isValidated, setIsValidated] = useState(false);
+  const [phone, setPhone] = useState<InputValueType>({value: '', isValid: false});
+  const [name, setName] = useState<InputValueType>({value: '', isValid: false});
   const [isLoading, setIsLoading] = useState(false);
 
   const handlePhoneInput = (phone: InputValueType) => {
     setPhone(phone)
   }
 
-  const handleNameInput = (name: string) => {
-    if(isValidated) {
-      setNameError(isEmpty(name))
-    }
+  const handleNameInput = (name: InputValueType) => {
     setName(name)
   }
 
   const onSubmit = () => {
     validateData();
-    if(edit && !nameError && !!name) {
+    if(edit && name.isValid) {
       setIsLoading(true)
       setTimeout(() => {
         setIsLoading(false);
-        saveAccount(account.phone!, name)
+        saveAccount(account.phone!, name.value)
         router.replace('/profile/account');
       }, 1000);
-    } else if( phone.isValid && !nameError && !!phone.value && !!name ) {
+    } else if( phone.isValid && name.isValid ) {
       setIsLoading(true)
       setTimeout(() => {
         setIsLoading(false);
-        setTempAccount(phone.value, name)
+        setTempAccount(phone.value, name.value)
         router.navigate('/verify-code-modal')
       }, 1000);
     }
   }
 
   const validateData = () => {
-    setIsValidated(true);
-
-    if (!edit && !name && !phone) {
+    if (!edit && (!name.value || !phone.value)) {
       return Alert.alert('Missing data', "Please provide recepient details")
     }
-
-    setNameError(isEmpty(name))
   }
 
+  const nameRules = [
+    (val: string) => !!val || 'Name is required',
+  ]
+
   const phoneRules = [
+    (val: string) => !!val || 'Name is required',
     (val: string) => validateLength(val, 12) || 'Wrong phone number'
   ]
 
@@ -77,9 +73,9 @@ const AccountForm = ({edit}: AccountPropType) => {
         }
         <View className='mb-6 mt-1'>
           <CustomInput 
-            onInput={(name: string) => {handleNameInput(name)}} 
+            onInput={(name: InputValueType) => {handleNameInput(name)}} 
             placeholder='Name'
-            error={nameError}
+            rules={nameRules}
             presetValue={edit}
           />
         </View>
