@@ -80,3 +80,8 @@ export type AccountType = {
   phone?: string,
   name?: string,
 }
+
+export type InputValueType = {
+  value: string,
+  isValid?: boolean,
+}

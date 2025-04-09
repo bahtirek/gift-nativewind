@@ -9,7 +9,7 @@ const PurchaseDetailsPage = () => {
     router.back();
   }
   return (
-    <PurchaseDetails handleButtonPress={handleButtonPress} />
+    <PurchaseDetails handleButtonPress={handleButtonPress} buttonLabel='Update' />
   )
 }
 

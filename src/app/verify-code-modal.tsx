@@ -1,34 +1,44 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
 import CustomButton from '../components/common/CustomButton';
 import CustomInput from '../components/common/CustomInput';
-import { isEmpty } from '../utils/input-validation';
-import { Stack } from 'expo-router'
+import { validateLength } from '../utils/input-validation';
+import { router, Stack } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAccount } from '@/providers/AccountProvider';
+import { InputValueType } from '@/types';
 
 const VerifyCode = () => {
-  const [code, setCode] = useState('');
-  const [codeError, setCodeError] = useState('');
-  const [isValidated, setIsValidated] = useState(false);
-  const { saveAccount } = useAccount();
+  const [code, setCode] = useState<InputValueType>({value: '', isValid: true});
+  const { saveTempAccount } = useAccount();
 
-  const handleCodeInput = (code: string) => {
-    if(isValidated) {      
-      setCodeError(isEmpty(code))
-    }
+  const handleCodeInput = (code: InputValueType) => {
     setCode(code)
   }
 
   const sendCode = () => {
-    setTimeout(() => {
-      saveAccount('', '')
-    })
+    if(!code.value) {
+      console.log('Missing data', "Please provide verification code");
+      
+      return Alert.alert('Missing data', "Please provide verification code");
+    } 
+    
+    if(code.isValid){
+      setTimeout(() => {
+        saveTempAccount();
+        router.navigate('/profile/account')
+      })
+    }
   }
 
   const resendCode = () => {
     
   }
+
+  const codeRules = [
+    (val: string) => !!val || 'Field is required',
+    (val: string) => validateLength(val, 6) || 'Code must be 6 digits'
+  ]
 
   return (
     <SafeAreaView edges={["left", "right"]} className='h-full bg-white'>
@@ -37,10 +47,10 @@ const VerifyCode = () => {
         <View>
           <View className='mb-6 mt-8'>
             <CustomInput 
-              onInput={(code: string) => {handleCodeInput(code)}} 
+              onInput={(code: InputValueType) => {handleCodeInput(code)}} 
               placeholder='Verification code'
               keyboardType='number-pad'
-              error={codeError}
+              rules={codeRules}
             />
           </View>
         </View>

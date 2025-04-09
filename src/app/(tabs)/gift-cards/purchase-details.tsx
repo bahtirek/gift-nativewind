@@ -8,7 +8,7 @@ const PurchaseDetailsPage = () => {
     router.navigate('/gift-cards');
   }
   return (
-    <PurchaseDetails handleButtonPress={handleButtonPress} />
+    <PurchaseDetails handleButtonPress={handleButtonPress} buttonLabel='Add to cart'/>
   )
 }
 

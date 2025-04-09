@@ -49,7 +49,7 @@ const CheckoutModal = () => {
             </View>
             {
               paymentType == 'visa' &&
-              <CreditCardForm validate={validate} paymanetUpdated={onPaymentUpdated} />
+              <CreditCardForm validate={validate} paymentUpdated={onPaymentUpdated} />
             }
             {
               paymentType == 'click' &&

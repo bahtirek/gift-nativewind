@@ -6,11 +6,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 type AccountProviderType = {
   account: AccountType;
   saveAccount: (phone: string, name: string) => void;
+  saveTempAccount: () => void;
   setTempAccount: (phone: string, name: string) => void;
 }
 export const AccountContext = createContext<AccountProviderType>({
   account: {},
   saveAccount: () => {},
+  saveTempAccount: () => {},
   setTempAccount: () => {},
 });
 
@@ -29,6 +31,9 @@ const AccountProvider = ({children}: PropsWithChildren) => {
     } else {
       saveAccountToStorage(tempAccount)
     }
+  }
+  const saveTempAccount = () => {
+    saveAccountToStorage(tempAccount)
   }
 
   const setTempAccount = (phone: string, name: string) => {
@@ -58,7 +63,7 @@ const AccountProvider = ({children}: PropsWithChildren) => {
 
 
   return(
-    <AccountContext.Provider value={{account, saveAccount, setTempAccount}}>
+    <AccountContext.Provider value={{account, saveAccount, setTempAccount, saveTempAccount}}>
       {children}
     </AccountContext.Provider>
   )
