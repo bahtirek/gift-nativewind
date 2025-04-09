@@ -1,19 +1,15 @@
 import { View, Alert, StyleSheet, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react';
-import { isEmpty, validateCreditCard, validateLength, validateExpDate } from '../../utils/input-validation';
+import { validateCreditCard, validateLength, validateExpDate } from '../../utils/input-validation';
 import CustomInput from '../common/CustomInput';
-import { PaymentType } from '@/types';
+import { InputValueType, PaymentType } from '@/types';
 import { setPaymentSignal } from '@/signals/payment.signal';
 
-const CreditCardForm = ({validate, paymanetUpdated}: any) => {
-  const [cardholderName, setCardholderName] = useState('');
-  const [creditCard, setCreditCard] = useState('');
-  const [expDate, setExpDate] = useState('');
-  const [creditCardError, setCreditCardError] = useState<null | string>(null);
-  const [expDateError, setExpDateError] = useState('');
-  const [cardholderNameError, setCardholderNameError] = useState('');
-  const [cvv, setCvv] = useState('');
-  const [cvvError, setCvvError] = useState('')
+const CreditCardForm = ({validate, paymentUpdated}: any) => {
+  const [cardholderName, setCardholderName] = useState<InputValueType>({value: '', isValid: false});
+  const [creditCard, setCreditCard] = useState<InputValueType>({value: '', isValid: false});
+  const [expDate, setExpDate] = useState<InputValueType>({value: '', isValid: false});
+  const [cvv, setCvv] = useState<InputValueType>({value: '', isValid: false});
   const [isValidated, setIsValidated] = useState(false);
 
   useEffect(() => {
@@ -22,109 +18,94 @@ const CreditCardForm = ({validate, paymanetUpdated}: any) => {
   }, [validate])
   
   const isFormCompleted = () => {
-    if (!cardholderName || !creditCard || !expDate || !cvv ) {
+    if (cardholderName.isValid && creditCard.isValid && expDate.isValid && cvv.isValid) {
+      const payment: PaymentType = {
+        cardholderName: cardholderName.value,
+        creditCard: creditCard.value,
+        expDate: expDate.value,
+        cvv: cvv.value
+      };
+      setPaymentSignal(payment);
+      paymentUpdated(true);
+    } else {
       console.log('Missing data', "Please provide payment details");
       
       return Alert.alert('Missing data', "Please provide payment details")
-    } else if (
-      !isEmpty(cardholderName) && 
-      !validateCreditCard(creditCard) && 
-      !validateExpDate(expDate) && 
-      !validateLength(cvv, 3, 'Wrong cvv')
-    ) {
-      const payment: PaymentType = {
-        cardholderName: cardholderName,
-        creditCard: creditCard,
-        expDate: expDate,
-        cvv: cvv
-      };
-      setPaymentSignal(payment);
-      paymanetUpdated(true);
-    } else {
-      validateData();
-      paymanetUpdated(false);
+      
     }
   }
   
-  const handleCardholderNameInput = (cardholderName: string) => {
-    if(isValidated) {
-      setCardholderNameError(isEmpty(cardholderName))
-    }
+  const handleCardholderNameInput = (cardholderName: InputValueType) => {
     setCardholderName(cardholderName);
   }
 
-  const handleCreditCardInput = (creditCard: string) => {
-    if(isValidated) {
-      setCreditCardError(validateCreditCard(creditCard))
-    }
+  const handleCreditCardInput = (creditCard: InputValueType) => {
     setCreditCard(creditCard)
   }
 
-  const handleExpDateInput = (expDate: string) => {
-    if(isValidated) {
-      setExpDateError(validateExpDate(expDate))
-    }
+  const handleExpDateInput = (expDate: InputValueType) => {
     setExpDate(expDate)
   }
 
-  const handleCvvInput = (cvv: string) => {
-    if(isValidated) {
-      setCvvError(validateLength(cvv, 3, 'Wrong cvv'))
-    }
+  const handleCvvInput = (cvv: InputValueType) => {
     setCvv(cvv)
   }
- 
-  const validateData = () => {
-    if(cardholderName) {
-      setCardholderNameError(isEmpty(cardholderName))
-    }
-    if(expDate) {
-      setExpDateError(validateExpDate(expDate))
-    } 
-    if(creditCard){
-      setCreditCardError(validateCreditCard(creditCard));
-    }    
-    if(cvv){
-      setCvvError(validateLength(cvv, 3, 'Wrong cvv'))
-    }    
-  }
+
+  const cardholderNameRules = [
+    (val: string) => !!val || 'Field is required'
+  ];
+  
+  const creditCardRules = [
+    (val: string) => !!val || 'Field is required',
+    (val: string) => validateCreditCard(val) || 'Wrong credit card number',
+  ];
+  
+  const expDateRules = [
+    (val: string) => !!val || 'Field is required',
+    (val: string) => validateExpDate(val) || 'Wrong exparation date',
+  ];
+  
+  const cvvRules = [
+    (val: string) => !!val || 'Field is required',
+    (val: string) => validateLength(val, 3) || 'CVV must be 3 digits long'
+  ];
 
   return (
     <ScrollView className='px-1'>
       <View className='mb-6 mt-1'>
         <CustomInput 
-          onInput={(cardholderName: string) => {handleCardholderNameInput(cardholderName)}} 
+          onInput={(cardholderName: InputValueType) => {handleCardholderNameInput(cardholderName)}} 
           placeholder='Cardholder name'
           mask='maskName'
-          error={cardholderNameError}
+          rules={cardholderNameRules}
         />
       </View>
       <View className='mb-6 mt-1'>
         <CustomInput 
-          onInput={(creditCard: string) => {handleCreditCardInput(creditCard)}} 
+          onInput={(creditCard: InputValueType) => {handleCreditCardInput(creditCard)}} 
           placeholder='Credit card number'
           mask='maskVisaCard'
           keyboardType='number-pad'
           maxLength={19}
-          error={creditCardError}
+          rules={creditCardRules}
         />
       </View>
       <View style={styles.flexRow}>
           <View className='mb-6 mt-1' style={styles.expDate}>
             <CustomInput 
-              onInput={(expDate: string) => {handleExpDateInput(expDate)}} 
+              onInput={(expDate: InputValueType) => {handleExpDateInput(expDate)}} 
               placeholder='Exp. date'
               mask='maskExpDate' 
               keyboardType='number-pad'
               maxLength={5}
-              error={expDateError}
+              rules={expDateRules}
             />
           </View>
           <View className='mb-6 mt-1' style={styles.cvv}>
             <CustomInput 
-              onInput={(cvv: string) => {handleCvvInput(cvv)}} 
+              onInput={(cvv: InputValueType) => {handleCvvInput(cvv)}} 
               placeholder='CVV'
-              error={cvvError}
+              rules={cvvRules}
               keyboardType='number-pad'
               maxLength={3}
               mask='numeric'

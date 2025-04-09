@@ -21,11 +21,7 @@ function validateEmail(value: string) {
 function validateCreditCard(value: string) {
   const ccRegex = /^4[0-9]{12}(?:[0-9]{3})?$/;
   value = value.replace(/\s/g, '')
-  if (value && ccRegex.test(value)) {
-    return ''
-  } else {
-    return `Wrong credit card` 
-  }
+  return ccRegex.test(value)
 
   /* 
     const visaRegex = /^4[0-9]{12}(?:[0-9]{3})?$/;
@@ -46,11 +42,7 @@ function validateLength(value: string, minLength: number, errorText? : string) {
 
 function validateExpDate(value: string) {
   const expDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
-  if (!value || (expDateRegex.test(value) && validateDate(value))) {
-    return ''
-  } else {
-    return `Wrong exparation date` 
-  }
+  return (expDateRegex.test(value) && validateDate(value))
 }
 
 function validateDate(value: string) {
