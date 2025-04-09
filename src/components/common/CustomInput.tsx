@@ -7,7 +7,7 @@ type validationProp = {
   error: string
 }
 
-const CustomInput = ( { onInput, mask, presetValue, className, reset, rules, ...rest }: any) => {
+const CustomInput = ( { onInput, mask, presetValue, className, reset, rules, prefix, ...rest }: any) => {
   const [value, setValue] = useState('');
   const [touched, setTouched] = useState(false);
   const [validation, setValidation] = useState<validationProp>({isValid: true, error: ''})
@@ -83,6 +83,9 @@ const CustomInput = ( { onInput, mask, presetValue, className, reset, rules, ...
           onBlur={onBlur}
           {...rest}
         />
+        <View className='absolute left-0 h-full justify-center pl-4'>
+          <Text className='text-[16px] text-gray-700 mt-0.5'>{prefix}</Text>
+        </View>
       </View>
       {
         (!validation.isValid && touched) && <Text className='text-red-500 mt-1 ml-4'>{validation.error}</Text>
@@ -108,7 +111,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 1,
       }
     })
-  }
+  },
 });
 
 export default CustomInput

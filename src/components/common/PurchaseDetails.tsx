@@ -171,6 +171,8 @@ const PurchaseDetails = ({ handleButtonPress, buttonLabel }: any) => {
                 keyboardType='number-pad'
                 presetValue={cartItemToEdit.phone}
                 rules={phoneRules}
+                className='pl-14'
+                prefix='(998) '
               />
             </View>
             <Text className='text-xl text-secondary-700 my-4'>Or</Text>
@@ -225,6 +227,9 @@ const styles = StyleSheet.create({
         marginLeft: -15
       }
     })
+  },
+  phonePrefix: {
+    paddingLeft: 30
   }
 })
 
