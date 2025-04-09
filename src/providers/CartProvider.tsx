@@ -122,7 +122,9 @@ const CartProvider = ({children}: PropsWithChildren) => {
 
   const saveSubmitedOrdersToStorage = async(orders: CartItemType[]) => {
     try {
-      const jsonValue = JSON.stringify(orders);
+      const existingOrders: CartItemType[] = await getOrders();
+      const allOrders: CartItemType[] = [...orders, ...existingOrders]
+      const jsonValue = JSON.stringify(allOrders);
       await AsyncStorage.setItem('orders', jsonValue);
       deleteAllItemsFromCartAndStorage()
     } catch (e) {
