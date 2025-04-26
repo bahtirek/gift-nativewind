@@ -8,16 +8,16 @@ import { useFocusEffect } from 'expo-router';
 
 const RedeemStack = () => {
   const [showModal, setShowModal] = useState(false);
-  const [showScanner, setShowScanner] = useState(false);
+  const [showScanner, setShowScanner] = useState(true);
   const [showError, setShowError] = useState(false);
-  const [showRedeemer, setShowRedeemer] = useState(true);
+  const [showRedeemer, setShowRedeemer] = useState(false);
 
   useFocusEffect(
     useCallback(() => {
-      /* setShowError(false);
+      setShowError(false);
       setShowRedeemer(false);
       setShowModal(false);
-      setShowScanner(true); */
+      setShowScanner(true);
     }, [])
   );
 
