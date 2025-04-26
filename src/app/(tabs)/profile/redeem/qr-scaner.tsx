@@ -40,10 +40,6 @@ const RedeemStack = () => {
     setShowScanner(true)
   }
 
-  const onRedeemedCompleted = (value: boolean) => {
-    handleRescan()
-  }
-
   return (
     <View style={styles.container}>
       <Stack.Screen options={{title: 'Redeem', headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />
@@ -61,7 +57,7 @@ const RedeemStack = () => {
       }
       {
         showRedeemer &&
-        <Redeem balance={'1000000'} token={'token'} amount={'1000000'} onRedeemedCompleted={(value: boolean) => {onRedeemedCompleted(value)}} />
+        <Redeem balance={'1000000'} token={'token'} amount={'1000000'} onRedeemedCompleted={handleRescan} />
       }
       <Modal
         animationType="fade"
