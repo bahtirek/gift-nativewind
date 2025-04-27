@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet, Platform, Alert, Modal, ActivityIndicator } from 'react-native'
-import React, { useEffect, useState, useCallback } from 'react'
+import { View, Text, StyleSheet, Platform, Alert, Modal, ActivityIndicator, TouchableOpacity } from 'react-native'
+import React, { useState, useCallback } from 'react'
 import CustomButton from '@components/common/CustomButton';
 import CustomInput from '@components/common/CustomInput';
 import { validateRedeemAmount } from '../../utils/input-validation';
@@ -8,7 +8,7 @@ import { maskCurrency } from '@/utils/masks';
 import { useFocusEffect } from 'expo-router';
 
 
-const Redeem = ({ balance, token, amount, onRedeemedCompleted }: any) => {
+const Redeem = ({ balance, token, amount, onRedeemedCompleted, onRefund }: any) => {
   const [redeemAmount, setRedeemAmount] = useState<InputValueType>({value: '', isValid: true});
   const [showModal, setShowModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -70,14 +70,17 @@ const Redeem = ({ balance, token, amount, onRedeemedCompleted }: any) => {
           <Text className='text-lg text-secondary-600 font-pregular'>Balance:</Text>
           <Text className='text-lg text-secondary-900 font-pregular'>{maskCurrency(balance)}</Text>
         </View>
+        <TouchableOpacity onPress={onRefund}>
+          <Text className='text-sm text-primary-700 text-left'>Last transaction details</Text>
+        </TouchableOpacity>
         <View className='mt-4 mb-6'>
-            <CustomInput 
-              onInput={(amount: InputValueType) => {handleAmountInput(amount)}} 
-              keyboardType="number-pad" 
-              placeholder='Redeem amount' 
-              mask='currency'
-              rules={amountRules}
-            />
+          <CustomInput 
+            onInput={(amount: InputValueType) => {handleAmountInput(amount)}} 
+            keyboardType="number-pad" 
+            placeholder='Redeem amount' 
+            mask='currency'
+            rules={amountRules}
+          />
         </View>
         <View className='mt-auto pt-8'>
           <CustomButton label={'Redeem'} handlePress={onRedeem}/>

@@ -1,16 +1,19 @@
 import React, { useState, useCallback } from 'react';
-import { View, StyleSheet, Alert, Modal, ActivityIndicator, Text } from 'react-native';
-import QRCodeScanner from '@/components/redeem/QrCodeScanner';
+import { View, StyleSheet, Modal, ActivityIndicator, Text } from 'react-native';
 import { Stack } from 'expo-router';
+import { useFocusEffect } from 'expo-router';
+import QRCodeScanner from '@/components/redeem/QrCodeScanner';
 import CustomButton from '@/components/common/CustomButton';
 import Redeem from '@/components/redeem/Redeem';
-import { useFocusEffect } from 'expo-router';
+import Refund from '@/components/redeem/Refund';
 
 const RedeemStack = () => {
   const [showModal, setShowModal] = useState(false);
   const [showScanner, setShowScanner] = useState(true);
   const [showError, setShowError] = useState(false);
   const [showRedeemer, setShowRedeemer] = useState(false);
+  const [showRefund, setShowRefund] = useState(false);
+  const [lastTransactionDetails, setLastTransactionDetails] = useState({amount: '100 000', date: '15 February 2025', redeemer: 'John Doe'})
 
   useFocusEffect(
     useCallback(() => {
@@ -18,6 +21,7 @@ const RedeemStack = () => {
       setShowRedeemer(false);
       setShowModal(false);
       setShowScanner(true);
+      setShowRefund(false);
     }, [])
   );
 
@@ -40,6 +44,19 @@ const RedeemStack = () => {
     setShowScanner(true)
   }
 
+  const onRefundCompleted = (value: boolean) => {
+    if(true) {
+      /* Update balance */
+    }
+    setShowRefund(false)
+    setShowRedeemer(true)
+  }
+
+  const onRefund = () => {
+    setShowRefund(true)
+    setShowRedeemer(false)
+  }
+
   return (
     <View style={styles.container}>
       <Stack.Screen options={{title: 'Redeem', headerTitleStyle: { color: '#FF4416' }, headerTintColor: '#FF4416'}} />
@@ -57,7 +74,11 @@ const RedeemStack = () => {
       }
       {
         showRedeemer &&
-        <Redeem balance={'1000000'} token={'token'} amount={'1000000'} onRedeemedCompleted={handleRescan} />
+        <Redeem balance={'1000000'} token={'token'} amount={'1000000'} onRedeemedCompleted={handleRescan} onRefund={onRefund} />
+      }
+      {
+        showRefund &&
+        <Refund lastTransactionDetails={lastTransactionDetails} onRefundCompleted={onRefundCompleted} />
       }
       <Modal
         animationType="fade"

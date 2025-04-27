@@ -1,10 +1,7 @@
 import { View, Text } from 'react-native'
-import React, { useEffect, useState, useCallback} from 'react'
-import { Stack, useFocusEffect } from 'expo-router'
+import React, { useState} from 'react'
+import { Stack } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import AccountForm from '@/components/profile/AccountForm';
-import { useAccount } from '@/providers/AccountProvider';
-import CustomButton from '@/components/common/CustomButton';
 import { maskCurrency } from '@/utils/masks';
 import allGiftCards from '@assets/data/allcards';
 
