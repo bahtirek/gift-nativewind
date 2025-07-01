@@ -13,6 +13,13 @@ function validateAmount (value: string, minValue: string) {
   return !value || amount >= minAmount
 }
 
+function validateRedeemAmount (value: string, balanceValue: string) {
+  const amount = parseInt(value.replace(/\s/g, ''));
+  const balance = parseInt(balanceValue.replace(/\s/g, ''));
+  
+  return !value || amount <= balance
+}
+
 function validateEmail(value: string) {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return !value || emailRegex.test(value)
@@ -78,5 +85,6 @@ export {
   validateEmail,
   validateCreditCard,
   validateLength, 
-  validateExpDate
+  validateExpDate,
+  validateRedeemAmount
 }

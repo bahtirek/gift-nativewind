@@ -12,6 +12,7 @@ import CartProvider from '@/providers/CartProvider';
 import GiftCardProvider from '@/providers/GiftCardProvider';
 import SearchSettingsProvider from '@/providers/SearchSettingsProvider';
 import AccountProvider from '@/providers/AccountProvider';
+import AuthProvider from '@/providers/AuthProvider';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -55,20 +56,22 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AccountProvider>
-        <SearchSettingsProvider>
-          <GiftCardProvider>
-            <CartProvider>
-              <Stack>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen name="search-settings-modal" options={{ presentation: 'modal' }} />
-                <Stack.Screen name="order-confirmation-modal" options={{ presentation: 'modal' }} />
-                <Stack.Screen name="verify-code-modal" options={{ presentation: 'modal' }} />
-              </Stack>
-            </CartProvider>
-          </GiftCardProvider>
-        </SearchSettingsProvider>
-      </AccountProvider>
+      <AuthProvider>
+        <AccountProvider>
+          <SearchSettingsProvider>
+            <GiftCardProvider>
+              <CartProvider>
+                <Stack>
+                  <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                  <Stack.Screen name="search-settings-modal" options={{ presentation: 'modal' }} />
+                  <Stack.Screen name="order-confirmation-modal" options={{ presentation: 'modal' }} />
+                  <Stack.Screen name="verify-code-modal" options={{ presentation: 'modal' }} />
+                </Stack>
+              </CartProvider>
+            </GiftCardProvider>
+          </SearchSettingsProvider>
+        </AccountProvider>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

@@ -15,6 +15,9 @@ import pencil from "./../../assets/icons/pencil.png";
 import emptyBasketGray from "./../../assets/icons/empty-basket-gray.png";
 import emptyBasketOrange from "./../../assets/icons/empty-basket-orange.png";
 import zoom_out_d4d4d4 from "./../../assets/icons/zoom-out-d4d4d4.png";
+import lightbulb_off from "./../../assets/icons/lightbulb_off.png";
+import lightbulb_on from "./../../assets/icons/lightbulb_on.png";
+import qr_reload from "./../../assets/icons/qr_reload.png";
 
 export default {
   bookmark,
@@ -33,5 +36,8 @@ export default {
   pencil,
   emptyBasketGray,
   emptyBasketOrange,
-  zoom_out_d4d4d4
+  zoom_out_d4d4d4,
+  lightbulb_off,
+  lightbulb_on,
+  qr_reload
 };

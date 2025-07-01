@@ -43,7 +43,7 @@ const CartIcon = ({icon, color,  name, focused}: {icon: object, color: ColorValu
 export default function TabLayout() {
   let tabHeight = 70;
   if (Platform.OS === 'android') {
-    tabHeight = 40;
+    tabHeight = 70;
     // Code specific to Android
   }
 

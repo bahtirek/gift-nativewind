@@ -18,7 +18,7 @@ const CategoryItem = ({item}: CategoryItemPropType) => {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      onPress={() => handelCheckBoxSelect(item.id)}
+      onPress={() => handelCheckBoxSelect(item.id!)}
       className='relative justify-center items-center'
       
     >
