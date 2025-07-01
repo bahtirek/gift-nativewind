@@ -53,7 +53,7 @@ export default function Home() {
   }
 
   return (
-    <SafeAreaView className='h-full bg-white'>
+    <SafeAreaView edges={["left", "right"]} className='h-full bg-white pt-10'>
       <FlatList 
         className='px-6'
         data={giftCards}
@@ -92,7 +92,7 @@ export default function Home() {
         )}
         keyboardDismissMode='on-drag'
       />
-      <StatusBar backgroundColor="#FFFBFA" style="dark" />
+      <StatusBar style="dark" />
     </SafeAreaView>
   );
 }
