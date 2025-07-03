@@ -106,6 +106,7 @@ const CartProvider = ({children}: PropsWithChildren) => {
   const deleteAllItemsFromCartAndStorage = async() => {
     try {
       await AsyncStorage.removeItem('cartItems');
+      
       setItems([]);
     } catch (e) {
       console.log(e);
@@ -137,6 +138,8 @@ const CartProvider = ({children}: PropsWithChildren) => {
       const jsonValue = await AsyncStorage.getItem('orders');
       if(jsonValue != null) {
         return JSON.parse(jsonValue) 
+      } else {
+        return []
       }
     } catch (e) {
       console.log(e);
